@@ -3,9 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Automotor.pe: consulta reportes vehiculares, revisa fuentes oficiales y encuentra vehículos verificados en Perú.">
+  <meta name="description" content="PLAQUÉALO: consulta información vehicular por placa, revisa fuentes oficiales y explora servicios vehiculares en Perú.">
+  <link rel="canonical" href="https://llegastian11.github.io/automotor-prototipo/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:title" content="PLAQUÉALO — La placa cuenta la historia">
+  <meta property="og:description" content="Consulta información vehicular y entiende rápidamente lo importante antes de comprar o vender.">
+  <meta property="og:url" content="https://llegastian11.github.io/automotor-prototipo/">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#faf9f7">
-  <title>Automotor.pe — La placa cuenta la historia</title>
+  <title>PLAQUÉALO — Consulta vehicular por placa en Perú</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
@@ -23,6 +30,7 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
+  <link rel="stylesheet" href="assets/css/plaquealo.css">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -37,9 +45,10 @@
   <main id="contenido">
     <section class="hero active" id="inicio" data-view="inicio">
       <div class="container">
-        <p class="hero-mode">Consulta vehicular</p>
+        <p class="hero-mode">PLAQUÉALO · Consulta vehicular</p>
         <h1 class="display">La placa cuenta <span>la historia.</span></h1>
-        <p class="hero-sub">Verifica en segundos lo que realmente importa antes de comprar o vender un vehículo.</p>
+        <p class="hero-sub">Consulta datos vehiculares y entiende rápidamente lo importante antes de comprar o vender.</p>
+        <div class="hero-trust" aria-label="Beneficios de la consulta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Múltiples fuentes</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Lectura sencilla</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Datos protegidos</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Consulta rápida</span></div>
         <form id="consulta" novalidate>
           <label class="plate-label" for="plateInput">Ingresa la placa del vehículo</label>
           <div class="plate">
@@ -59,9 +68,9 @@
         </figure>
 
         <div class="quick-results">
-          <div class="quick-result"><span class="status-icon green">✓</span><div><strong>Multas</strong><small>Sin registro</small></div></div>
-          <div class="quick-result"><span class="status-icon green">✓</span><div><strong>SOAT</strong><small>Vigente</small></div></div>
-          <div class="quick-result"><span class="status-icon amber">!</span><div><strong>Gravámenes</strong><small>1 registro</small></div></div>
+          <div class="quick-result"><span class="status-icon green" aria-hidden="true">✓</span><div><strong>Multas</strong><small>Sin registro</small><span class="status-label success">Conforme</span></div></div>
+          <div class="quick-result"><span class="status-icon green" aria-hidden="true">✓</span><div><strong>SOAT</strong><small>Vigente</small><span class="status-label success">Conforme</span></div></div>
+          <div class="quick-result"><span class="status-icon amber" aria-hidden="true">!</span><div><strong>Gravámenes</strong><small>1 registro</small><span class="status-label warning">Atención</span></div></div>
         </div>
       </div>
       <div class="source-rail"><div class="source-row container"><span>Fuentes oficiales</span><strong>SUNARP</strong><strong>SAT</strong><strong>MTC</strong><strong>SBS</strong><strong>APESEG</strong><strong>SUTRAN</strong></div></div>
@@ -236,21 +245,9 @@
 
   <div class="modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-top"><h2 id="modalTitle">Publica tu vehículo</h2><button class="modal-close" type="button" aria-label="Cerrar">×</button></div><p class="section-copy" style="font-size:14px;margin-top:10px">Completa los datos básicos. En la versión final podrás añadir fotos y validar la placa.</p><form class="form-grid" id="publishForm"><div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" placeholder="B5K110" required></div><div class="field"><label for="pubYear">Año</label><select id="pubYear"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div><div class="field full"><label for="pubModel">Marca y modelo</label><input id="pubModel" placeholder="Ej. Toyota RAV4" required></div><div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" placeholder="42,000 km"></div><div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" placeholder="US$ 18,500"></div><button class="btn btn-red field full" type="submit">Continuar publicación</button></form><p class="modal-note" id="publishStatus">Esta es una demostración visual; no se guardará información.</p></div></div>
 
-  <script>
-    const plateInput=document.querySelector('#plateInput'),plateStatus=document.querySelector('#plateStatus');
-    plateInput.addEventListener('input',()=>{plateInput.value=plateInput.value.toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,7);plateStatus.textContent=plateInput.value.length>=5?`Placa ${plateInput.value} lista para consultar.`:'Completa una placa válida.';plateStatus.style.color=plateInput.value.length>=5?'var(--green)':'var(--red)'});
-    document.querySelector('#consulta').addEventListener('submit',e=>{e.preventDefault();plateStatus.textContent=plateInput.value.length>=5?`Consulta visual iniciada para ${plateInput.value}.`:'Ingresa una placa válida.'});
-    document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));button.classList.add('active');document.querySelectorAll('.vehicle').forEach(card=>card.style.display=button.dataset.filter==='all'||card.dataset.type===button.dataset.filter?'block':'none')}));
-    const modal=document.querySelector('#publishModal');document.querySelectorAll('.publish-open').forEach(b=>b.addEventListener('click',()=>{modal.classList.add('open');document.querySelector('#pubPlate').focus()}));document.querySelector('.modal-close').addEventListener('click',()=>modal.classList.remove('open'));modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});document.querySelector('#publishForm').addEventListener('submit',e=>{e.preventDefault();document.querySelector('#publishStatus').textContent='Vista previa preparada. En la versión final continuarías al paso de fotografías.';document.querySelector('#publishStatus').style.color='var(--green)'});
-    const routeGroups={inicio:'inicio',consulta:'inicio',reporte:'inicio',tasacion:'tasacion',vehiculos:'vehiculos',fuentes:'fuentes',blog:'blog'};
-    const navLinks=document.querySelector('.nav-links'),menuButton=document.querySelector('.menu-btn');
-    function currentRoute(){return location.hash.replace(/^#\/?/,'')||'consulta'}
-    function renderView(){const route=currentRoute(),group=routeGroups[route]||'inicio';document.body.dataset.route=route;document.querySelectorAll('main>[data-view]').forEach(view=>view.classList.toggle('active',view.dataset.view===group));document.querySelectorAll('[data-route]').forEach(link=>link.classList.toggle('active',link.dataset.route===route));document.querySelectorAll(`main>[data-view="${group}"] .reveal`).forEach(el=>el.classList.add('visible'));navLinks.classList.remove('menu-open');menuButton.setAttribute('aria-expanded','false');window.scrollTo(0,0)}
-    document.addEventListener('click',event=>{const link=event.target.closest('a[href^="#"]');if(!link)return;const route=link.getAttribute('href').replace(/^#\/?/,'');if(!routeGroups[route])return;event.preventDefault();if(currentRoute()!==route)history.pushState(null,'',`#/${route}`);renderView()});
-    document.querySelector('.mini-search').addEventListener('submit',event=>{event.preventDefault();plateInput.value=event.currentTarget.querySelector('input').value.toUpperCase();history.pushState(null,'','#/consulta');renderView();plateStatus.textContent=`Placa ${plateInput.value} lista para consultar.`});
-    document.querySelector('#valuationForm').addEventListener('submit',event=>{event.preventDefault();const value=document.querySelector('#valuationPlate').value.toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,7);document.querySelector('#valuationPlate').value=value;document.querySelector('#valuationStatus').textContent=value.length>=5?`Tasación visual preparada para ${value}.`:'Ingresa una placa válida para continuar.';document.querySelector('#valuationStatus').style.color=value.length>=5?'var(--green)':'var(--red)'});
-    menuButton.setAttribute('aria-expanded','false');menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('menu-open');menuButton.setAttribute('aria-expanded',String(open))});window.addEventListener('popstate',renderView);renderView();
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-  </script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>

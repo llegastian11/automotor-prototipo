@@ -17,7 +17,21 @@ Cómo abrir
 - Para visualizar las fotografías y tipografías externas se requiere conexión a internet.
 
 Paleta principal
-- Rojo: #C81E3A
-- Negro: #14151A
-- Blanco cálido: #FAF9F7
+- Rojo PLAQUÉALO: #C41E1E
+- Negro: #171719
+- Blanco cálido: #F7F5F2
 
+Configuración pendiente
+- Logo definitivo: assets/js/config.js → brand.logoBase64
+- WhatsApp: assets/js/config.js → contact.whatsapp (solo números con código de país)
+- Correo: assets/js/config.js → contact.email
+- Redes sociales: assets/js/config.js → socialLinks
+- Métricas reales: assets/js/config.js → metrics o conexión con API
+- Google Login: requiere un proveedor OAuth seguro; no debe agregarse client_secret al frontend.
+
+Arquitectura
+- assets/css/plaquealo.css: sistema visual y responsive.
+- assets/js/config.js: marca, contacto y enlaces centralizados.
+- assets/js/data.js: contenido y datos demo identificados.
+- assets/js/services.js: abstracciones para catálogo vehicular y autenticación.
+- assets/js/app.js: componentes, navegación e interacciones.
