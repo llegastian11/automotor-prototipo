@@ -21,7 +21,8 @@
   };
 
   function brandLogo() {
-    if (config.brand.logoBase64) return `<img src="${config.brand.logoBase64}" alt="${config.brand.name}">`;
+    const logoSource = config.brand.logoBase64 || config.brand.logoSrc;
+    if (logoSource) return `<img src="${logoSource}" alt="${config.brand.name}">`;
     return `<span class="brand-mark" aria-hidden="true">P</span><span class="brand-word">${config.brand.name}</span>`;
   }
   qsa('.brand').forEach((brand) => {
@@ -99,7 +100,31 @@
   qsa('.source-group').forEach((group, index) => group.dataset.category = index === 0 || index === 6 ? 'identidad' : [1,3,4,5].includes(index) ? 'multas' : index === 2 ? 'tecnico' : 'seguridad');
 
   const footer = qs('.footer');
-  footer.innerHTML = `<div class="container"><div class="footer-grid"><div><a class="brand" href="#/consulta">${brandLogo()}</a><p class="footer-about">Información vehicular para tomar mejores decisiones.</p><div class="footer-socials" id="socialLinks"></div></div><div><h4>Servicios</h4><a href="#/consulta">Consulta vehicular</a><a href="#/tasacion">Tasación</a><a href="#/vehiculos">Marketplace</a><a href="#/servicios/soat">SOAT</a><a href="#/servicios/seguro-vehicular">Seguro Vehicular</a><a href="#/servicios/gps">GPS Vehicular</a></div><div><h4>Recursos</h4><a href="#/fuentes">Fuentes oficiales</a><a href="#/blog">Blog</a><a href="#/consulta">Preguntas frecuentes</a></div><div><h4>Legal</h4><a href="#/legal/terminos">Términos de uso</a><a href="#/legal/privacidad">Política de privacidad</a><a href="#/legal/cookies">Cookies</a><a href="mailto:${config.contact.email || 'contacto@example.com'}">Contacto</a></div></div><div class="footer-bottom"><span>© 2026 ${config.brand.name}</span><span>Una iniciativa vehicular de ${config.brand.corporateBackup}.</span></div></div>`;
+  footer.innerHTML = `<div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand" href="#/consulta">${brandLogo()}</a><p class="footer-about">Información vehicular para tomar mejores decisiones.</p><div class="footer-socials" id="socialLinks"></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-services"><span>Servicios</span>${icon('chevron')}</button><div class="footer-panel" id="footer-services" hidden><a href="#/consulta">Consulta vehicular</a><a href="#/tasacion">Tasación</a><a href="#/vehiculos">Marketplace</a><a href="#/servicios/soat">SOAT</a><a href="#/servicios/seguro-vehicular">Seguro Vehicular</a><a href="#/servicios/gps">GPS Vehicular</a></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-resources"><span>Recursos</span>${icon('chevron')}</button><div class="footer-panel" id="footer-resources" hidden><a href="#/fuentes">Fuentes oficiales</a><a href="#/blog">Blog</a><a href="#/consulta">Preguntas frecuentes</a></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-legal"><span>Legal</span>${icon('chevron')}</button><div class="footer-panel" id="footer-legal" hidden><a href="#/legal/terminos">Términos de uso</a><a href="#/legal/privacidad">Política de privacidad</a><a href="#/legal/cookies">Cookies</a><a href="mailto:${config.contact.email || 'contacto@example.com'}">Contacto</a></div></div></div><div class="footer-bottom"><span>© 2026 ${config.brand.name}</span><span>Una iniciativa vehicular de ${config.brand.corporateBackup}.</span></div></div>`;
+
+  const footerMedia = window.matchMedia('(max-width: 680px)');
+  const syncFooterAccordion = () => {
+    qsa('.footer-toggle').forEach((toggle) => {
+      const panel = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (footerMedia.matches) {
+        panel.hidden = toggle.getAttribute('aria-expanded') !== 'true';
+      } else {
+        toggle.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+      }
+    });
+  };
+  qsa('.footer-toggle').forEach((toggle) => toggle.addEventListener('click', () => {
+    if (!footerMedia.matches) return;
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    document.getElementById(toggle.getAttribute('aria-controls')).hidden = expanded;
+  }));
+  footerMedia.addEventListener?.('change', () => {
+    qsa('.footer-toggle').forEach((toggle) => toggle.setAttribute('aria-expanded', footerMedia.matches ? 'false' : 'true'));
+    syncFooterAccordion();
+  });
+  syncFooterAccordion();
 
   const socialContainer = qs('#socialLinks');
   Object.entries(config.socialLinks).filter(([,url])=>url).forEach(([name,url])=>socialContainer.insertAdjacentHTML('beforeend',`<a href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${name}">${name.slice(0,1).toUpperCase()}</a>`));
