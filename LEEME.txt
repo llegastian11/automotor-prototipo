@@ -1,0 +1,23 @@
+AUTOMOTOR.PE — PROTOTIPO Y MOCKUPS
+
+Contenido
+1. index.html — prototipo navegable principal.
+2. automotor-web-completa.html — copia con el nombre original.
+3. assets/automotor/ — recursos visuales utilizados por el HTML.
+4. mockups/ — capturas listas para presentar:
+   - 01-consulta-desktop.png
+   - 02-fuentes-desktop.png
+   - 03-vehiculos-desktop.png
+   - 04-consulta-mobile.png
+   - 05-fuentes-tablet.png
+
+Cómo abrir
+- Abre index.html con Chrome, Safari, Edge o Firefox.
+- El prototipo es visual: varias interacciones son demostrativas.
+- Para visualizar las fotografías y tipografías externas se requiere conexión a internet.
+
+Paleta principal
+- Rojo: #C81E3A
+- Negro: #14151A
+- Blanco cálido: #FAF9F7
+

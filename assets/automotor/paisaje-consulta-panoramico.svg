@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Automóvil recorriendo un paisaje peruano</title>
+  <desc id="desc">Ilustración panorámica minimalista de un automóvil rojo en una carretera entre montañas cálidas.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#F8E9D7"/><stop offset="1" stop-color="#EFC29F"/></linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF1BE"/><stop offset="1" stop-color="#F3B951"/></linearGradient>
+    <linearGradient id="car" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E33A50"/><stop offset=".58" stop-color="#C81E3A"/><stop offset="1" stop-color="#98132B"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4B5563"/><stop offset="1" stop-color="#17191E"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="13"/></filter>
+  </defs>
+  <rect width="1600" height="600" fill="url(#sky)"/>
+  <circle cx="1370" cy="104" r="75" fill="url(#sun)" opacity=".9"/>
+  <path d="M0 294 130 183l107 76 151-145 148 151 125-105 143 124 137-150 136 128 118-84 155 117 170-151 100 87v164H0Z" fill="#D49378" opacity=".62"/>
+  <path d="M0 356 167 238l137 94 142-119 145 127 161-112 145 121 141-102 149 106 149-111 204 118v104H0Z" fill="#A95E57" opacity=".7"/>
+  <path d="M0 398c250-65 472-43 678 4 229 52 456 40 666-25 102-31 188-37 256-25v248H0Z" fill="#D3A257"/>
+  <path d="M0 464c271-55 518-31 726 18 231 54 438 52 631 1 92-25 173-31 243-20v137H0Z" fill="#8F7D4C"/>
+  <path d="M0 535c269-76 503-98 726-59 211 36 396 38 566 1 110-24 212-26 308-7v130H0Z" fill="#25262B"/>
+  <path d="M0 511h1600" stroke="#F4E2BC" stroke-width="5" opacity=".7"/>
+  <path d="M0 572h1600" stroke="#E7D4AD" stroke-width="4" stroke-dasharray="35 32" opacity=".9"/>
+  <g fill="none" stroke="#655A3D" stroke-linecap="round">
+    <path d="M106 422c45-57 97-83 153-78 51 4 93 29 128 75" stroke-width="13"/>
+    <path d="M161 419v-119M328 419v-92" stroke-width="10"/>
+  </g>
+  <g opacity=".45" fill="none" stroke="#725F45" stroke-width="5" stroke-linecap="round">
+    <path d="M1300 402c35-45 77-66 122-62 40 3 74 23 103 60"/><path d="M1344 400v-92M1476 400v-69"/>
+  </g>
+  <ellipse cx="1045" cy="515" rx="220" ry="28" fill="#14151A" opacity=".22" filter="url(#shadow)"/>
+  <g transform="translate(817 333) scale(.76)">
+    <path d="M55 100c13-44 33-76 69-83 56-11 127-13 181 1 36 9 61 41 78 82l41 15c18 7 29 23 29 42v29c0 13-10 23-23 23H27c-14 0-25-11-25-25v-23c0-24 14-42 35-50l18-7Z" fill="url(#car)"/>
+    <path d="m112 94 26-51c7-13 19-21 34-23 38-4 81-3 116 5 13 3 24 12 31 24l25 45Z" fill="url(#glass)"/>
+    <path d="m202 23-6 71M135 99h212" stroke="#F7C0C6" stroke-width="4" opacity=".5"/>
+    <path d="M26 144c58-13 125-18 200-18 81 0 150 7 211 22" fill="none" stroke="#F76B7D" stroke-width="5" opacity=".6"/>
+    <rect x="181" y="151" width="101" height="31" rx="7" fill="#F5F3EA" stroke="#AFAEA8" stroke-width="3"/>
+    <path d="M14 158h55c3 0 6 3 6 6v13H16c-8 0-12-6-12-12 0-4 4-7 10-7ZM437 158h-55c-3 0-6 3-6 6v13h59c8 0 12-6 12-12 0-4-4-7-10-7Z" fill="#FFF6D8"/>
+    <circle cx="102" cy="201" r="38" fill="#17191E"/><circle cx="102" cy="201" r="19" fill="#6B6D73"/>
+    <circle cx="351" cy="201" r="38" fill="#17191E"/><circle cx="351" cy="201" r="19" fill="#6B6D73"/>
+    <path d="M52 101h330" stroke="#831026" stroke-width="5" opacity=".55"/>
+  </g>
+</svg>
