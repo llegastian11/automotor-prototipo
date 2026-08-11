@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="PLAQUÉALO: consulta información vehicular por placa, revisa fuentes oficiales y explora servicios vehiculares en Perú.">
+  <meta name="description" content="Automotor.pe: consulta información vehicular por placa, revisa fuentes oficiales y explora servicios vehiculares en Perú.">
   <link rel="canonical" href="https://llegastian11.github.io/automotor-prototipo/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_PE">
-  <meta property="og:title" content="PLAQUÉALO — La placa cuenta la historia">
+  <meta property="og:title" content="Automotor.pe — La placa cuenta la historia">
   <meta property="og:description" content="Consulta información vehicular y entiende rápidamente lo importante antes de comprar o vender.">
   <meta property="og:url" content="https://llegastian11.github.io/automotor-prototipo/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#faf9f7">
-  <title>PLAQUÉALO — Consulta vehicular por placa en Perú</title>
+  <title>Automotor.pe — Consulta vehicular por placa en Perú</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
-  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811j">
+  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811k">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -62,11 +62,12 @@
       </div>
     </section>
 
-    <section class="hero" id="plaquealo" data-view="plaquealo">
+    <section class="hero automotor-hero" id="plaquealo" data-view="plaquealo">
+      <div class="automotor-hero-backdrop" aria-hidden="true"></div>
       <div class="container hero-split">
         <div class="hero-copy-panel">
           <p class="official-badge"><span aria-hidden="true">✓</span> Información de SUNARP, SAT, SOAT y MTC</p>
-          <p class="hero-mode">PLAQUÉALO · Consulta vehicular</p>
+          <p class="hero-mode">Automotor.pe · Plaquealo</p>
           <h1 class="display hero-real-title">Conoce la historia real <span>de esa placa</span></h1>
           <p class="hero-sub">Consulta antecedentes, deudas y documentos del vehículo antes de comprar o vender. Decide con información clara.</p>
           <form id="consulta" novalidate>
@@ -80,19 +81,23 @@
           </form>
           <div class="hero-stats" aria-label="Características de la consulta"><div><span>Fuentes consultadas</span><strong>25</strong></div><div><span>Consulta digital</span><strong>100%</strong></div></div>
         </div>
-        <div class="hero-visual-panel">
+        <div class="hero-device-stage">
           <span class="sources-connected"><i></i> 25 fuentes conectadas</span>
-          <img src="assets/automotor/paisaje-consulta.png" alt="Automóvil rojo en una carretera rodeada de montañas peruanas">
-          <article class="hero-report-card" aria-label="Vista previa interactiva del reporte vehicular">
-            <div class="hero-report-head"><div><small>Vista previa del reporte</small><strong id="previewPlate">ABC-123</strong></div><span>PE</span></div>
-            <p class="report-card-hint">Selecciona un dato para entender el resultado.</p>
-            <div class="hero-report-options" role="list">
-              <button class="hero-report-row selected" type="button" data-report-topic="multas" aria-expanded="true"><i>✓</i><span>Multas</span><b>Sin registro</b></button>
-              <button class="hero-report-row" type="button" data-report-topic="soat" aria-expanded="false"><i>✓</i><span>SOAT</span><b>Vigente</b></button>
-              <button class="hero-report-row attention" type="button" data-report-topic="gravamenes" aria-expanded="false"><i>!</i><span>Gravámenes</span><b>1 registro</b></button>
+          <article class="report-phone" aria-label="Vista previa interactiva del reporte vehicular">
+            <div class="phone-shell">
+              <div class="phone-status"><span>9:41</span><i aria-hidden="true"></i></div>
+              <div class="phone-plate"><small>PERÚ</small><strong id="previewPlate">ABC-123</strong></div>
+              <div class="phone-summary"><span>Vista previa</span><strong>Reporte vehicular</strong><small>Información organizada para decidir mejor.</small></div>
+              <div class="hero-report-options" role="list">
+                <button class="hero-report-row selected" type="button" data-report-topic="multas" aria-expanded="true"><i>✓</i><span>Multas y papeletas</span><b>Sin registro</b></button>
+                <button class="hero-report-row" type="button" data-report-topic="soat" aria-expanded="false"><i>✓</i><span>SOAT</span><b>Vigente</b></button>
+                <button class="hero-report-row attention" type="button" data-report-topic="gravamenes" aria-expanded="false"><i>!</i><span>Gravámenes</span><b>1 registro</b></button>
+              </div>
+              <div class="report-insight" id="reportInsight" aria-live="polite"><span>Consulta SAT y municipalidades</span><p>No se encontraron papeletas en la vista de ejemplo.</p></div>
+              <span class="phone-home" aria-hidden="true"></span>
             </div>
-            <div class="report-insight" id="reportInsight" aria-live="polite"><span>Consulta SAT y municipalidades</span><p>No se encontraron papeletas en la vista de ejemplo.</p></div>
           </article>
+          <span class="hero-car-label">Camaro · vista referencial</span>
         </div>
       </div>
       <div class="source-rail"><div class="source-row container"><span>Fuentes oficiales</span><strong>SUNARP</strong><strong>SAT</strong><strong>MTC</strong><strong>SBS</strong><strong>APESEG</strong><strong>SUTRAN</strong></div></div>
@@ -275,9 +280,9 @@
 
   <div class="modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-top"><h2 id="modalTitle">Publica tu vehículo</h2><button class="modal-close" type="button" aria-label="Cerrar">×</button></div><p class="section-copy" style="font-size:14px;margin-top:10px">Completa los datos básicos. En la versión final podrás añadir fotos y validar la placa.</p><form class="form-grid" id="publishForm"><div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" placeholder="B5K110" required></div><div class="field"><label for="pubYear">Año</label><select id="pubYear"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div><div class="field full"><label for="pubModel">Marca y modelo</label><input id="pubModel" placeholder="Ej. Toyota RAV4" required></div><div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" placeholder="42,000 km"></div><div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" placeholder="US$ 18,500"></div><button class="btn btn-red field full" type="submit">Continuar publicación</button></form><p class="modal-note" id="publishStatus">Esta es una demostración visual; no se guardará información.</p></div></div>
 
-  <script src="assets/js/config.js?v=20260811j"></script>
-  <script src="assets/js/data.js?v=20260811j"></script>
+  <script src="assets/js/config.js?v=20260811k"></script>
+  <script src="assets/js/data.js?v=20260811k"></script>
   <script src="assets/js/services.js"></script>
-  <script src="assets/js/app.js?v=20260811j"></script>
+  <script src="assets/js/app.js?v=20260811k"></script>
 </body>
 </html>

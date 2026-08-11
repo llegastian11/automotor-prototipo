@@ -23,7 +23,7 @@
   function brandLogo() {
     const logoSource = config.brand.logoBase64 || config.brand.logoSrc;
     if (logoSource) return `<img src="${logoSource}" alt="${config.brand.name}">`;
-    return `<span class="brand-mark" aria-hidden="true">P</span><span class="brand-word">${config.brand.name}</span>`;
+    return `<span class="automotor-mark" aria-hidden="true">${icon('car')}</span><span class="brand-word">AUTOMOTOR<em>.pe</em></span>`;
   }
   qsa('.brand').forEach((brand) => {
     brand.innerHTML = brandLogo();
@@ -31,36 +31,35 @@
   });
   qsa('.report-logo').forEach((el) => el.textContent = config.brand.name);
 
-  const serviceLinks = Object.values(data.services).map((service, index) => {
+  const productServiceLinks = Object.values(data.services).map((service, index) => {
     const serviceIcon = index === 0 ? 'file' : index === 1 ? 'shield' : 'pin';
     return `<a class="service-nav-item" href="#/${service.route}" data-route="${service.route}"><span class="nav-icon">${icon(serviceIcon)}</span><span><strong>${service.name}</strong><small>${service.short}</small></span></a>`;
   }).join('');
+  const serviceLinks = `<div class="services-dropdown-head"><span>Servicios Automotor</span><small>Herramientas para comprar, proteger y administrar vehículos.</small></div><div class="services-dropdown-grid"><div class="services-column"><b>Consulta y valor</b><a class="service-nav-item" href="#/consulta-vehicular" data-route="consulta-vehicular"><span class="nav-icon">${icon('search')}</span><span><strong>Consulta vehicular</strong><small>Accede gratis a fuentes oficiales.</small></span></a><a class="service-nav-item" href="#/tasacion" data-route="tasacion"><span class="nav-icon">${icon('tag')}</span><span><strong>Tasación</strong><small>Obtén una referencia de valor.</small></span></a></div><div class="services-column"><b>Protección y control</b>${productServiceLinks}</div></div>`;
 
   const nav = qs('.nav');
   nav.innerHTML = `
     <a class="brand" href="#/inicio" data-route="inicio" aria-label="${config.brand.name}, inicio">${brandLogo()}</a>
     <div class="nav-links">
-      <a class="nav-plaquealo" href="#/plaquealo" data-route="plaquealo">plaquealo</a>
-      <a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a>
+      <a class="nav-plaquealo" href="#/plaquealo" data-route="plaquealo">Plaquealo</a>
       <a href="#/empresas" data-route="empresas">Empresas y flotas</a>
-      <a href="#/tasacion" data-route="tasacion">Tasación</a>
       <a href="#/vehiculos" data-route="vehiculos">Vehículos</a>
-      <div class="services-menu"><button class="services-trigger" type="button" aria-haspopup="true">Servicios ${icon('chevron')}</button><div class="services-dropdown">${serviceLinks}</div></div>
+      <div class="services-menu"><button class="services-trigger" type="button" aria-haspopup="true" aria-expanded="false">Otros servicios ${icon('chevron')}</button><div class="services-dropdown">${serviceLinks}</div></div>
       <a href="#/blog" data-route="blog">Blog</a>
     </div>
-    <div class="nav-actions"><button class="btn btn-outline publish-open" type="button">Publicar vehículo</button><button class="login google-login" type="button">Ingresar</button><button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer" type="button">${icon('menu')}</button></div>`;
+    <div class="nav-actions"><button class="header-login google-login" type="button">${icon('user')}<span>Ingresar</span></button><button class="header-publish publish-open" type="button">${icon('car')}<span>Publicar vehículo</span><b>+</b></button><button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer" type="button">${icon('menu')}</button></div>`;
 
   document.body.insertAdjacentHTML('beforeend', `
     <div class="drawer-backdrop" aria-hidden="true"></div>
     <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="Menú principal">
       <div class="drawer-head"><a class="brand" href="#/inicio">${brandLogo()}</a><button class="drawer-close" type="button" aria-label="Cerrar menú">${icon('close')}</button></div>
       <nav class="drawer-nav">
-        <a class="drawer-link drawer-plaquealo" href="#/plaquealo" data-route="plaquealo">${icon('file')} plaquealo</a>
-        <a class="drawer-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
+        <a class="drawer-link drawer-plaquealo" href="#/plaquealo" data-route="plaquealo">${icon('file')} Plaquealo</a>
         <a class="drawer-link" href="#/empresas" data-route="empresas">${icon('car')} Empresas y flotas</a>
-        <a class="drawer-link" href="#/tasacion" data-route="tasacion">${icon('tag')} Tasación</a>
         <a class="drawer-link" href="#/vehiculos" data-route="vehiculos">${icon('grid')} Marketplace</a>
-        <span class="drawer-section-label">Servicios</span>
+        <span class="drawer-section-label">Otros servicios</span>
+        <a class="drawer-service-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
+        <a class="drawer-service-link" href="#/tasacion" data-route="tasacion">${icon('tag')} Tasación</a>
         <a class="drawer-service-link" href="#/servicios/soat" data-route="servicios/soat">${icon('file')} SOAT</a>
         <a class="drawer-service-link" href="#/servicios/seguro-vehicular" data-route="servicios/seguro-vehicular">${icon('shield')} Seguro Vehicular</a>
         <a class="drawer-service-link" href="#/servicios/gps" data-route="servicios/gps">${icon('pin')} GPS Vehicular</a>
@@ -68,6 +67,19 @@
       </nav>
       <div class="drawer-foot"><button class="btn btn-red publish-open" type="button">Publicar vehículo</button><button class="google-button google-login" type="button"><b>G</b> Continuar con Google</button><div class="drawer-legal"><a href="#/legal/terminos">Legal</a><a href="#/legal/privacidad">Privacidad</a><a href="#/legal/cookies">Cookies</a></div></div>
     </aside>`);
+
+  const servicesMenu = qs('.services-menu');
+  const servicesTrigger = qs('.services-trigger');
+  servicesTrigger.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const open = servicesMenu.classList.toggle('open');
+    servicesTrigger.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', (event) => {
+    if (servicesMenu.contains(event.target)) return;
+    servicesMenu.classList.remove('open');
+    servicesTrigger.setAttribute('aria-expanded', 'false');
+  });
 
   const main = qs('main');
   Object.entries(data.services).forEach(([key, service], index) => {
@@ -184,7 +196,7 @@
 
   qs('.menu-btn').addEventListener('click', () => { document.body.classList.add('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','false'); qs('.menu-btn').setAttribute('aria-expanded','true'); qs('.drawer-close').focus(); });
   qs('.drawer-close').addEventListener('click', closeDrawer); qs('.drawer-backdrop').addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', (event) => { if(event.key === 'Escape'){ closeDrawer(); closeModal(); } });
+  document.addEventListener('keydown', (event) => { if(event.key === 'Escape'){ closeDrawer(); closeModal(); servicesMenu.classList.remove('open'); servicesTrigger.setAttribute('aria-expanded','false'); } });
 
   const plateInput = qs('#plateInput'); const plateStatus = qs('#plateStatus'); const previewPlate = qs('#previewPlate');
   const sanitizePlate = (value) => value.toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,8);
