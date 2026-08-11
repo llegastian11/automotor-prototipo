@@ -223,7 +223,7 @@
     const value = sanitizePlate(homePlateInput.value); const valid = value.replace('-','').length >= 6;
     if (!valid) { homePlateStatus.textContent = 'Ingresa una placa peruana válida.'; homePlateStatus.className = 'home-plate-status error'; homePlateInput.focus(); return; }
     plateInput.value = value; plateInput.dispatchEvent(new Event('input'));
-    history.pushState(null,'','#/plaquealo'); renderView();
+    history.pushState(null,'','#/inicio'); renderView();
   });
 
   qsa('[data-report-topic]').forEach((button) => button.addEventListener('click', () => {

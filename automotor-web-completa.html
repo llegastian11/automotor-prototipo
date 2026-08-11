@@ -30,7 +30,7 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
-  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811k">
+  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811l">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -43,26 +43,26 @@
   </header>
 
   <main id="contenido">
-    <section class="home-overview active" id="inicio" data-view="inicio">
+    <section class="home-overview active" id="plaquealo-producto" data-view="plaquealo">
       <div class="container home-overview-grid">
         <div class="home-overview-copy">
-          <p class="eyebrow">Automotor.pe · herramientas vehiculares</p>
-          <h1 class="section-title">Todo lo que necesitas para decidir mejor sobre un vehículo.</h1>
-          <p class="section-copy">Consulta información pública, reúne antecedentes en un reporte, estima el valor de un auto y explora vehículos en un solo lugar.</p>
-          <div class="home-service-list" aria-label="Servicios principales">
-            <a href="#/consulta-vehicular"><span>01</span><div><strong>Consulta vehicular gratuita</strong><small>Accede a fuentes y portales oficiales.</small></div><b>→</b></a>
-            <a href="#/tasacion"><span>02</span><div><strong>Tasación</strong><small>Obtén una referencia de valor para tu vehículo.</small></div><b>→</b></a>
-            <a href="#/vehiculos"><span>03</span><div><strong>Vehículos</strong><small>Explora publicaciones con información clara.</small></div><b>→</b></a>
+          <p class="eyebrow">Plaquealo · reporte vehicular</p>
+          <h1 class="section-title">Una placa. La información clave en un solo reporte.</h1>
+          <p class="section-copy">Plaquealo organiza antecedentes, documentos y alertas para ayudarte a revisar un vehículo antes de comprarlo o venderlo.</p>
+          <div class="home-service-list" aria-label="Información incluida en Plaquealo">
+            <a href="#/consulta-vehicular"><span>01</span><div><strong>Antecedentes y documentos</strong><small>Propiedad, multas, SOAT, revisión técnica y más.</small></div><b>→</b></a>
+            <a href="#/plaquealo"><span>02</span><div><strong>Alertas fáciles de interpretar</strong><small>Resultados organizados por estado y nivel de atención.</small></div><b>→</b></a>
+            <a href="#/consulta-vehicular"><span>03</span><div><strong>25 fuentes disponibles</strong><small>Información pública y especializada reunida en una lectura.</small></div><b>→</b></a>
           </div>
         </div>
         <article class="home-plaquealo-card">
           <div class="home-plaquealo-art"><img src="assets/automotor/paisaje-consulta-panoramico.svg" alt="Automóvil recorriendo un paisaje peruano"></div>
-          <div class="home-plaquealo-content"><span class="product-label">Servicio destacado</span><h2>La placa cuenta la historia.</h2><p>Ingresa una placa y continúa en PLAQUÉALO con el dato preparado para consultar.</p><form class="home-plate-form" id="homePlateForm" novalidate><label for="homePlateInput">Ingresa la placa del vehículo</label><div class="home-plate-control"><span class="home-plate-country"><span class="mini-flag" aria-hidden="true"></span><b>PERÚ</b></span><input id="homePlateInput" maxlength="8" placeholder="ABC-123" autocomplete="off" spellcheck="false" aria-describedby="homePlateStatus"><button type="submit" aria-label="Consultar placa"><span>Consultar placa</span><b aria-hidden="true">→</b></button></div><p id="homePlateStatus" class="home-plate-status" role="status">Consulta inicial sin costo · Tus datos están protegidos</p></form></div>
+          <div class="home-plaquealo-content"><span class="product-label">Consulta Plaquealo</span><h2>La placa cuenta la historia.</h2><p>Ingresa una placa y prepara la consulta del reporte vehicular.</p><form class="home-plate-form" id="homePlateForm" novalidate><label for="homePlateInput">Ingresa la placa del vehículo</label><div class="home-plate-control"><span class="home-plate-country"><span class="mini-flag" aria-hidden="true"></span><b>PERÚ</b></span><input id="homePlateInput" maxlength="8" placeholder="ABC-123" autocomplete="off" spellcheck="false" aria-describedby="homePlateStatus"><button type="submit" aria-label="Consultar placa"><span>Consultar placa</span><b aria-hidden="true">→</b></button></div><p id="homePlateStatus" class="home-plate-status" role="status">Consulta inicial sin costo · Tus datos están protegidos</p></form></div>
         </article>
       </div>
     </section>
 
-    <section class="hero automotor-hero" id="plaquealo" data-view="plaquealo">
+    <section class="hero automotor-hero" id="inicio" data-view="inicio">
       <div class="automotor-hero-backdrop" aria-hidden="true"></div>
       <div class="container hero-split">
         <div class="hero-copy-panel">
@@ -82,7 +82,6 @@
           <div class="hero-stats" aria-label="Características de la consulta"><div><span>Fuentes consultadas</span><strong>25</strong></div><div><span>Consulta digital</span><strong>100%</strong></div></div>
         </div>
         <div class="hero-device-stage">
-          <span class="sources-connected"><i></i> 25 fuentes conectadas</span>
           <article class="report-phone" aria-label="Vista previa interactiva del reporte vehicular">
             <div class="phone-shell">
               <div class="phone-status"><span>9:41</span><i aria-hidden="true"></i></div>
@@ -280,9 +279,9 @@
 
   <div class="modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-top"><h2 id="modalTitle">Publica tu vehículo</h2><button class="modal-close" type="button" aria-label="Cerrar">×</button></div><p class="section-copy" style="font-size:14px;margin-top:10px">Completa los datos básicos. En la versión final podrás añadir fotos y validar la placa.</p><form class="form-grid" id="publishForm"><div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" placeholder="B5K110" required></div><div class="field"><label for="pubYear">Año</label><select id="pubYear"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div><div class="field full"><label for="pubModel">Marca y modelo</label><input id="pubModel" placeholder="Ej. Toyota RAV4" required></div><div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" placeholder="42,000 km"></div><div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" placeholder="US$ 18,500"></div><button class="btn btn-red field full" type="submit">Continuar publicación</button></form><p class="modal-note" id="publishStatus">Esta es una demostración visual; no se guardará información.</p></div></div>
 
-  <script src="assets/js/config.js?v=20260811k"></script>
-  <script src="assets/js/data.js?v=20260811k"></script>
+  <script src="assets/js/config.js?v=20260811l"></script>
+  <script src="assets/js/data.js?v=20260811l"></script>
   <script src="assets/js/services.js"></script>
-  <script src="assets/js/app.js?v=20260811k"></script>
+  <script src="assets/js/app.js?v=20260811l"></script>
 </body>
 </html>
