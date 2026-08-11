@@ -38,13 +38,14 @@
 
   const nav = qs('.nav');
   nav.innerHTML = `
-    <a class="brand" href="#/consulta" data-route="consulta" aria-label="${config.brand.name}, consulta vehicular">${brandLogo()}</a>
+    <a class="brand" href="#/inicio" data-route="inicio" aria-label="${config.brand.name}, inicio">${brandLogo()}</a>
     <div class="nav-links">
-      <a href="#/consulta" data-route="consulta">Consulta</a>
+      <a href="#/inicio" data-route="inicio">Inicio</a>
+      <a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a>
+      <a href="#/plaquealo" data-route="plaquealo">PLAQUÉALO</a>
       <a href="#/tasacion" data-route="tasacion">Tasación</a>
       <a href="#/vehiculos" data-route="vehiculos">Vehículos</a>
       <div class="services-menu"><button class="services-trigger" type="button" aria-haspopup="true">Servicios ${icon('chevron')}</button><div class="services-dropdown">${serviceLinks}</div></div>
-      <a href="#/fuentes" data-route="fuentes">Fuentes oficiales</a>
       <a href="#/blog" data-route="blog">Blog</a>
     </div>
     <div class="nav-actions"><button class="btn btn-outline publish-open" type="button">Publicar vehículo</button><button class="login google-login" type="button">Ingresar</button><button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer" type="button">${icon('menu')}</button></div>`;
@@ -52,16 +53,17 @@
   document.body.insertAdjacentHTML('beforeend', `
     <div class="drawer-backdrop" aria-hidden="true"></div>
     <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="Menú principal">
-      <div class="drawer-head"><a class="brand" href="#/consulta">${brandLogo()}</a><button class="drawer-close" type="button" aria-label="Cerrar menú">${icon('close')}</button></div>
+      <div class="drawer-head"><a class="brand" href="#/inicio">${brandLogo()}</a><button class="drawer-close" type="button" aria-label="Cerrar menú">${icon('close')}</button></div>
       <nav class="drawer-nav">
-        <a class="drawer-link" href="#/consulta" data-route="consulta">${icon('search')} Consulta vehicular</a>
+        <a class="drawer-link" href="#/inicio" data-route="inicio">${icon('grid')} Inicio</a>
+        <a class="drawer-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
+        <a class="drawer-link" href="#/plaquealo" data-route="plaquealo">${icon('file')} PLAQUÉALO</a>
         <a class="drawer-link" href="#/tasacion" data-route="tasacion">${icon('tag')} Tasación</a>
         <a class="drawer-link" href="#/vehiculos" data-route="vehiculos">${icon('grid')} Marketplace</a>
         <span class="drawer-section-label">Servicios</span>
         <a class="drawer-service-link" href="#/servicios/soat" data-route="servicios/soat">${icon('file')} SOAT</a>
         <a class="drawer-service-link" href="#/servicios/seguro-vehicular" data-route="servicios/seguro-vehicular">${icon('shield')} Seguro Vehicular</a>
         <a class="drawer-service-link" href="#/servicios/gps" data-route="servicios/gps">${icon('pin')} GPS Vehicular</a>
-        <a class="drawer-link" href="#/fuentes" data-route="fuentes">${icon('file')} Fuentes oficiales</a>
         <a class="drawer-link" href="#/blog" data-route="blog">${icon('book')} Blog</a>
       </nav>
       <div class="drawer-foot"><button class="btn btn-red publish-open" type="button">Publicar vehículo</button><button class="google-button google-login" type="button"><b>G</b> Continuar con Google</button><div class="drawer-legal"><a href="#/legal/terminos">Legal</a><a href="#/legal/privacidad">Privacidad</a><a href="#/legal/cookies">Cookies</a></div></div>
@@ -84,7 +86,7 @@
   });
 
   main.insertAdjacentHTML('beforeend', `
-    <section class="section legal-page" data-view="legal"><div class="container"><div class="legal-box"><p class="eyebrow">Información legal</p><h1 class="section-title" id="legalTitle">Documento legal</h1><p>Contenido provisional pendiente de revisión y aprobación legal. Esta ruta está preparada para incorporar el documento definitivo.</p><a class="btn btn-outline" href="#/consulta">Volver a consulta</a></div></div></section>`);
+    <section class="section legal-page" data-view="legal"><div class="container"><div class="legal-box"><p class="eyebrow">Información legal</p><h1 class="section-title" id="legalTitle">Documento legal</h1><p>Contenido provisional pendiente de revisión y aprobación legal. Esta ruta está preparada para incorporar el documento definitivo.</p><a class="btn btn-outline" href="#/inicio">Volver al inicio</a></div></div></section>`);
 
   const promise = qs('.promise');
   promise.insertAdjacentHTML('afterend', `<section class="section metrics-band active" data-view="inicio"><div class="container metrics-grid"><div class="metric-intro"><p class="eyebrow">Actividad de la plataforma</p><h2>Datos preparados para una fuente real.</h2><span class="demo-label">Valores pendientes de API</span></div><div class="metric-card"><strong data-metric="total">—</strong><span>Consultas realizadas</span></div><div class="metric-card"><strong data-metric="monthly">—</strong><span>Consultas este mes</span></div><div class="metric-card"><strong>${config.metrics.availableSources}+</strong><span>Fuentes disponibles</span></div></div></section>`);
@@ -98,9 +100,29 @@
   const sourcesIntro = qs('.sources-intro');
   sourcesIntro.insertAdjacentHTML('afterend', `<div class="sources-toolbar"><label class="sr-only" for="sourceSearch">Buscar fuente</label><input class="source-search" id="sourceSearch" type="search" placeholder="Buscar entidad, ciudad o información"><label class="sr-only" for="sourceFilter">Filtrar categoría</label><select class="source-filter" id="sourceFilter"><option value="all">Todas las categorías</option><option value="identidad">Propiedad y registro</option><option value="multas">Multas y papeletas</option><option value="tecnico">Estado técnico y seguros</option><option value="seguridad">Documentos y seguridad</option></select></div><div class="source-empty" id="sourceEmpty">No encontramos fuentes con esos criterios.</div>`);
   qsa('.source-group').forEach((group, index) => group.dataset.category = index === 0 || index === 6 ? 'identidad' : [1,3,4,5].includes(index) ? 'multas' : index === 2 ? 'tecnico' : 'seguridad');
+  const officialSourceLinks = [
+    { match: /SUNARP|propietario|historial de propietarios|anotaciones/i, url: 'https://consultavehicular.sunarp.gob.pe/consulta-vehicular/inicio' },
+    { match: /SOAT|APESEG/i, url: 'https://www.apeseg.org.pe/consultas-soat/' },
+    { match: /SUTRAN/i, url: 'https://www.sutran.gob.pe/consultas/record-de-infracciones/' },
+    { match: /inspección|revisión técnica|MTC/i, url: 'https://portal.mtc.gob.pe/reportedgtt/form/frmconsultaplacaitv.aspx' },
+    { match: /ATU/i, url: 'https://www.atu.gob.pe/' },
+    { match: /robo|PNP|lunas polarizadas/i, url: 'https://sistemas.policia.gob.pe/recuperados/' },
+    { match: /SAT|papeleta|impuesto|captura/i, url: 'https://www.sat.gob.pe/Websitev9' }
+  ];
+  qsa('.source-item').forEach((item) => {
+    const source = officialSourceLinks.find((entry) => entry.match.test(item.textContent));
+    const link = document.createElement('a');
+    link.className = 'source-action';
+    link.href = source?.url || 'https://automotor.pe/consulta-vehicular/';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', `Abrir fuente para ${qs('strong', item).textContent}`);
+    link.textContent = 'Consultar ↗';
+    item.append(link);
+  });
 
   const footer = qs('.footer');
-  footer.innerHTML = `<div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand" href="#/consulta">${brandLogo()}</a><p class="footer-about">Información vehicular para tomar mejores decisiones.</p><div class="footer-socials" id="socialLinks"></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-services"><span>Servicios</span>${icon('chevron')}</button><div class="footer-panel" id="footer-services" hidden><a href="#/consulta">Consulta vehicular</a><a href="#/tasacion">Tasación</a><a href="#/vehiculos">Marketplace</a><a href="#/servicios/soat">SOAT</a><a href="#/servicios/seguro-vehicular">Seguro Vehicular</a><a href="#/servicios/gps">GPS Vehicular</a></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-resources"><span>Recursos</span>${icon('chevron')}</button><div class="footer-panel" id="footer-resources" hidden><a href="#/fuentes">Fuentes oficiales</a><a href="#/blog">Blog</a><a href="#/consulta">Preguntas frecuentes</a></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-legal"><span>Legal</span>${icon('chevron')}</button><div class="footer-panel" id="footer-legal" hidden><a href="#/legal/terminos">Términos de uso</a><a href="#/legal/privacidad">Política de privacidad</a><a href="#/legal/cookies">Cookies</a><a href="mailto:${config.contact.email || 'contacto@example.com'}">Contacto</a></div></div></div><div class="footer-bottom"><span>© 2026 ${config.brand.name}</span><span>Una iniciativa vehicular de ${config.brand.corporateBackup}.</span></div></div>`;
+  footer.innerHTML = `<div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand" href="#/inicio">${brandLogo()}</a><p class="footer-about">Información vehicular para tomar mejores decisiones.</p><div class="footer-socials" id="socialLinks"></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-services"><span>Servicios</span>${icon('chevron')}</button><div class="footer-panel" id="footer-services" hidden><a href="#/consulta-vehicular">Consulta vehicular gratuita</a><a href="#/plaquealo">PLAQUÉALO</a><a href="#/tasacion">Tasación</a><a href="#/vehiculos">Marketplace</a><a href="#/servicios/soat">SOAT</a><a href="#/servicios/seguro-vehicular">Seguro Vehicular</a><a href="#/servicios/gps">GPS Vehicular</a></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-resources"><span>Recursos</span>${icon('chevron')}</button><div class="footer-panel" id="footer-resources" hidden><a href="#/consulta-vehicular">Fuentes oficiales</a><a href="#/blog">Blog</a><a href="#/plaquealo">Preguntas frecuentes</a></div></div><div class="footer-group"><button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-legal"><span>Legal</span>${icon('chevron')}</button><div class="footer-panel" id="footer-legal" hidden><a href="#/legal/terminos">Términos de uso</a><a href="#/legal/privacidad">Política de privacidad</a><a href="#/legal/cookies">Cookies</a><a href="mailto:${config.contact.email || 'contacto@example.com'}">Contacto</a></div></div></div><div class="footer-bottom"><span>© 2026 ${config.brand.name}</span><span>Una iniciativa vehicular de ${config.brand.corporateBackup}.</span></div></div>`;
 
   const footerMedia = window.matchMedia('(max-width: 680px)');
   const syncFooterAccordion = () => {
@@ -141,11 +163,11 @@
 
   if (config.contact.whatsapp) document.body.insertAdjacentHTML('beforeend', `<button class="whatsapp-fab" type="button" aria-label="Contactar por WhatsApp">${icon('whatsapp')}</button>`);
 
-  const routeGroups = {consulta:'inicio',inicio:'inicio',reporte:'inicio',tasacion:'tasacion',vehiculos:'vehiculos',fuentes:'fuentes',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
-  const currentRoute = () => location.hash.replace(/^#\/?/,'') || 'consulta';
+  const routeGroups = {inicio:'inicio',home:'inicio','consulta-vehicular':'consulta-vehicular',fuentes:'consulta-vehicular',plaquealo:'plaquealo',consulta:'plaquealo',reporte:'plaquealo',tasacion:'tasacion',vehiculos:'vehiculos',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
+  const currentRoute = () => location.hash.replace(/^#\/?/,'') || 'inicio';
   function closeDrawer() { document.body.classList.remove('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','true'); qs('.menu-btn').setAttribute('aria-expanded','false'); }
   function renderView() {
-    const route = currentRoute(); const group = routeGroups[route] || 'consulta';
+    const route = currentRoute(); const group = routeGroups[route] || 'inicio';
     document.body.dataset.route = route;
     qsa('main>[data-view]').forEach((view) => view.classList.toggle('active', view.dataset.view === group));
     qsa('[data-route]').forEach((link) => link.classList.toggle('active', link.dataset.route === route));
@@ -217,7 +239,7 @@
 
   qsa('.google-login').forEach((button)=>button.addEventListener('click',async()=>{try{await window.authService.signInWithGoogle()}catch{alert('Google Login está preparado, pero requiere configurar un proveedor OAuth seguro. No se almacenaron datos.')}}));
   qs('#valuationForm').addEventListener('submit',(event)=>{event.preventDefault();const input=qs('#valuationPlate');input.value=sanitizePlate(input.value);qs('#valuationStatus').textContent=input.value.replace('-','').length>=6?`Tasación demo preparada para ${input.value}.`:'Ingresa una placa válida.'});
-  qs('.mini-search').addEventListener('submit',(event)=>{event.preventDefault();plateInput.value=sanitizePlate(qs('input',event.currentTarget).value);history.pushState(null,'','#/consulta');renderView();plateInput.dispatchEvent(new Event('input'))});
+  qs('.mini-search').addEventListener('submit',(event)=>{event.preventDefault();plateInput.value=sanitizePlate(qs('input',event.currentTarget).value);history.pushState(null,'','#/plaquealo');renderView();plateInput.dispatchEvent(new Event('input'))});
 
   const observer = new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.1}); qsa('.reveal').forEach((el)=>observer.observe(el));
   renderView(); paintWizard();
