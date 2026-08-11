@@ -11,7 +11,7 @@
   <meta property="og:description" content="Consulta información vehicular y entiende rápidamente lo importante antes de comprar o vender.">
   <meta property="og:url" content="https://llegastian11.github.io/automotor-prototipo/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#f6f6f4">
+  <meta name="theme-color" content="#faf9f7">
   <title>PLAQUÉALO — Consulta vehicular por placa en Perú</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,8 +30,7 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
-  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811a">
-  <link rel="stylesheet" href="assets/css/audit-polish.css?v=20260811d">
+  <link rel="stylesheet" href="assets/css/plaquealo.css">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -134,51 +133,6 @@
         <div class="report-sheet" aria-label="Ejemplo visual de reporte"><div class="report-title"><div><small>Reporte vehicular</small><strong>B5K110</strong></div><div class="report-logo">AUTOMOTOR<span>.pe</span></div></div><div class="report-row"><i>✓</i><span>Multas y papeletas</span><b>Sin registro</b></div><div class="report-row"><i>✓</i><span>SOAT</span><b>Vigente</b></div><div class="report-row"><i>✓</i><span>Revisión técnica</span><b>Vigente</b></div><div class="report-row attention"><i>!</i><span>Gravámenes</span><b>1 registro</b></div><div class="report-row"><i>✓</i><span>Accidentes registrados</span><b>Sin registro</b></div></div>
       </div>
     </section>
-
-    <section class="section project-team active" id="equipo" data-view="inicio">
-      <div class="container">
-        <div class="team-intro reveal">
-          <div><p class="eyebrow">Personas detrás del producto</p><h2 class="section-title">Criterio humano para ordenar información compleja.</h2></div>
-          <p class="section-copy">Un equipo multidisciplinario combina producto, tecnología, datos y conocimiento vehicular para convertir múltiples fuentes en decisiones comprensibles.</p>
-        </div>
-        <div class="team-roster reveal" role="list" aria-label="Equipo del proyecto">
-          <article class="team-member" role="listitem"><span class="team-index">01</span><span class="team-avatar" aria-hidden="true">AP</span><div><h3>Andrea P.</h3><p>Diseño de producto</p></div><span class="team-scope">Experiencia y accesibilidad</span></article>
-          <article class="team-member" role="listitem"><span class="team-index">02</span><span class="team-avatar" aria-hidden="true">LM</span><div><h3>Luis M.</h3><p>Ingeniería de plataforma</p></div><span class="team-scope">Integraciones y rendimiento</span></article>
-          <article class="team-member" role="listitem"><span class="team-index">03</span><span class="team-avatar" aria-hidden="true">CR</span><div><h3>Camila R.</h3><p>Operaciones vehiculares</p></div><span class="team-scope">Fuentes y calidad de datos</span></article>
-          <article class="team-member" role="listitem"><span class="team-index">04</span><span class="team-avatar" aria-hidden="true">JS</span><div><h3>Jorge S.</h3><p>Producto para empresas</p></div><span class="team-scope">Flotas y soporte comercial</span></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section lead-section active" id="contacto" data-view="inicio">
-      <div class="container lead-layout">
-        <div class="lead-copy reveal">
-          <p class="eyebrow">Conversemos</p><h2 class="section-title">Cuéntanos qué necesitas verificar.</h2>
-          <p>Atendemos consultas de compradores, vendedores y empresas que necesitan revisar vehículos o gestionar una flota.</p>
-          <div class="lead-questions">
-            <details><summary>¿Puedo consultar antes de comprar?</summary><p>Sí. La placa permite organizar las fuentes disponibles antes de cerrar una compra.</p></details>
-            <details><summary>¿Trabajan con flotas empresariales?</summary><p>El flujo está preparado para consultas recurrentes, monitoreo y necesidades de operación.</p></details>
-            <details><summary>¿Qué información debo enviar?</summary><p>Tu tipo de necesidad, un medio de contacto y, si la tienes, la placa del vehículo.</p></details>
-          </div>
-        </div>
-        <form class="lead-form reveal" id="leadForm" novalidate>
-          <div class="lead-form-head"><span>Solicitud de orientación</span><strong>Respuesta comercial</strong></div>
-          <div class="lead-fields">
-            <div class="lead-field"><label for="leadName">Nombre completo *</label><input id="leadName" name="name" autocomplete="name" placeholder="Ej. María Torres" required><span class="lead-error" data-lead-error="name"></span></div>
-            <div class="lead-field"><label for="leadContact">Correo o teléfono *</label><input id="leadContact" name="contact" autocomplete="email" placeholder="correo@empresa.pe" required><span class="lead-error" data-lead-error="contact"></span></div>
-            <div class="lead-field"><label for="leadProfile">¿Cómo usarás PLAQUÉALO? *</label><select id="leadProfile" name="profile" required><option value="">Selecciona una opción</option><option>Comprar un vehículo</option><option>Vender un vehículo</option><option>Gestionar una flota</option><option>Integrar datos vehiculares</option></select><span class="lead-error" data-lead-error="profile"></span></div>
-            <div class="lead-field"><label for="leadPlate">Placa, si ya la tienes</label><input id="leadPlate" name="plate" maxlength="8" autocomplete="off" placeholder="ABC-123"><span class="lead-error" data-lead-error="plate"></span></div>
-            <div class="lead-field full"><label for="leadMessage">¿Qué necesitas resolver? *</label><textarea id="leadMessage" name="message" rows="4" placeholder="Describe brevemente tu consulta o el tamaño de tu flota." required></textarea><span class="lead-error" data-lead-error="message"></span></div>
-            <label class="lead-consent full"><input id="leadConsent" name="consent" type="checkbox"><span>Acepto ser contactado para recibir orientación sobre esta solicitud.</span></label>
-            <span class="lead-error consent-error full" data-lead-error="consent"></span>
-            <button class="btn btn-red full" type="submit"><span>Enviar consulta</span><span aria-hidden="true">→</span></button>
-          </div>
-          <p class="lead-privacy">No compartimos tus datos con terceros. Este prototipo no envía información hasta conectar un canal comercial.</p>
-          <p class="lead-feedback" id="leadFeedback" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-
 
     <section class="section sources-catalog" id="fuentes" data-view="fuentes">
       <div class="container">
@@ -290,9 +244,9 @@
 
   <div class="modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-top"><h2 id="modalTitle">Publica tu vehículo</h2><button class="modal-close" type="button" aria-label="Cerrar">×</button></div><p class="section-copy" style="font-size:14px;margin-top:10px">Completa los datos básicos. En la versión final podrás añadir fotos y validar la placa.</p><form class="form-grid" id="publishForm"><div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" placeholder="B5K110" required></div><div class="field"><label for="pubYear">Año</label><select id="pubYear"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div><div class="field full"><label for="pubModel">Marca y modelo</label><input id="pubModel" placeholder="Ej. Toyota RAV4" required></div><div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" placeholder="42,000 km"></div><div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" placeholder="US$ 18,500"></div><button class="btn btn-red field full" type="submit">Continuar publicación</button></form><p class="modal-note" id="publishStatus">Esta es una demostración visual; no se guardará información.</p></div></div>
 
-  <script src="assets/js/config.js?v=20260811a"></script>
-  <script src="assets/js/data.js?v=20260811a"></script>
-  <script src="assets/js/services.js?v=20260811a"></script>
-  <script src="assets/js/app.js?v=20260811c"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/services.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>

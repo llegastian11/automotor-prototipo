@@ -66,7 +66,6 @@
       </nav>
       <div class="drawer-foot"><button class="btn btn-red publish-open" type="button">Publicar vehículo</button><button class="google-button google-login" type="button"><b>G</b> Continuar con Google</button><div class="drawer-legal"><a href="#/legal/terminos">Legal</a><a href="#/legal/privacidad">Privacidad</a><a href="#/legal/cookies">Cookies</a></div></div>
     </aside>`);
-  qs('#mobileDrawer').setAttribute('inert', '');
 
   const main = qs('main');
   Object.entries(data.services).forEach(([key, service], index) => {
@@ -144,22 +143,11 @@
 
   const routeGroups = {consulta:'inicio',inicio:'inicio',reporte:'inicio',tasacion:'tasacion',vehiculos:'vehiculos',fuentes:'fuentes',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
   const currentRoute = () => location.hash.replace(/^#\/?/,'') || 'consulta';
-  function closeDrawer() {
-    const wasOpen = document.body.classList.contains('drawer-open');
-    document.body.classList.remove('drawer-open');
-    qs('#mobileDrawer').setAttribute('aria-hidden','true');
-    qs('#mobileDrawer').setAttribute('inert', '');
-    qs('.menu-btn').setAttribute('aria-expanded','false');
-    if (wasOpen) qs('.menu-btn').focus();
-  }
+  function closeDrawer() { document.body.classList.remove('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','true'); qs('.menu-btn').setAttribute('aria-expanded','false'); }
   function renderView() {
     const route = currentRoute(); const group = routeGroups[route] || 'consulta';
     document.body.dataset.route = route;
-    qsa('main>[data-view]').forEach((view) => {
-      const active = view.dataset.view === group;
-      view.classList.toggle('active', active);
-      view.setAttribute('aria-hidden', String(!active));
-    });
+    qsa('main>[data-view]').forEach((view) => view.classList.toggle('active', view.dataset.view === group));
     qsa('[data-route]').forEach((link) => link.classList.toggle('active', link.dataset.route === route));
     if (group === 'legal') qs('#legalTitle').textContent = route.endsWith('privacidad') ? 'Política de privacidad' : route.endsWith('cookies') ? 'Política de cookies' : 'Términos de uso';
     qsa(`main>[data-view="${group}"] .reveal`).forEach((el) => el.classList.add('visible'));
@@ -172,13 +160,11 @@
   });
   window.addEventListener('popstate', renderView);
 
-  qs('.menu-btn').addEventListener('click', () => { document.body.classList.add('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','false'); qs('#mobileDrawer').removeAttribute('inert'); qs('.menu-btn').setAttribute('aria-expanded','true'); qs('.drawer-close').focus(); });
+  qs('.menu-btn').addEventListener('click', () => { document.body.classList.add('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','false'); qs('.menu-btn').setAttribute('aria-expanded','true'); qs('.drawer-close').focus(); });
   qs('.drawer-close').addEventListener('click', closeDrawer); qs('.drawer-backdrop').addEventListener('click', closeDrawer);
   document.addEventListener('keydown', (event) => { if(event.key === 'Escape'){ closeDrawer(); closeModal(); } });
 
   const plateInput = qs('#plateInput'); const plateStatus = qs('#plateStatus');
-  plateStatus.setAttribute('role', 'status');
-  plateStatus.setAttribute('aria-live', 'polite');
   const sanitizePlate = (value) => value.toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,8);
   plateInput.value = '';
   plateInput.placeholder = 'ABC-123';
@@ -207,22 +193,11 @@
   }));
   qsa('input[name="document"]').forEach((input)=>input.addEventListener('input',()=>input.value=input.value.replace(/\D/g,'').slice(0,11)));
 
-  const publishModal = qs('#publishModal'); let wizardStep = 0; let modalReturnFocus = null;
-  publishModal.setAttribute('aria-hidden', 'true');
-  qs('#publishStatus').setAttribute('role', 'status');
-  qs('#publishStatus').setAttribute('aria-live', 'polite');
-  function openModal(){ modalReturnFocus = document.activeElement; publishModal.classList.add('open'); publishModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; qs('#pubPlate').focus(); }
-  function closeModal(){ if(!publishModal.classList.contains('open')) return; publishModal.classList.remove('open'); publishModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; modalReturnFocus?.focus(); }
+  const publishModal = qs('#publishModal'); let wizardStep = 0;
+  function openModal(){ publishModal.classList.add('open'); document.body.style.overflow='hidden'; qs('#pubPlate').focus(); }
+  function closeModal(){ publishModal.classList.remove('open'); document.body.style.overflow=''; }
   function paintWizard(){ qsa('.wizard-panel').forEach((panel,index)=>panel.classList.toggle('active',index===wizardStep)); qsa('.wizard-step-indicator').forEach((item,index)=>item.classList.toggle('active',index<=wizardStep)); qs('#wizardBack').disabled = wizardStep===0; qs('#wizardNext').textContent = wizardStep===3 ? 'Finalizar publicación' : 'Continuar'; }
   document.addEventListener('click',(event)=>{ if(event.target.closest('.publish-open')) openModal(); if(event.target.closest('.modal-close')) closeModal(); if(event.target === publishModal) closeModal(); });
-  publishModal.addEventListener('keydown', (event) => {
-    if(event.key !== 'Tab') return;
-    const focusable = qsa('button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href]', publishModal).filter((item) => item.offsetParent !== null);
-    if(!focusable.length) return;
-    const first = focusable[0]; const last = focusable.at(-1);
-    if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
-    if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
-  });
   qs('#wizardBack').addEventListener('click',()=>{wizardStep=Math.max(0,wizardStep-1);paintWizard()});
   qs('#wizardNext').addEventListener('click',()=>{ if(wizardStep===0 && (!qs('#pubPlate').value || !qs('#pubYear').value || !qs('#pubBrand').value || !qs('#pubModel').value)){qs('#publishStatus').textContent='Completa placa, año, marca y modelo para continuar.';return} if(wizardStep<3){wizardStep++;paintWizard();return} qs('#authGate').classList.add('visible'); qs('#publishStatus').textContent='Autenticación Google pendiente de configuración; tus datos siguen en el formulario.'; });
   (async()=>{ try{const brands=await window.vehicleCatalogService.getBrands();qs('#pubBrand').innerHTML='<option value="">Selecciona una marca</option>'+brands.map((brand)=>`<option>${brand}</option>`).join('');qs('#brandState').textContent='Catálogo demo desacoplado del formulario.'}catch{qs('#brandState').textContent='No se pudo cargar. Reintenta.'} })();
@@ -231,45 +206,6 @@
   qsa('.google-login').forEach((button)=>button.addEventListener('click',async()=>{try{await window.authService.signInWithGoogle()}catch{alert('Google Login está preparado, pero requiere configurar un proveedor OAuth seguro. No se almacenaron datos.')}}));
   qs('#valuationForm').addEventListener('submit',(event)=>{event.preventDefault();const input=qs('#valuationPlate');input.value=sanitizePlate(input.value);qs('#valuationStatus').textContent=input.value.replace('-','').length>=6?`Tasación demo preparada para ${input.value}.`:'Ingresa una placa válida.'});
   qs('.mini-search').addEventListener('submit',(event)=>{event.preventDefault();plateInput.value=sanitizePlate(qs('input',event.currentTarget).value);history.pushState(null,'','#/consulta');renderView();plateInput.dispatchEvent(new Event('input'))});
-
-  const leadForm = qs('#leadForm');
-  const leadPlate = qs('#leadPlate');
-  leadPlate.addEventListener('input', () => { leadPlate.value = sanitizePlate(leadPlate.value); });
-  qsa('.lead-questions details').forEach((details) => details.addEventListener('toggle', () => {
-    if (!details.open) return;
-    qsa('.lead-questions details').forEach((item) => { if (item !== details) item.open = false; });
-  }));
-  leadForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const values = Object.fromEntries(new FormData(leadForm));
-    const errors = {};
-    if ((values.name || '').trim().length < 3) errors.name = 'Ingresa tu nombre completo.';
-    const contact = (values.contact || '').trim();
-    if (!contact || (!contact.includes('@') && contact.replace(/\D/g, '').length < 7)) errors.contact = 'Ingresa un correo o teléfono válido.';
-    if (!values.profile) errors.profile = 'Selecciona el uso principal.';
-    if (values.plate && sanitizePlate(values.plate).replace('-', '').length < 6) errors.plate = 'Revisa el formato de la placa.';
-    if ((values.message || '').trim().length < 12) errors.message = 'Cuéntanos un poco más para poder orientarte.';
-    if (!values.consent) errors.consent = 'Necesitamos tu autorización para contactarte.';
-
-    qsa('.lead-error', leadForm).forEach((item) => { item.textContent = errors[item.dataset.leadError] || ''; });
-    qsa('input, select, textarea', leadForm).forEach((field) => field.setAttribute('aria-invalid', String(Boolean(errors[field.name]))));
-    leadForm.classList.remove('is-success');
-    qs('#leadFeedback').textContent = '';
-    if (Object.keys(errors).length) {
-      qs(`[name="${Object.keys(errors)[0]}"]`, leadForm)?.focus();
-      return;
-    }
-
-    const submit = qs('button[type="submit"]', leadForm);
-    submit.disabled = true;
-    submit.firstElementChild.textContent = 'Preparando consulta…';
-    window.setTimeout(() => {
-      submit.disabled = false;
-      submit.firstElementChild.textContent = 'Enviar consulta';
-      leadForm.classList.add('is-success');
-      qs('#leadFeedback').textContent = 'Formulario validado. El canal comercial está listo para conectarse.';
-    }, 650);
-  });
 
   const observer = new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.1}); qsa('.reveal').forEach((el)=>observer.observe(el));
   renderView(); paintWizard();
