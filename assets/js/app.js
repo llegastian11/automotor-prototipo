@@ -40,8 +40,9 @@
   nav.innerHTML = `
     <a class="brand" href="#/inicio" data-route="inicio" aria-label="${config.brand.name}, inicio">${brandLogo()}</a>
     <div class="nav-links">
-      <a href="#/plaquealo" data-route="plaquealo">PLAQUÉALO</a>
+      <a class="nav-plaquealo" href="#/plaquealo" data-route="plaquealo">plaquealo</a>
       <a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a>
+      <a href="#/empresas" data-route="empresas">Empresas y flotas</a>
       <a href="#/tasacion" data-route="tasacion">Tasación</a>
       <a href="#/vehiculos" data-route="vehiculos">Vehículos</a>
       <div class="services-menu"><button class="services-trigger" type="button" aria-haspopup="true">Servicios ${icon('chevron')}</button><div class="services-dropdown">${serviceLinks}</div></div>
@@ -54,8 +55,9 @@
     <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="Menú principal">
       <div class="drawer-head"><a class="brand" href="#/inicio">${brandLogo()}</a><button class="drawer-close" type="button" aria-label="Cerrar menú">${icon('close')}</button></div>
       <nav class="drawer-nav">
-        <a class="drawer-link" href="#/plaquealo" data-route="plaquealo">${icon('file')} PLAQUÉALO</a>
+        <a class="drawer-link drawer-plaquealo" href="#/plaquealo" data-route="plaquealo">${icon('file')} plaquealo</a>
         <a class="drawer-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
+        <a class="drawer-link" href="#/empresas" data-route="empresas">${icon('car')} Empresas y flotas</a>
         <a class="drawer-link" href="#/tasacion" data-route="tasacion">${icon('tag')} Tasación</a>
         <a class="drawer-link" href="#/vehiculos" data-route="vehiculos">${icon('grid')} Marketplace</a>
         <span class="drawer-section-label">Servicios</span>
@@ -72,7 +74,7 @@
     main.insertAdjacentHTML('beforeend', `
       <section class="section service-page" data-view="${service.route}" id="${service.route.replaceAll('/','-')}">
         <div class="container service-layout">
-          <div class="service-copy"><span class="service-icon-large">${icon(index === 0 ? 'file' : index === 1 ? 'shield' : 'pin')}</span><p class="eyebrow">Servicios PLAQUÉALO</p><h1 class="section-title">${service.title}</h1><p class="section-copy">${service.description}</p><ul class="service-benefits">${service.benefits.map((item) => `<li>${item}</li>`).join('')}</ul></div>
+          <div class="service-copy"><span class="service-icon-large">${icon(index === 0 ? 'file' : index === 1 ? 'shield' : 'pin')}</span><p class="eyebrow">Servicios PLAQUÉALO</p><h1 class="section-title">${service.title}</h1><p class="section-copy">${service.description}</p><ul class="service-benefits">${service.benefits.map((item) => `<li>${item}</li>`).join('')}</ul><div class="service-partners"><span>${key === 'gps' ? 'Tecnología y monitoreo con' : 'Trabajamos con'}</span><div>${(service.partners || []).map((partner) => `<strong>${partner}</strong>`).join('')}</div><p>${key === 'gps' ? 'Soluciones de ubicación y seguimiento vehicular para particulares y flotas.' : 'La disponibilidad y condiciones dependen de la evaluación de cada aseguradora.'}</p></div></div>
           <form class="quote-card service-quote-form" data-service="${key}" novalidate><h2>Solicita tu cotización por WhatsApp</h2><p>Completa los datos y un asesor te responderá con el siguiente paso.</p><div class="quote-grid">
             <div class="quote-field"><label for="${key}-plate">Número de placa *</label><input id="${key}-plate" name="plate" placeholder="Ej: ABC-123" maxlength="8" autocomplete="off"><span class="field-error" data-error="plate"></span></div>
             <div class="quote-field"><label for="${key}-place">Lugar donde circulará *</label><input id="${key}-place" name="place" placeholder="Ej: Lima, Callao, Arequipa" autocomplete="address-level1"><span class="field-error" data-error="place"></span></div>
@@ -161,7 +163,7 @@
 
   if (config.contact.whatsapp) document.body.insertAdjacentHTML('beforeend', `<button class="whatsapp-fab" type="button" aria-label="Contactar por WhatsApp">${icon('whatsapp')}</button>`);
 
-  const routeGroups = {inicio:'inicio',home:'inicio','consulta-vehicular':'consulta-vehicular',fuentes:'consulta-vehicular',plaquealo:'plaquealo',consulta:'plaquealo',reporte:'plaquealo',tasacion:'tasacion',vehiculos:'vehiculos',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
+  const routeGroups = {inicio:'inicio',home:'inicio','consulta-vehicular':'consulta-vehicular',fuentes:'consulta-vehicular',plaquealo:'plaquealo',consulta:'plaquealo',reporte:'plaquealo',empresas:'empresas',tasacion:'tasacion',vehiculos:'vehiculos',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
   const currentRoute = () => location.hash.replace(/^#\/?/,'') || 'inicio';
   function closeDrawer() { document.body.classList.remove('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','true'); qs('.menu-btn').setAttribute('aria-expanded','false'); }
   function renderView() {

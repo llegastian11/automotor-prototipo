@@ -23,6 +23,6 @@ window.PLAQUEALO_CONFIG = Object.freeze({
   metrics: {
     totalQueries: null,
     monthlyQueries: null,
-    availableSources: 40
+    availableSources: 25
   }
 });

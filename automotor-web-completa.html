@@ -30,14 +30,14 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
-  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811i">
+  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811j">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="topbar">
     <nav class="nav container" aria-label="Navegación principal">
       <a class="brand" href="#/inicio" data-route="inicio" aria-label="PLAQUÉALO, inicio">PLAQUÉALO</a>
-      <div class="nav-links"><a href="#/plaquealo" data-route="plaquealo">PLAQUÉALO</a><a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a><a href="#/tasacion" data-route="tasacion">Tasación</a><a href="#/vehiculos" data-route="vehiculos">Vehículos</a><a href="#/blog" data-route="blog">Blog</a></div>
+      <div class="nav-links"><a class="nav-plaquealo" href="#/plaquealo" data-route="plaquealo">plaquealo</a><a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a><a href="#/empresas" data-route="empresas">Empresas y flotas</a><a href="#/tasacion" data-route="tasacion">Tasación</a><a href="#/vehiculos" data-route="vehiculos">Vehículos</a><a href="#/blog" data-route="blog">Blog</a></div>
       <div class="nav-actions"><button class="btn btn-outline publish-open" type="button">Publicar vehículo</button><a class="login" href="#footer">Ingresar</a><button class="menu-btn" aria-label="Abrir menú" type="button"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
     </nav>
   </header>
@@ -67,21 +67,21 @@
         <div class="hero-copy-panel">
           <p class="official-badge"><span aria-hidden="true">✓</span> Información de SUNARP, SAT, SOAT y MTC</p>
           <p class="hero-mode">PLAQUÉALO · Consulta vehicular</p>
-          <h1 class="display">La placa cuenta <span>la historia.</span></h1>
+          <h1 class="display hero-real-title">Conoce la historia real <span>de esa placa</span></h1>
           <p class="hero-sub">Consulta antecedentes, deudas y documentos del vehículo antes de comprar o vender. Decide con información clara.</p>
           <form id="consulta" novalidate>
             <label class="plate-label" for="plateInput">Ingresa la placa del vehículo</label>
             <div class="plate">
               <div class="plate-country" aria-hidden="true"><span class="flag"><i></i><i></i><i></i></span><strong>PERÚ</strong></div>
               <input id="plateInput" class="plate-input" maxlength="7" value="B5K110" autocomplete="off" spellcheck="false" aria-describedby="plateHelp" aria-label="Número de placa">
-              <button class="plate-submit" type="submit" aria-label="Consultar placa"><span>Consultar placa</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+              <button class="plate-submit" type="submit" aria-label="Consultar placa"><span>Consultar placa</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></button>
             </div>
             <p class="plate-note" id="plateHelp">Consulta inicial sin costo · Tus datos están protegidos <span class="plate-status" id="plateStatus">Placa B5K110 lista para consultar.</span></p>
           </form>
-          <div class="hero-stats" aria-label="Características de la consulta"><div><span>Fuentes consultadas</span><strong>40+</strong></div><div><span>Tiempo de respuesta</span><strong>En segundos</strong></div><div><span>Consulta digital</span><strong>100%</strong></div></div>
+          <div class="hero-stats" aria-label="Características de la consulta"><div><span>Fuentes consultadas</span><strong>25</strong></div><div><span>Consulta digital</span><strong>100%</strong></div></div>
         </div>
         <div class="hero-visual-panel">
-          <span class="sources-connected"><i></i> 40+ fuentes disponibles</span>
+          <span class="sources-connected"><i></i> 25 fuentes conectadas</span>
           <img src="assets/automotor/paisaje-consulta.png" alt="Automóvil rojo en una carretera rodeada de montañas peruanas">
           <article class="hero-report-card" aria-label="Vista previa interactiva del reporte vehicular">
             <div class="hero-report-head"><div><small>Vista previa del reporte</small><strong id="previewPlate">ABC-123</strong></div><span>PE</span></div>
@@ -161,7 +161,7 @@
       <div class="container">
         <div class="sources-intro reveal">
           <div><p class="eyebrow">Fuentes oficiales</p><h2 class="section-title">La información detrás de cada placa.</h2></div>
-          <div><p class="section-copy">Centralizamos consultas públicas y especializadas para revisar propiedad, deudas, seguros, inspecciones, antecedentes y papeletas en distintas regiones del Perú.</p><div class="sources-summary"><div><strong>40+</strong><span>consultas disponibles</span></div><div><strong>8</strong><span>grupos de información</span></div><div><strong>1</strong><span>placa para comenzar</span></div></div></div>
+          <div><p class="section-copy">Centralizamos consultas públicas y especializadas para revisar propiedad, deudas, seguros, inspecciones, antecedentes y papeletas en distintas regiones del Perú.</p><div class="sources-summary"><div><strong>40+</strong><span>consultas gratuitas</span></div><div><strong>8</strong><span>grupos de información</span></div><div><strong>1</strong><span>placa para comenzar</span></div></div></div>
         </div>
 
         <div class="source-groups reveal">
@@ -182,7 +182,7 @@
               <div class="source-item"><span class="source-mark">SUT</span><div><strong>Papeletas SUTRAN</strong><small>Fiscalización nacional</small></div></div>
               <div class="source-item"><span class="source-mark">S/</span><div><strong>Monto SUTRAN</strong><small>Deuda acumulada</small></div></div>
               <div class="source-item"><span class="source-mark">ATU</span><div><strong>Multas ATU</strong><small>Transporte urbano</small></div></div>
-              <div class="source-item"><span class="source-mark">PIT</span><div><strong>Fotopapeletas PIT</strong><small>Registro fotográfico</small></div></div>
+              <div class="source-item"><span class="source-mark">FOTO</span><div><strong>Fotopit</strong><small>Registro de fotopapeletas</small></div></div>
             </div>
           </article>
 
@@ -260,6 +260,14 @@
       <div class="container"><div class="blog-head reveal"><div><p class="eyebrow">Guías Automotor</p><h2 class="section-title">Comprar bien también se aprende.</h2></div><a class="btn btn-outline" href="#blog">Ver todos los artículos</a></div><div class="articles"><article class="lead-article reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1560250056-07ba64664864?auto=format&fit=crop&w=1400&q=85" alt="Persona inspeccionando un vehículo"><div class="article-copy"><span class="article-tag">Guía de compra · 8 min</span><h3>La revisión que debes hacer antes de comprar un auto usado</h3><p>Documentos, señales físicas y preguntas clave para una compra más segura.</p></div></article><div class="side-articles"><article class="small-article reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="Documentos sobre una mesa"><div><span class="article-tag">Documentos</span><h3>Qué revisar en la tarjeta de propiedad</h3><p>6 min de lectura</p></div></article><article class="small-article reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Compra segura desde un teléfono"><div><span class="article-tag">Seguridad</span><h3>Cómo detectar una publicación sospechosa</h3><p>5 min de lectura</p></div></article></div></div></div>
     </section>
 
+    <section class="section fleet-page" id="empresas" data-view="empresas">
+      <div class="container fleet-hero">
+        <div><p class="eyebrow">Empresas y flotas</p><h1 class="section-title">Control vehicular para equipos que no pueden detenerse.</h1><p class="section-copy">Centraliza consultas, seguimiento GPS y soporte para administrar vehículos de trabajo con mayor visibilidad.</p><div class="fleet-actions"><a class="btn btn-red" href="#/servicios/gps">Conocer GPS para flotas</a><a class="btn btn-outline" href="mailto:contacto@automotor.pe">Hablar con el equipo</a></div></div>
+        <div class="fleet-dashboard" aria-label="Ejemplo de monitoreo de flota"><div class="fleet-map"><span class="fleet-road one"></span><span class="fleet-road two"></span><i class="fleet-pin pin-one"></i><i class="fleet-pin pin-two"></i><i class="fleet-pin pin-three"></i></div><div class="fleet-summary"><div><strong>Flota conectada</strong><span>Vista demostrativa</span></div><b>GPS · Alertas · Historial</b></div></div>
+      </div>
+      <div class="container fleet-features"><article><span>01</span><h2>Monitoreo GPS</h2><p>Ubicación, recorridos y alertas con tecnología de Protemax.</p></article><article><span>02</span><h2>Consultas por volumen</h2><p>Flujos preparados para revisar múltiples unidades de una operación.</p></article><article><span>03</span><h2>Soporte empresarial</h2><p>Acompañamiento para definir una solución acorde al tamaño de la flota.</p></article></div>
+    </section>
+
     <section class="final-cta" data-view="plaquealo"><div class="container final-grid"><h2>Una placa. Una consulta. Una decisión mejor informada.</h2><form class="mini-search" action="#plaquealo"><span>PERÚ</span><input aria-label="Placa para consulta rápida" value="B5K110" maxlength="7"><button aria-label="Ir a consultar">→</button></form></div></section>
   </main>
 
@@ -267,9 +275,9 @@
 
   <div class="modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-top"><h2 id="modalTitle">Publica tu vehículo</h2><button class="modal-close" type="button" aria-label="Cerrar">×</button></div><p class="section-copy" style="font-size:14px;margin-top:10px">Completa los datos básicos. En la versión final podrás añadir fotos y validar la placa.</p><form class="form-grid" id="publishForm"><div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" placeholder="B5K110" required></div><div class="field"><label for="pubYear">Año</label><select id="pubYear"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div><div class="field full"><label for="pubModel">Marca y modelo</label><input id="pubModel" placeholder="Ej. Toyota RAV4" required></div><div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" placeholder="42,000 km"></div><div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" placeholder="US$ 18,500"></div><button class="btn btn-red field full" type="submit">Continuar publicación</button></form><p class="modal-note" id="publishStatus">Esta es una demostración visual; no se guardará información.</p></div></div>
 
-  <script src="assets/js/config.js"></script>
-  <script src="assets/js/data.js"></script>
+  <script src="assets/js/config.js?v=20260811j"></script>
+  <script src="assets/js/data.js?v=20260811j"></script>
   <script src="assets/js/services.js"></script>
-  <script src="assets/js/app.js?v=20260811i"></script>
+  <script src="assets/js/app.js?v=20260811j"></script>
 </body>
 </html>

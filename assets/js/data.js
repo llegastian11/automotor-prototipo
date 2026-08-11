@@ -6,7 +6,8 @@ window.PLAQUEALO_DATA = Object.freeze({
       short: 'Cotiza tu SOAT.',
       title: 'Tu SOAT, simple y acompañado.',
       description: 'Solicita una cotización y recibe orientación para continuar por WhatsApp.',
-      benefits: ['Atención guiada', 'Solicitud desde celular', 'Datos claros antes de continuar']
+      benefits: ['Atención guiada', 'Solicitud desde celular', 'Datos claros antes de continuar'],
+      partners: ['La Positiva', 'Mapfre', 'Pacífico', 'Interseguro']
     },
     seguro: {
       route: 'servicios/seguro-vehicular',
@@ -14,7 +15,8 @@ window.PLAQUEALO_DATA = Object.freeze({
       short: 'Protege tu vehículo.',
       title: 'Protección para tu vehículo y tu camino.',
       description: 'Cuéntanos dónde y cómo usas tu vehículo para orientarte hacia una alternativa adecuada.',
-      benefits: ['Cotización personalizada', 'Opciones según tipo de uso', 'Asesoría por WhatsApp']
+      benefits: ['Cotización personalizada', 'Opciones según tipo de uso', 'Asesoría por WhatsApp'],
+      partners: ['La Positiva', 'Mapfre', 'Pacífico', 'Interseguro']
     },
     gps: {
       route: 'servicios/gps',
@@ -22,7 +24,8 @@ window.PLAQUEALO_DATA = Object.freeze({
       short: 'Seguridad y monitoreo.',
       title: 'Ubicación y control cuando más importa.',
       description: 'Solicita información para proteger un vehículo particular o preparar una solución de monitoreo.',
-      benefits: ['Monitoreo vehicular', 'Orientación para instalación', 'Escalable a soluciones de flota']
+      benefits: ['Monitoreo vehicular', 'Orientación para instalación', 'Escalable a soluciones de flota'],
+      partners: ['Protemax']
     }
   },
   vehicleCatalog: {
@@ -43,4 +46,3 @@ window.PLAQUEALO_DATA = Object.freeze({
     {initial:'AL',name:'Andrea L.',location:'Trujillo',text:'La consulta desde celular se siente directa: placa, acción y resultados en el mismo flujo.'}
   ]
 });
-
