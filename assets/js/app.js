@@ -66,7 +66,7 @@
       </nav>
       <div class="drawer-foot"><button class="btn btn-red publish-open" type="button">Publicar vehículo</button><button class="google-button google-login" type="button"><b>G</b> Continuar con Google</button><div class="drawer-legal"><a href="#/legal/terminos">Legal</a><a href="#/legal/privacidad">Privacidad</a><a href="#/legal/cookies">Cookies</a></div></div>
     </aside>`);
-  qs('#mobileDrawer').inert = true;
+  qs('#mobileDrawer').setAttribute('inert', '');
 
   const main = qs('main');
   Object.entries(data.services).forEach(([key, service], index) => {
@@ -148,7 +148,7 @@
     const wasOpen = document.body.classList.contains('drawer-open');
     document.body.classList.remove('drawer-open');
     qs('#mobileDrawer').setAttribute('aria-hidden','true');
-    qs('#mobileDrawer').inert = true;
+    qs('#mobileDrawer').setAttribute('inert', '');
     qs('.menu-btn').setAttribute('aria-expanded','false');
     if (wasOpen) qs('.menu-btn').focus();
   }
@@ -172,7 +172,7 @@
   });
   window.addEventListener('popstate', renderView);
 
-  qs('.menu-btn').addEventListener('click', () => { document.body.classList.add('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','false'); qs('#mobileDrawer').inert = false; qs('.menu-btn').setAttribute('aria-expanded','true'); qs('.drawer-close').focus(); });
+  qs('.menu-btn').addEventListener('click', () => { document.body.classList.add('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','false'); qs('#mobileDrawer').removeAttribute('inert'); qs('.menu-btn').setAttribute('aria-expanded','true'); qs('.drawer-close').focus(); });
   qs('.drawer-close').addEventListener('click', closeDrawer); qs('.drawer-backdrop').addEventListener('click', closeDrawer);
   document.addEventListener('keydown', (event) => { if(event.key === 'Escape'){ closeDrawer(); closeModal(); } });
 
