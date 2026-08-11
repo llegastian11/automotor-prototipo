@@ -30,7 +30,7 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
-  <link rel="stylesheet" href="assets/css/plaquealo.css">
+  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811e">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -64,11 +64,15 @@
         <div class="hero-visual-panel">
           <span class="sources-connected"><i></i> 40+ fuentes disponibles</span>
           <img src="assets/automotor/paisaje-consulta.png" alt="Automóvil rojo en una carretera rodeada de montañas peruanas">
-          <article class="hero-report-card" aria-label="Vista previa del reporte vehicular">
-            <div class="hero-report-head"><div><small>Vista previa del reporte</small><strong>ABC-123</strong></div><span>PE</span></div>
-            <div class="hero-report-row"><i>✓</i><span>Multas</span><b>Sin registro</b></div>
-            <div class="hero-report-row"><i>✓</i><span>SOAT</span><b>Vigente</b></div>
-            <div class="hero-report-row attention"><i>!</i><span>Gravámenes</span><b>1 registro</b></div>
+          <article class="hero-report-card" aria-label="Vista previa interactiva del reporte vehicular">
+            <div class="hero-report-head"><div><small>Vista previa del reporte</small><strong id="previewPlate">ABC-123</strong></div><span>PE</span></div>
+            <p class="report-card-hint">Selecciona un dato para entender el resultado.</p>
+            <div class="hero-report-options" role="list">
+              <button class="hero-report-row selected" type="button" data-report-topic="multas" aria-expanded="true"><i>✓</i><span>Multas</span><b>Sin registro</b></button>
+              <button class="hero-report-row" type="button" data-report-topic="soat" aria-expanded="false"><i>✓</i><span>SOAT</span><b>Vigente</b></button>
+              <button class="hero-report-row attention" type="button" data-report-topic="gravamenes" aria-expanded="false"><i>!</i><span>Gravámenes</span><b>1 registro</b></button>
+            </div>
+            <div class="report-insight" id="reportInsight" aria-live="polite"><span>Consulta SAT y municipalidades</span><p>No se encontraron papeletas en la vista de ejemplo.</p></div>
           </article>
         </div>
       </div>
@@ -247,6 +251,6 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/services.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20260811e"></script>
 </body>
 </html>

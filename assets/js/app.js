@@ -164,13 +164,25 @@
   qs('.drawer-close').addEventListener('click', closeDrawer); qs('.drawer-backdrop').addEventListener('click', closeDrawer);
   document.addEventListener('keydown', (event) => { if(event.key === 'Escape'){ closeDrawer(); closeModal(); } });
 
-  const plateInput = qs('#plateInput'); const plateStatus = qs('#plateStatus');
+  const plateInput = qs('#plateInput'); const plateStatus = qs('#plateStatus'); const previewPlate = qs('#previewPlate');
   const sanitizePlate = (value) => value.toUpperCase().replace(/[^A-Z0-9-]/g,'').slice(0,8);
+  const reportTopics = {
+    multas: { source: 'Consulta SAT y municipalidades', detail: 'No se encontraron papeletas en la vista de ejemplo.' },
+    soat: { source: 'Consulta APESEG', detail: 'La póliza figura vigente en la vista de ejemplo.' },
+    gravamenes: { source: 'Consulta SUNARP', detail: 'Se encontró un registro que conviene revisar antes de comprar.' }
+  };
   plateInput.value = '';
   plateInput.placeholder = 'ABC-123';
   plateStatus.textContent = 'Ingresa una placa peruana para continuar.';
-  plateInput.addEventListener('input', () => { plateInput.value = sanitizePlate(plateInput.value); const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Placa ${plateInput.value} lista para consultar.` : 'Ingresa una placa peruana para continuar.'; plateStatus.style.color = valid ? 'var(--success)' : 'var(--danger)'; });
+  plateInput.addEventListener('input', () => { plateInput.value = sanitizePlate(plateInput.value); previewPlate.textContent = plateInput.value || 'ABC-123'; const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Placa ${plateInput.value} lista para consultar.` : 'Ingresa una placa peruana para continuar.'; plateStatus.style.color = valid ? 'var(--success)' : 'var(--danger)'; });
   qs('#consulta').addEventListener('submit', (event) => { event.preventDefault(); const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Demo de consulta preparada para ${plateInput.value}.` : 'Ingresa una placa válida.'; if(valid) qs('.quick-results').scrollIntoView({behavior:'smooth',block:'center'}); });
+
+  qsa('[data-report-topic]').forEach((button) => button.addEventListener('click', () => {
+    qsa('[data-report-topic]').forEach((item) => { item.classList.toggle('selected', item === button); item.setAttribute('aria-expanded', item === button ? 'true' : 'false'); });
+    const topic = reportTopics[button.dataset.reportTopic];
+    const insight = qs('#reportInsight');
+    insight.innerHTML = `<span>${topic.source}</span><p>${topic.detail}</p>`;
+  }));
 
   qsa('.filter').forEach((button) => button.addEventListener('click', () => { qsa('.filter').forEach((item)=>item.classList.remove('active')); button.classList.add('active'); qsa('#vehiculos .vehicle').forEach((card)=>card.hidden = button.dataset.filter !== 'all' && card.dataset.type !== button.dataset.filter); }));
 
