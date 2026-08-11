@@ -197,6 +197,21 @@
   plateInput.addEventListener('input', () => { plateInput.value = sanitizePlate(plateInput.value); previewPlate.textContent = plateInput.value || 'ABC-123'; const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Placa ${plateInput.value} lista para consultar.` : 'Ingresa una placa peruana para continuar.'; plateStatus.style.color = valid ? 'var(--success)' : 'var(--danger)'; });
   qs('#consulta').addEventListener('submit', (event) => { event.preventDefault(); const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Demo de consulta preparada para ${plateInput.value}.` : 'Ingresa una placa válida.'; if(valid) qs('.quick-results').scrollIntoView({behavior:'smooth',block:'center'}); });
 
+  const homePlateForm = qs('#homePlateForm'); const homePlateInput = qs('#homePlateInput'); const homePlateStatus = qs('#homePlateStatus');
+  homePlateInput.addEventListener('input', () => {
+    homePlateInput.value = sanitizePlate(homePlateInput.value);
+    const valid = homePlateInput.value.replace('-','').length >= 6;
+    homePlateStatus.textContent = valid ? `Placa ${homePlateInput.value} lista para continuar.` : 'Consulta inicial sin costo · Tus datos están protegidos';
+    homePlateStatus.className = `home-plate-status${valid ? ' valid' : ''}`;
+  });
+  homePlateForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = sanitizePlate(homePlateInput.value); const valid = value.replace('-','').length >= 6;
+    if (!valid) { homePlateStatus.textContent = 'Ingresa una placa peruana válida.'; homePlateStatus.className = 'home-plate-status error'; homePlateInput.focus(); return; }
+    plateInput.value = value; plateInput.dispatchEvent(new Event('input'));
+    history.pushState(null,'','#/plaquealo'); renderView();
+  });
+
   qsa('[data-report-topic]').forEach((button) => button.addEventListener('click', () => {
     qsa('[data-report-topic]').forEach((item) => { item.classList.toggle('selected', item === button); item.setAttribute('aria-expanded', item === button ? 'true' : 'false'); });
     const topic = reportTopics[button.dataset.reportTopic];
