@@ -232,6 +232,45 @@
   qs('#valuationForm').addEventListener('submit',(event)=>{event.preventDefault();const input=qs('#valuationPlate');input.value=sanitizePlate(input.value);qs('#valuationStatus').textContent=input.value.replace('-','').length>=6?`Tasación demo preparada para ${input.value}.`:'Ingresa una placa válida.'});
   qs('.mini-search').addEventListener('submit',(event)=>{event.preventDefault();plateInput.value=sanitizePlate(qs('input',event.currentTarget).value);history.pushState(null,'','#/consulta');renderView();plateInput.dispatchEvent(new Event('input'))});
 
+  const leadForm = qs('#leadForm');
+  const leadPlate = qs('#leadPlate');
+  leadPlate.addEventListener('input', () => { leadPlate.value = sanitizePlate(leadPlate.value); });
+  qsa('.lead-questions details').forEach((details) => details.addEventListener('toggle', () => {
+    if (!details.open) return;
+    qsa('.lead-questions details').forEach((item) => { if (item !== details) item.open = false; });
+  }));
+  leadForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const values = Object.fromEntries(new FormData(leadForm));
+    const errors = {};
+    if ((values.name || '').trim().length < 3) errors.name = 'Ingresa tu nombre completo.';
+    const contact = (values.contact || '').trim();
+    if (!contact || (!contact.includes('@') && contact.replace(/\D/g, '').length < 7)) errors.contact = 'Ingresa un correo o teléfono válido.';
+    if (!values.profile) errors.profile = 'Selecciona el uso principal.';
+    if (values.plate && sanitizePlate(values.plate).replace('-', '').length < 6) errors.plate = 'Revisa el formato de la placa.';
+    if ((values.message || '').trim().length < 12) errors.message = 'Cuéntanos un poco más para poder orientarte.';
+    if (!values.consent) errors.consent = 'Necesitamos tu autorización para contactarte.';
+
+    qsa('.lead-error', leadForm).forEach((item) => { item.textContent = errors[item.dataset.leadError] || ''; });
+    qsa('input, select, textarea', leadForm).forEach((field) => field.setAttribute('aria-invalid', String(Boolean(errors[field.name]))));
+    leadForm.classList.remove('is-success');
+    qs('#leadFeedback').textContent = '';
+    if (Object.keys(errors).length) {
+      qs(`[name="${Object.keys(errors)[0]}"]`, leadForm)?.focus();
+      return;
+    }
+
+    const submit = qs('button[type="submit"]', leadForm);
+    submit.disabled = true;
+    submit.firstElementChild.textContent = 'Preparando consulta…';
+    window.setTimeout(() => {
+      submit.disabled = false;
+      submit.firstElementChild.textContent = 'Enviar consulta';
+      leadForm.classList.add('is-success');
+      qs('#leadFeedback').textContent = 'Formulario validado. El canal comercial está listo para conectarse.';
+    }, 650);
+  });
+
   const observer = new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.1}); qsa('.reveal').forEach((el)=>observer.observe(el));
   renderView(); paintWizard();
 })();
