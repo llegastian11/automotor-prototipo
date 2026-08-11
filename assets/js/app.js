@@ -40,9 +40,8 @@
   nav.innerHTML = `
     <a class="brand" href="#/inicio" data-route="inicio" aria-label="${config.brand.name}, inicio">${brandLogo()}</a>
     <div class="nav-links">
-      <a href="#/inicio" data-route="inicio">Inicio</a>
-      <a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a>
       <a href="#/plaquealo" data-route="plaquealo">PLAQUÉALO</a>
+      <a href="#/consulta-vehicular" data-route="consulta-vehicular">Consulta vehicular</a>
       <a href="#/tasacion" data-route="tasacion">Tasación</a>
       <a href="#/vehiculos" data-route="vehiculos">Vehículos</a>
       <div class="services-menu"><button class="services-trigger" type="button" aria-haspopup="true">Servicios ${icon('chevron')}</button><div class="services-dropdown">${serviceLinks}</div></div>
@@ -55,9 +54,8 @@
     <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="Menú principal">
       <div class="drawer-head"><a class="brand" href="#/inicio">${brandLogo()}</a><button class="drawer-close" type="button" aria-label="Cerrar menú">${icon('close')}</button></div>
       <nav class="drawer-nav">
-        <a class="drawer-link" href="#/inicio" data-route="inicio">${icon('grid')} Inicio</a>
-        <a class="drawer-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
         <a class="drawer-link" href="#/plaquealo" data-route="plaquealo">${icon('file')} PLAQUÉALO</a>
+        <a class="drawer-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
         <a class="drawer-link" href="#/tasacion" data-route="tasacion">${icon('tag')} Tasación</a>
         <a class="drawer-link" href="#/vehiculos" data-route="vehiculos">${icon('grid')} Marketplace</a>
         <span class="drawer-section-label">Servicios</span>
