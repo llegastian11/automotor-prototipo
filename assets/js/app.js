@@ -35,14 +35,15 @@
     const serviceIcon = index === 0 ? 'file' : index === 1 ? 'shield' : 'pin';
     return `<a class="service-nav-item" href="#/${service.route}" data-route="${service.route}"><span class="nav-icon">${icon(serviceIcon)}</span><span><strong>${service.name}</strong><small>${service.short}</small></span></a>`;
   }).join('');
-  const serviceLinks = `<div class="services-dropdown-head"><span>Servicios Automotor</span><small>Herramientas para comprar, proteger y administrar vehículos.</small></div><div class="services-dropdown-grid"><div class="services-column"><b>Consulta y valor</b><a class="service-nav-item" href="#/consulta-vehicular" data-route="consulta-vehicular"><span class="nav-icon">${icon('search')}</span><span><strong>Consulta vehicular</strong><small>Accede gratis a fuentes oficiales.</small></span></a><a class="service-nav-item" href="#/tasacion" data-route="tasacion"><span class="nav-icon">${icon('tag')}</span><span><strong>Tasación</strong><small>Obtén una referencia de valor.</small></span></a></div><div class="services-column"><b>Protección y control</b>${productServiceLinks}</div></div>`;
+  const serviceLinks = `<div class="services-dropdown-head"><span>Servicios Automotor</span><small>Herramientas para comprar, proteger y administrar vehículos.</small></div><div class="services-dropdown-grid"><div class="services-column"><b>Consulta y documentos</b><a class="service-nav-item" href="#/consulta-vehicular" data-route="consulta-vehicular"><span class="nav-icon">${icon('search')}</span><span><strong>Consulta vehicular</strong><small>Accede gratis a fuentes oficiales.</small></span></a><a class="service-nav-item" href="#/tasacion" data-route="tasacion"><span class="nav-icon">${icon('tag')}</span><span><strong>Tasación</strong><small>Obtén una referencia de valor.</small></span></a><a class="service-nav-item" href="#/tive" data-route="tive"><span class="nav-icon">${icon('file')}</span><span><strong>Descargar TIVE</strong><small>Tarjeta de propiedad electrónica · S/ 20.</small></span></a></div><div class="services-column"><b>Protección y control</b>${productServiceLinks}</div></div>`;
 
   const nav = qs('.nav');
   nav.innerHTML = `
     <a class="brand" href="#/inicio" data-route="inicio" aria-label="${config.brand.name}, inicio">${brandLogo()}</a>
     <div class="nav-links">
       <a class="nav-plaquealo" href="#/plaquealo" data-route="plaquealo">Plaquealo</a>
-      <a href="#/empresas" data-route="empresas">Empresas y flotas</a>
+      <a href="#/migarage" data-route="migarage">MiGarage</a>
+      <a href="#/planes" data-route="planes">Planes</a>
       <a href="#/vehiculos" data-route="vehiculos">Vehículos</a>
       <div class="services-menu"><button class="services-trigger" type="button" aria-haspopup="true" aria-expanded="false">Otros servicios ${icon('chevron')}</button><div class="services-dropdown">${serviceLinks}</div></div>
       <a href="#/blog" data-route="blog">Blog</a>
@@ -55,11 +56,13 @@
       <div class="drawer-head"><a class="brand" href="#/inicio">${brandLogo()}</a><button class="drawer-close" type="button" aria-label="Cerrar menú">${icon('close')}</button></div>
       <nav class="drawer-nav">
         <a class="drawer-link drawer-plaquealo" href="#/plaquealo" data-route="plaquealo">${icon('file')} Plaquealo</a>
-        <a class="drawer-link" href="#/empresas" data-route="empresas">${icon('car')} Empresas y flotas</a>
+        <a class="drawer-link" href="#/migarage" data-route="migarage">${icon('shield')} MiGarage</a>
+        <a class="drawer-link" href="#/planes" data-route="planes">${icon('tag')} Planes</a>
         <a class="drawer-link" href="#/vehiculos" data-route="vehiculos">${icon('grid')} Marketplace</a>
         <span class="drawer-section-label">Otros servicios</span>
         <a class="drawer-service-link" href="#/consulta-vehicular" data-route="consulta-vehicular">${icon('search')} Consulta vehicular</a>
         <a class="drawer-service-link" href="#/tasacion" data-route="tasacion">${icon('tag')} Tasación</a>
+        <a class="drawer-service-link" href="#/tive" data-route="tive">${icon('file')} Descargar TIVE · S/ 20</a>
         <a class="drawer-service-link" href="#/servicios/soat" data-route="servicios/soat">${icon('file')} SOAT</a>
         <a class="drawer-service-link" href="#/servicios/seguro-vehicular" data-route="servicios/seguro-vehicular">${icon('shield')} Seguro Vehicular</a>
         <a class="drawer-service-link" href="#/servicios/gps" data-route="servicios/gps">${icon('pin')} GPS Vehicular</a>
@@ -175,7 +178,7 @@
 
   if (config.contact.whatsapp) document.body.insertAdjacentHTML('beforeend', `<button class="whatsapp-fab" type="button" aria-label="Contactar por WhatsApp">${icon('whatsapp')}</button>`);
 
-  const routeGroups = {inicio:'inicio',home:'inicio','consulta-vehicular':'consulta-vehicular',fuentes:'consulta-vehicular',plaquealo:'plaquealo',consulta:'plaquealo',reporte:'plaquealo',empresas:'empresas',tasacion:'tasacion',vehiculos:'vehiculos',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
+  const routeGroups = {inicio:'inicio',home:'inicio','consulta-vehicular':'consulta-vehicular',fuentes:'consulta-vehicular',plaquealo:'plaquealo',consulta:'plaquealo',reporte:'plaquealo',planes:'planes',migarage:'migarage',tive:'tive',tasacion:'tasacion',vehiculos:'vehiculos',blog:'blog','servicios/soat':'servicios/soat','servicios/seguro-vehicular':'servicios/seguro-vehicular','servicios/gps':'servicios/gps','legal/terminos':'legal','legal/privacidad':'legal','legal/cookies':'legal'};
   const currentRoute = () => location.hash.replace(/^#\/?/,'') || 'inicio';
   function closeDrawer() { document.body.classList.remove('drawer-open'); qs('#mobileDrawer').setAttribute('aria-hidden','true'); qs('.menu-btn').setAttribute('aria-expanded','false'); }
   function renderView() {
@@ -266,6 +269,9 @@
 
   qsa('.google-login').forEach((button)=>button.addEventListener('click',async()=>{try{await window.authService.signInWithGoogle()}catch{alert('Google Login está preparado, pero requiere configurar un proveedor OAuth seguro. No se almacenaron datos.')}}));
   qs('#valuationForm').addEventListener('submit',(event)=>{event.preventDefault();const input=qs('#valuationPlate');input.value=sanitizePlate(input.value);qs('#valuationStatus').textContent=input.value.replace('-','').length>=6?`Tasación demo preparada para ${input.value}.`:'Ingresa una placa válida.'});
+  qs('#tiveDni').addEventListener('input',(event)=>event.target.value=event.target.value.replace(/\D/g,'').slice(0,8));
+  qs('#tivePlate').addEventListener('input',(event)=>event.target.value=sanitizePlate(event.target.value));
+  qs('#tiveForm').addEventListener('submit',(event)=>{event.preventDefault();const dni=qs('#tiveDni').value;const plate=sanitizePlate(qs('#tivePlate').value);const feedback=qs('#tiveFeedback');if(dni.length!==8||plate.replace('-','').length<6){feedback.textContent='Completa el DNI de 8 dígitos y una placa válida.';feedback.style.color='var(--danger)';return}feedback.textContent=`Solicitud preparada para ${plate}. El pago de S/ 20 es solo demostrativo.`;feedback.style.color='var(--success)'});
   qs('.mini-search').addEventListener('submit',(event)=>{event.preventDefault();plateInput.value=sanitizePlate(qs('input',event.currentTarget).value);history.pushState(null,'','#/plaquealo');renderView();plateInput.dispatchEvent(new Event('input'))});
 
   const observer = new IntersectionObserver((entries)=>entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.1}); qsa('.reveal').forEach((el)=>observer.observe(el));

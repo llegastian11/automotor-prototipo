@@ -30,7 +30,7 @@
     .sources-nav:focus-within:not(:hover) .source-popover{opacity:0;visibility:hidden;transform:translateX(-50%) translateY(7px)}body[data-route="fuentes"] .source-popover{display:none}
     @media(max-width:680px){.hero h1{font-size:2.15rem;letter-spacing:-.065em}.plate{grid-template-columns:70px minmax(0,1fr) 62px}.plate-input{min-width:0;font-size:1.7rem;letter-spacing:.04em}.plate-submit svg{width:24px}.hero-sub{padding-inline:8px}.art-scene img{object-position:center}}
   </style>
-  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811l">
+  <link rel="stylesheet" href="assets/css/plaquealo.css?v=20260811m">
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -62,8 +62,7 @@
       </div>
     </section>
 
-    <section class="hero automotor-hero" id="inicio" data-view="inicio">
-      <div class="automotor-hero-backdrop" aria-hidden="true"></div>
+    <section class="hero restored-hero" id="inicio" data-view="inicio">
       <div class="container hero-split">
         <div class="hero-copy-panel">
           <p class="official-badge"><span aria-hidden="true">✓</span> Información de SUNARP, SAT, SOAT y MTC</p>
@@ -81,22 +80,14 @@
           </form>
           <div class="hero-stats" aria-label="Características de la consulta"><div><span>Fuentes consultadas</span><strong>25</strong></div><div><span>Consulta digital</span><strong>100%</strong></div></div>
         </div>
-        <div class="hero-device-stage">
-          <article class="report-phone" aria-label="Vista previa interactiva del reporte vehicular">
-            <div class="phone-shell">
-              <div class="phone-status"><span>9:41</span><i aria-hidden="true"></i></div>
-              <div class="phone-plate"><small>PERÚ</small><strong id="previewPlate">ABC-123</strong></div>
-              <div class="phone-summary"><span>Vista previa</span><strong>Reporte vehicular</strong><small>Información organizada para decidir mejor.</small></div>
-              <div class="hero-report-options" role="list">
-                <button class="hero-report-row selected" type="button" data-report-topic="multas" aria-expanded="true"><i>✓</i><span>Multas y papeletas</span><b>Sin registro</b></button>
-                <button class="hero-report-row" type="button" data-report-topic="soat" aria-expanded="false"><i>✓</i><span>SOAT</span><b>Vigente</b></button>
-                <button class="hero-report-row attention" type="button" data-report-topic="gravamenes" aria-expanded="false"><i>!</i><span>Gravámenes</span><b>1 registro</b></button>
-              </div>
-              <div class="report-insight" id="reportInsight" aria-live="polite"><span>Consulta SAT y municipalidades</span><p>No se encontraron papeletas en la vista de ejemplo.</p></div>
-              <span class="phone-home" aria-hidden="true"></span>
-            </div>
+        <div class="hero-visual-panel">
+          <img src="assets/automotor/paisaje-consulta.png" alt="Automóvil rojo en una carretera rodeada de montañas peruanas">
+          <article class="hero-report-card" aria-label="Vista previa interactiva del reporte vehicular">
+            <div class="hero-report-head"><div><small>Vista previa del reporte</small><strong id="previewPlate">ABC-123</strong></div><span>PE</span></div>
+            <p class="report-card-hint">Selecciona un dato para entender el resultado.</p>
+            <div class="hero-report-options" role="list"><button class="hero-report-row selected" type="button" data-report-topic="multas" aria-expanded="true"><i>✓</i><span>Multas</span><b>Sin registro</b></button><button class="hero-report-row" type="button" data-report-topic="soat" aria-expanded="false"><i>✓</i><span>SOAT</span><b>Vigente</b></button><button class="hero-report-row attention" type="button" data-report-topic="gravamenes" aria-expanded="false"><i>!</i><span>Gravámenes</span><b>1 registro</b></button></div>
+            <div class="report-insight" id="reportInsight" aria-live="polite"><span>Consulta SAT y municipalidades</span><p>No se encontraron papeletas en la vista de ejemplo.</p></div>
           </article>
-          <span class="hero-car-label">Camaro · vista referencial</span>
         </div>
       </div>
       <div class="source-rail"><div class="source-row container"><span>Fuentes oficiales</span><strong>SUNARP</strong><strong>SAT</strong><strong>MTC</strong><strong>SBS</strong><strong>APESEG</strong><strong>SUTRAN</strong></div></div>
@@ -264,13 +255,12 @@
       <div class="container"><div class="blog-head reveal"><div><p class="eyebrow">Guías Automotor</p><h2 class="section-title">Comprar bien también se aprende.</h2></div><a class="btn btn-outline" href="#blog">Ver todos los artículos</a></div><div class="articles"><article class="lead-article reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1560250056-07ba64664864?auto=format&fit=crop&w=1400&q=85" alt="Persona inspeccionando un vehículo"><div class="article-copy"><span class="article-tag">Guía de compra · 8 min</span><h3>La revisión que debes hacer antes de comprar un auto usado</h3><p>Documentos, señales físicas y preguntas clave para una compra más segura.</p></div></article><div class="side-articles"><article class="small-article reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="Documentos sobre una mesa"><div><span class="article-tag">Documentos</span><h3>Qué revisar en la tarjeta de propiedad</h3><p>6 min de lectura</p></div></article><article class="small-article reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Compra segura desde un teléfono"><div><span class="article-tag">Seguridad</span><h3>Cómo detectar una publicación sospechosa</h3><p>5 min de lectura</p></div></article></div></div></div>
     </section>
 
-    <section class="section fleet-page" id="empresas" data-view="empresas">
-      <div class="container fleet-hero">
-        <div><p class="eyebrow">Empresas y flotas</p><h1 class="section-title">Control vehicular para equipos que no pueden detenerse.</h1><p class="section-copy">Centraliza consultas, seguimiento GPS y soporte para administrar vehículos de trabajo con mayor visibilidad.</p><div class="fleet-actions"><a class="btn btn-red" href="#/servicios/gps">Conocer GPS para flotas</a><a class="btn btn-outline" href="mailto:contacto@automotor.pe">Hablar con el equipo</a></div></div>
-        <div class="fleet-dashboard" aria-label="Ejemplo de monitoreo de flota"><div class="fleet-map"><span class="fleet-road one"></span><span class="fleet-road two"></span><i class="fleet-pin pin-one"></i><i class="fleet-pin pin-two"></i><i class="fleet-pin pin-three"></i></div><div class="fleet-summary"><div><strong>Flota conectada</strong><span>Vista demostrativa</span></div><b>GPS · Alertas · Historial</b></div></div>
-      </div>
-      <div class="container fleet-features"><article><span>01</span><h2>Monitoreo GPS</h2><p>Ubicación, recorridos y alertas con tecnología de Protemax.</p></article><article><span>02</span><h2>Consultas por volumen</h2><p>Flujos preparados para revisar múltiples unidades de una operación.</p></article><article><span>03</span><h2>Soporte empresarial</h2><p>Acompañamiento para definir una solución acorde al tamaño de la flota.</p></article></div>
+    <section class="section plans-page" id="planes" data-view="planes"><div class="container"><p class="eyebrow">Planes referenciales</p><h1 class="section-title">Elige cuánto control necesitas.</h1><p class="section-copy">Precios de demostración sujetos a validación comercial.</p><div class="plans-grid"><article><span>PERSONAL</span><h2>Gratis</h2><p>Acceso a fuentes oficiales y una vista básica.</p><ul><li>Consulta vehicular gratuita</li><li>Enlaces oficiales</li></ul><a class="btn btn-outline" href="#/consulta-vehicular">Comenzar</a></article><article class="featured"><span>PLAQUEALO</span><h2>S/ 19.90</h2><p>Un reporte organizado para revisar antes de comprar.</p><ul><li>25 fuentes disponibles</li><li>Alertas y documentos</li><li>Descarga del reporte</li></ul><a class="btn btn-red" href="#/plaquealo">Consultar placa</a></article><article><span>MIGARAGE</span><h2>S/ 14.90 / mes</h2><p>Seguimiento continuo de los vehículos que ya tienes.</p><ul><li>Alertas de multas</li><li>Recordatorios de SOAT</li><li>Hasta 3 vehículos</li></ul><a class="btn btn-outline" href="#/migarage">Conocer MiGarage</a></article></div></div>
     </section>
+
+    <section class="section tive-page" data-view="tive"><div class="container tive-layout"><div><p class="eyebrow">Documento vehicular</p><h1 class="section-title">Descarga tu TIVE.</h1><p class="section-copy">Solicita la Tarjeta de Identificación Vehicular Electrónica con los datos del titular.</p><div class="tive-note">Costo referencial del servicio <strong>S/ 20</strong></div></div><form class="quote-card" id="tiveForm" novalidate><h2>Datos para la solicitud</h2><p>Verifica que el DNI corresponda al titular del vehículo.</p><div class="quote-grid"><div class="quote-field full"><label for="tiveDni">DNI del titular</label><input id="tiveDni" inputmode="numeric" maxlength="8" placeholder="12345678" required></div><div class="quote-field full"><label for="tivePlate">Placa del vehículo</label><input id="tivePlate" maxlength="8" placeholder="ABC-123" required></div><button class="btn btn-red" type="submit">Pagar S/ 20</button></div><p class="quote-feedback" id="tiveFeedback" role="status">Pago demostrativo; no se realizará ningún cargo.</p></form></div></section>
+
+    <section class="section garage-page" data-view="migarage"><div class="container"><p class="eyebrow">MiGarage</p><h1 class="section-title">Tus vehículos, siempre vigilados.</h1><p class="section-copy">Recibe alertas de nuevas multas, vencimiento de SOAT y recordatorios importantes.</p><div class="garage-features"><article><b>01</b><h2>Monitoreo de multas</h2><p>Te avisamos cuando aparece una nueva deuda o papeleta.</p></article><article><b>02</b><h2>Alertas de SOAT</h2><p>Recordatorios antes del vencimiento para evitar interrupciones.</p></article><article><b>03</b><h2>Un solo garaje</h2><p>Organiza hasta tres vehículos en el plan referencial.</p></article></div><a class="btn btn-red" href="#/planes">Ver planes</a></div></section>
 
     <section class="final-cta" data-view="plaquealo"><div class="container final-grid"><h2>Una placa. Una consulta. Una decisión mejor informada.</h2><form class="mini-search" action="#plaquealo"><span>PERÚ</span><input aria-label="Placa para consulta rápida" value="B5K110" maxlength="7"><button aria-label="Ir a consultar">→</button></form></div></section>
   </main>
@@ -279,9 +269,9 @@
 
   <div class="modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><div class="modal-top"><h2 id="modalTitle">Publica tu vehículo</h2><button class="modal-close" type="button" aria-label="Cerrar">×</button></div><p class="section-copy" style="font-size:14px;margin-top:10px">Completa los datos básicos. En la versión final podrás añadir fotos y validar la placa.</p><form class="form-grid" id="publishForm"><div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" placeholder="B5K110" required></div><div class="field"><label for="pubYear">Año</label><select id="pubYear"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></div><div class="field full"><label for="pubModel">Marca y modelo</label><input id="pubModel" placeholder="Ej. Toyota RAV4" required></div><div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" placeholder="42,000 km"></div><div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" placeholder="US$ 18,500"></div><button class="btn btn-red field full" type="submit">Continuar publicación</button></form><p class="modal-note" id="publishStatus">Esta es una demostración visual; no se guardará información.</p></div></div>
 
-  <script src="assets/js/config.js?v=20260811l"></script>
-  <script src="assets/js/data.js?v=20260811l"></script>
+  <script src="assets/js/config.js?v=20260811m"></script>
+  <script src="assets/js/data.js?v=20260811m"></script>
   <script src="assets/js/services.js"></script>
-  <script src="assets/js/app.js?v=20260811l"></script>
+  <script src="assets/js/app.js?v=20260811m"></script>
 </body>
 </html>
