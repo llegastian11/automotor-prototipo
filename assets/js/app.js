@@ -212,7 +212,15 @@
   plateInput.placeholder = 'ABC-123';
   plateStatus.textContent = 'Ingresa una placa peruana para continuar.';
   plateInput.addEventListener('input', () => { plateInput.value = sanitizePlate(plateInput.value); previewPlate.textContent = plateInput.value || 'ABC-123'; const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Placa ${plateInput.value} lista para consultar.` : 'Ingresa una placa peruana para continuar.'; plateStatus.style.color = valid ? 'var(--success)' : 'var(--danger)'; });
-  qs('#consulta').addEventListener('submit', (event) => { event.preventDefault(); const valid = plateInput.value.replace('-','').length >= 6; plateStatus.textContent = valid ? `Demo de consulta preparada para ${plateInput.value}.` : 'Ingresa una placa válida.'; if(valid) qs('.quick-results').scrollIntoView({behavior:'smooth',block:'center'}); });
+  qs('#consulta').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = sanitizePlate(plateInput.value); const valid = value.replace('-','').length >= 6;
+    plateStatus.textContent = valid ? `Placa ${value} preparada. Abriendo Plaquealo…` : 'Ingresa una placa válida.';
+    if (!valid) { plateInput.focus(); return; }
+    homePlateInput.value = value; homePlateInput.dispatchEvent(new Event('input'));
+    history.pushState(null,'','#/plaquealo'); renderView();
+    window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  });
 
   const homePlateForm = qs('#homePlateForm'); const homePlateInput = qs('#homePlateInput'); const homePlateStatus = qs('#homePlateStatus');
   homePlateInput.addEventListener('input', () => {
@@ -226,7 +234,8 @@
     const value = sanitizePlate(homePlateInput.value); const valid = value.replace('-','').length >= 6;
     if (!valid) { homePlateStatus.textContent = 'Ingresa una placa peruana válida.'; homePlateStatus.className = 'home-plate-status error'; homePlateInput.focus(); return; }
     plateInput.value = value; plateInput.dispatchEvent(new Event('input'));
-    history.pushState(null,'','#/inicio'); renderView();
+    homePlateStatus.textContent = `Consulta preparada para la placa ${value}.`;
+    homePlateStatus.className = 'home-plate-status valid';
   });
 
   qsa('[data-report-topic]').forEach((button) => button.addEventListener('click', () => {
