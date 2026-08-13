@@ -83,6 +83,14 @@
     servicesMenu.classList.remove('open');
     servicesTrigger.setAttribute('aria-expanded', 'false');
   });
+  const closeServicesMenu = () => {
+    servicesMenu.classList.remove('open');
+    servicesTrigger.setAttribute('aria-expanded', 'false');
+  };
+  servicesMenu.addEventListener('mouseleave', closeServicesMenu);
+  servicesMenu.addEventListener('focusout', (event) => {
+    if (!servicesMenu.contains(event.relatedTarget)) closeServicesMenu();
+  });
 
   const main = qs('main');
   Object.entries(data.services).forEach(([key, service], index) => {
@@ -134,6 +142,12 @@
     link.setAttribute('aria-label', `Abrir fuente para ${qs('strong', item).textContent}`);
     link.textContent = 'Consultar ↗';
     item.append(link);
+    if (item.classList.contains('requires-account')) {
+      const access = document.createElement('span');
+      access.className = 'source-access';
+      access.textContent = 'Requiere cuenta SUNARP';
+      qs('div', item).append(access);
+    }
   });
 
   const footer = qs('.footer');
