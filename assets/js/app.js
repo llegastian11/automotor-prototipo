@@ -123,23 +123,60 @@
   const sourcesIntro = qs('.sources-intro');
   sourcesIntro.insertAdjacentHTML('afterend', `<div class="sources-toolbar"><label class="sr-only" for="sourceSearch">Buscar fuente</label><input class="source-search" id="sourceSearch" type="search" placeholder="Buscar entidad, ciudad o información"><label class="sr-only" for="sourceFilter">Filtrar categoría</label><select class="source-filter" id="sourceFilter"><option value="all">Todas las categorías</option><option value="identidad">Propiedad y registro</option><option value="multas">Multas y papeletas</option><option value="tecnico">Estado técnico y seguros</option><option value="seguridad">Documentos y seguridad</option></select></div><div class="source-empty" id="sourceEmpty">No encontramos fuentes con esos criterios.</div>`);
   qsa('.source-group').forEach((group, index) => group.dataset.category = index === 0 || index === 6 ? 'identidad' : [1,3,4,5].includes(index) ? 'multas' : index === 2 ? 'tecnico' : 'seguridad');
-  const officialSourceLinks = [
-    { match: /SUNARP|propietario|historial de propietarios|anotaciones/i, url: 'https://consultavehicular.sunarp.gob.pe/consulta-vehicular/inicio' },
-    { match: /SOAT|APESEG/i, url: 'https://www.apeseg.org.pe/consultas-soat/' },
-    { match: /SUTRAN/i, url: 'https://www.sutran.gob.pe/consultas/record-de-infracciones/' },
-    { match: /inspección|revisión técnica|MTC/i, url: 'https://portal.mtc.gob.pe/reportedgtt/form/frmconsultaplacaitv.aspx' },
-    { match: /ATU/i, url: 'https://www.atu.gob.pe/' },
-    { match: /robo|PNP|lunas polarizadas/i, url: 'https://sistemas.policia.gob.pe/recuperados/' },
-    { match: /SAT|papeleta|impuesto|captura/i, url: 'https://www.sat.gob.pe/Websitev9' }
-  ];
+  const officialSourceLinks = new Map([
+    ['Consulta vehicular', 'https://consultavehicular.sunarp.gob.pe/'],
+    ['Impuesto vehicular', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx?mysession=%2fkXttmyGbViC4eScebKDZ%2b7zxli%2bnKXbDliLSVM%2bG18%3d'],
+    ['Consulta de SOAT', 'https://www.apeseg.org.pe/consultas-soat/'],
+    ['Papeletas SAT Lima', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx'],
+    ['Papeletas Callao', 'https://pagopapeletascallao.pe/'],
+    ['Papeletas SUTRAN', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/'],
+    ['Monto SUTRAN', 'https://www.sutran.gob.pe/consultas/record-de-infracciones/verifica-tu-infraccion/'],
+    ['Multas ATU', 'https://pasarela.atu.gob.pe/#'],
+    ['Fotopit', 'http://www.pit.gob.pe/pit2007/EstadoCuentaVelocidad.aspx'],
+    ['Inspección vehicular', 'https://rec.mtc.gob.pe/Citv/ArConsultaCitv'],
+    ['Deudas GNV FISE', 'https://fise.minem.gob.pe:23308/consulta-taller/pages/consultaTaller/inicio'],
+    ['Vigencia de tanque', 'https://vh.infogas.com.pe/'],
+    ['Estado de placa', 'https://www.placas.pe/#/home/verificarEstadoPlaca'],
+    ['Accidentes por SOAT', 'https://servicios.sbs.gob.pe/reportesoat/'],
+    ['Accidentes por seguro', 'https://servicios.sbs.gob.pe/reportesoat/'],
+    ['SAT Trujillo', 'https://satt.gob.pe/servicios/record-de-infracciones'],
+    ['Papeletas Piura', 'http://www.munipiura.gob.pe/consulta-de-multas-de-transito#buscar-por-placa'],
+    ['Papeletas Tarapoto', 'https://www.sat-t.gob.pe/'],
+    ['Papeletas Chiclayo', 'https://virtualsatch.satch.gob.pe/virtualsatch/record_infracciones/buscar_placa_'],
+    ['Papeletas Cajamarca', 'https://www.satcajamarca.gob.pe/#/'],
+    ['Papeletas Chachapoyas', 'https://app.munichachapoyas.gob.pe/servicios/consulta_papeletas/app/papeletas.php'],
+    ['Papeletas Huancayo', 'http://sathuancayo.fortiddns.com:888/VentanillaVirtual/ConsultaPIT.aspx'],
+    ['Papeletas Huánuco', 'https://www.munihuanuco.gob.pe/wp-content/servicios/transportes/gt_papeletas.php'],
+    ['Papeletas Andahuaylas', 'https://muniandahuaylas.gob.pe/consultar-papeleta/'],
+    ['Papeletas Ica', 'https://m.satica.gob.pe/'],
+    ['Papeletas Arequipa', 'https://www.muniarequipa.gob.pe/oficina-virtual/c0nInfrPermisos/faltas/papeletas.php'],
+    ['Papeletas Cusco', 'https://cusco.gob.pe/informatica/index.php/'],
+    ['Papeletas Tacna', 'https://www.munitacna.gob.pe/pagina/sf/servicios/papeletas'],
+    ['Historial de propietarios', 'https://sprl.sunarp.gob.pe/sprl/ingreso'],
+    ['Precio pagado', 'https://sigueloplus.sunarp.gob.pe/siguelo/'],
+    ['Anotaciones SUNARP', 'https://sigueloplus.sunarp.gob.pe/siguelo/'],
+    ['Descargar TIVE', 'https://www.sunarp.gob.pe/serviciosenlinea/portal/tarjeta-de-identificacion-vehicular-electronica-tive.html'],
+    ['Lunas polarizadas', 'https://sistemas.policia.gob.pe/consultalunas/ConsultarServicioLunas'],
+    ['Consulta de robo', 'https://sistemas1.policia.gob.pe/ConsultaPVR/ErrorSesion.aspx'],
+    ['Orden de captura', 'https://www.sat.gob.pe/VirtualSAT/principal.aspx?mysession=8QduqIL0JVCYoUtsKsI4LoDx73VGLXObdvYbjhAea%2fs%3d']
+  ]);
   qsa('.source-item').forEach((item) => {
-    const source = officialSourceLinks.find((entry) => entry.match.test(item.textContent));
+    const sourceName = qs('strong', item).textContent.trim();
+    const source = officialSourceLinks.get(sourceName);
+    if (!source) {
+      const unavailable = document.createElement('span');
+      unavailable.className = 'source-action source-unavailable';
+      unavailable.textContent = 'No disponible';
+      unavailable.setAttribute('aria-label', `${sourceName}: Automotor.pe no publica actualmente un enlace externo`);
+      item.append(unavailable);
+      return;
+    }
     const link = document.createElement('a');
     link.className = 'source-action';
-    link.href = source?.url || 'https://automotor.pe/consulta-vehicular/';
+    link.href = source;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.setAttribute('aria-label', `Abrir fuente para ${qs('strong', item).textContent}`);
+    link.setAttribute('aria-label', `Abrir fuente para ${sourceName}`);
     link.textContent = 'Consultar ↗';
     item.append(link);
     if (item.classList.contains('requires-account')) {
