@@ -1,8 +1,8 @@
 window.PLAQUEALO_CONFIG = Object.freeze({
   brand: {
-    name: 'AUTOMOTOR.pe',
+    name: 'PLAQUÉALO',
     corporateBackup: 'Automotor.pe',
-    logoSrc: 'assets/automotor/logo-automotor-oficial.png',
+    logoSrc: 'assets/automotor/logo-plaquealo-oficial.png',
     logoBase64: ''
   },
   contact: {
