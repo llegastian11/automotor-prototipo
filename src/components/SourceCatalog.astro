@@ -46,8 +46,8 @@ import { sourceGroups } from '../data/services';
 
 <style>
   .sources-toolbar { display: flex; gap: 10px; margin: 38px 0 10px; }
-  .source-search { flex: 1; min-height: 50px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 0 16px; }
-  .source-filter { min-height: 50px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 0 14px; }
+  .source-search { flex: 1; min-width: 0; min-height: 50px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 0 16px; }
+  .source-filter { flex: 0 1 220px; min-width: 0; min-height: 50px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 0 14px; }
   .source-empty { display: none; padding: 30px; border: 1px dashed var(--line); border-radius: 16px; text-align: center; color: var(--muted); }
   .source-empty.visible { display: block; }
 
@@ -80,6 +80,8 @@ import { sourceGroups } from '../data/services';
   }
   @media (max-width: 560px) {
     .source-items, .source-group.wide .source-items { grid-template-columns: 1fr; }
+    .sources-toolbar { flex-direction: column; }
+    .source-filter { flex-basis: auto; width: 100%; }
   }
 </style>
 
