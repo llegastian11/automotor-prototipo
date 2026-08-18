@@ -287,6 +287,31 @@
     plateInput.value = value; plateInput.dispatchEvent(new Event('input'));
     homePlateStatus.textContent = `Consulta preparada para la placa ${value}.`;
     homePlateStatus.className = 'home-plate-status valid';
+    reportProductCta.disabled = false;
+    reportProductCta.focus();
+  });
+
+  const reportProductCta = qs('#reportProductCta');
+  const reportProductNames = {
+    completo: 'reporte completo',
+    propietarios: 'reporte de propietarios',
+    papeletas: 'reporte de papeletas nacional'
+  };
+  qsa('input[name="reportProduct"]').forEach((input) => input.addEventListener('change', () => {
+    qsa('.report-product').forEach((option) => option.classList.toggle('selected', option.contains(input)));
+    reportProductCta.textContent = `Continuar con ${reportProductNames[input.value]} · S/ ${input.dataset.price}`;
+  }));
+  reportProductCta.addEventListener('click', () => {
+    const selected = qs('input[name="reportProduct"]:checked');
+    const plate = sanitizePlate(homePlateInput.value);
+    if (plate.replace('-','').length < 6) {
+      homePlateStatus.textContent = 'Ingresa una placa peruana válida antes de continuar.';
+      homePlateStatus.className = 'home-plate-status error';
+      homePlateInput.focus();
+      return;
+    }
+    homePlateStatus.textContent = `${reportProductNames[selected.value][0].toUpperCase()}${reportProductNames[selected.value].slice(1)} seleccionado para ${plate} · S/ ${selected.dataset.price}.`;
+    homePlateStatus.className = 'home-plate-status valid';
   });
 
   qsa('[data-report-topic]').forEach((button) => button.addEventListener('click', () => {

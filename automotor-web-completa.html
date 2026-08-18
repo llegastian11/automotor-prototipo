@@ -56,7 +56,24 @@
           </div>
         </div>
         <article class="home-plaquealo-card">
-          <div class="home-plaquealo-content"><span class="product-label">Consulta Plaquealo</span><h2>La placa cuenta la historia.</h2><p>Ingresa una placa y prepara la consulta del reporte vehicular.</p><form class="home-plate-form" id="homePlateForm" novalidate><label for="homePlateInput">Ingresa la placa del vehículo</label><div class="home-plate-control"><span class="home-plate-country"><span class="mini-flag" aria-hidden="true"></span><b>PERÚ</b></span><input id="homePlateInput" maxlength="8" placeholder="ABC-123" autocomplete="off" spellcheck="false" aria-describedby="homePlateStatus"><button type="submit" aria-label="Consultar placa"><span>Consultar placa</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></button></div><p id="homePlateStatus" class="home-plate-status" role="status">Consulta inicial sin costo · Tus datos están protegidos</p></form></div>
+          <div class="home-plaquealo-content">
+            <span class="product-label">Consulta Plaquealo</span>
+            <h2>La placa cuenta la historia.</h2>
+            <p>Ingresa una placa, elige el reporte que necesitas y continúa con la consulta.</p>
+            <form class="home-plate-form" id="homePlateForm" novalidate>
+              <label for="homePlateInput">Ingresa la placa del vehículo</label>
+              <div class="home-plate-control"><span class="home-plate-country"><span class="mini-flag" aria-hidden="true"></span><b>PERÚ</b></span><input id="homePlateInput" maxlength="8" placeholder="ABC-123" autocomplete="off" spellcheck="false" aria-describedby="homePlateStatus"><button type="submit" aria-label="Consultar placa"><span>Consultar placa</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></button></div>
+              <p id="homePlateStatus" class="home-plate-status" role="status">Consulta inicial sin costo · Tus datos están protegidos</p>
+            </form>
+            <fieldset class="report-products" id="reportProducts">
+              <legend>Elige tu reporte</legend>
+              <label class="report-product selected"><input type="radio" name="reportProduct" value="completo" data-price="35" checked><span class="report-product-check" aria-hidden="true"></span><span class="report-product-copy"><strong>Reporte completo</strong><small>Antecedentes, documentos, alertas y estado vehicular.</small></span><b>S/ 35</b></label>
+              <label class="report-product"><input type="radio" name="reportProduct" value="propietarios" data-price="20"><span class="report-product-check" aria-hidden="true"></span><span class="report-product-copy"><strong>Reporte de propietarios</strong><small>Historial de propietarios registrados del vehículo.</small></span><b>S/ 20</b></label>
+              <label class="report-product"><input type="radio" name="reportProduct" value="papeletas" data-price="15"><span class="report-product-check" aria-hidden="true"></span><span class="report-product-copy"><strong>Reporte de papeletas a nivel nacional</strong><small>Consulta de papeletas disponibles en distintas regiones del Perú.</small></span><b>S/ 15</b></label>
+            </fieldset>
+            <button class="report-product-cta" id="reportProductCta" type="button" disabled>Continuar con reporte completo · S/ 35</button>
+            <p class="report-product-note">Pago seguro · Reporte digital preparado para descargar</p>
+          </div>
           <div class="home-plaquealo-art"><img src="assets/automotor/paisaje-automotor-hd.webp" alt="Automóvil recorriendo un paisaje peruano"></div>
         </article>
       </div>
