@@ -4,16 +4,21 @@
 // prototipo anterior, donde el vínculo con Automotor.pe solo vivía en el
 // hero de /inicio/ y se ocultaba en móvil.
 import { company } from '../data/company';
+import { withBase } from '../utils/url';
 
 interface Props {
   href?: string;
   compact?: boolean;
+  /** El logo trae tonos oscuros — sobre fondos oscuros (footer) necesita una placa clara detrás para no perderse. */
+  onDark?: boolean;
 }
-const { href = '/', compact = false } = Astro.props;
+const { href = '/', compact = false, onDark = false } = Astro.props;
 ---
 
-<a class:list={['product-brand', { compact }]} href={href} aria-label={`${company.product}, un producto de ${company.brand}, ir a inicio`}>
-  <span class="product-brand-name">{company.product}</span>
+<a class:list={['product-brand', { compact, 'on-dark': onDark }]} href={href} aria-label={`${company.product}, un producto de ${company.brand}, ir a inicio`}>
+  <span class="product-brand-logo-chip">
+    <img class="product-brand-logo" src={withBase('/assets/automotor/logo-plaquealo-oficial.png')} alt={company.product} width="661" height="102" />
+  </span>
   <span class="product-brand-sep" aria-hidden="true">·</span>
   <span class="product-brand-parent">un producto de <strong>{company.brand}</strong></span>
 </a>
@@ -26,23 +31,31 @@ const { href = '/', compact = false } = Astro.props;
     flex-wrap: wrap;
     line-height: 1;
   }
-  .product-brand-name {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 19px;
-    letter-spacing: -0.03em;
-    color: var(--ink);
+  .product-brand-logo {
+    display: block;
+    height: 22px;
+    width: auto;
   }
+  .product-brand.compact .product-brand-logo { height: 18px; }
+
+  .product-brand.on-dark .product-brand-logo-chip {
+    display: inline-flex;
+    padding: 8px 12px;
+    border-radius: 11px;
+    background: #fffdfa;
+  }
+
   .product-brand-sep { color: var(--line); font-size: 13px; }
+  .product-brand.on-dark .product-brand-sep { color: rgba(255, 255, 255, 0.3); }
   .product-brand-parent {
     font-size: 11px;
     font-weight: 600;
     color: var(--muted);
     white-space: nowrap;
   }
+  .product-brand.on-dark .product-brand-parent { color: rgba(255, 255, 255, 0.55); }
   .product-brand-parent strong { color: var(--red); font-weight: 700; }
 
-  .product-brand.compact .product-brand-name { font-size: 16px; }
   .product-brand.compact .product-brand-parent { font-size: 9.5px; }
 
   @media (max-width: 560px) {

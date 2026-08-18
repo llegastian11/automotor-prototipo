@@ -116,7 +116,7 @@ const otherServices = {
     box-shadow: 0 14px 38px rgba(23, 23, 25, 0.09);
     backdrop-filter: blur(16px);
   }
-  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-links { display: flex; align-items: center; flex-shrink: 0; gap: 18px; }
   .nav-links > a {
     position: relative;
     font-size: 13px;
@@ -197,7 +197,14 @@ const otherServices = {
   .header-publish b { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 7px; background: var(--red); font-size: 16px; line-height: 1; }
   .menu-btn { display: none; border: 0; background: transparent; padding: 10px; cursor: pointer; }
 
-  @media (max-width: 980px) {
+  @media (max-width: 1250px) and (min-width: 1181px) {
+    .nav-links { gap: 12px; }
+    .nav-links > a { font-size: 12px; }
+    .header-publish span { display: none; }
+    .header-publish { padding: 0 12px; }
+  }
+
+  @media (max-width: 1180px) {
     .nav-links, .nav-actions .header-publish { display: none; }
     .menu-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 11px; }
   }

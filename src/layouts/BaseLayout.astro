@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import WhatsAppFab from '../components/WhatsAppFab.astro';
 import PublishModal from '../components/PublishModal.astro';
 import { company } from '../data/company';
+import { withBase } from '../utils/url';
 import '../styles/global.css';
 
 interface Props {
@@ -53,6 +54,9 @@ const websiteJsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#faf9f7" />
+    <link rel="icon" type="image/png" href={withBase('/favicon-32.png')} sizes="32x32" />
+    <link rel="icon" type="image/png" href={withBase('/favicon-512.png')} sizes="512x512" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
     <SEO title={title} description={description} ogImage={ogImage} noindex={noindex} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

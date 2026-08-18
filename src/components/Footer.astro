@@ -13,7 +13,7 @@ const socials = Object.entries(company.socialLinks).filter(([, url]) => url);
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <ProductBrand href={withBase('/')} />
+        <ProductBrand href={withBase('/')} onDark />
         <p class="footer-about">{company.tagline}</p>
         {socials.length > 0 && (
           <div class="footer-socials">
@@ -80,8 +80,6 @@ const socials = Object.entries(company.socialLinks).filter(([, url]) => url);
 
 <style>
   .footer { padding: 62px 0 30px; background: #191717; color: #fff; }
-  .footer :global(.product-brand-name) { color: #fff; }
-  .footer :global(.product-brand-parent) { color: rgba(255, 255, 255, 0.55); }
   .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 60px; }
   .footer-about { max-width: 340px; margin: 18px 0 0; color: rgba(255, 255, 255, 0.5); font-size: 14px; line-height: 1.7; }
   .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
