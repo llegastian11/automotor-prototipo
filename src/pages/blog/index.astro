@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExampleBadge from '../../components/ExampleBadge.astro';
+
+const leadArticle = {
+  image: 'https://images.unsplash.com/photo-1560250056-07ba64664864?auto=format&fit=crop&w=1400&q=85',
+  alt: 'Persona inspeccionando un vehículo',
+  tag: 'Guía de compra · 8 min',
+  title: 'La revisión que debes hacer antes de comprar un auto usado',
+  excerpt: 'Documentos, señales físicas y preguntas clave para una compra más segura.',
+};
+const sideArticles = [
+  { image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80', alt: 'Documentos sobre una mesa', tag: 'Documentos', title: 'Qué revisar en la tarjeta de propiedad', meta: '6 min de lectura' },
+  { image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80', alt: 'Compra segura desde un teléfono', tag: 'Seguridad', title: 'Cómo detectar una publicación sospechosa', meta: '5 min de lectura' },
+];
+---
+
+<BaseLayout
+  title="Guías Automotor | Blog sobre compra y venta de vehículos en Perú"
+  description="Guías prácticas para comprar y vender vehículos en Perú: documentos, señales de alerta y consejos de seguridad."
+>
+  <section class="section">
+    <div class="container">
+      <div class="blog-head reveal">
+        <div>
+          <p class="eyebrow">Guías Automotor</p>
+          <h1 class="section-title">Comprar bien también se aprende.</h1>
+          <ExampleBadge label="Ejemplo · artículos de muestra" />
+        </div>
+      </div>
+      <div class="articles">
+        <article class="lead-article reveal">
+          <img loading="lazy" src={leadArticle.image} alt={leadArticle.alt} width="1400" height="850" />
+          <div class="article-copy">
+            <span class="article-tag">{leadArticle.tag}</span>
+            <h2>{leadArticle.title}</h2>
+            <p>{leadArticle.excerpt}</p>
+          </div>
+        </article>
+        <div class="side-articles">
+          {sideArticles.map((article) => (
+            <article class="small-article reveal">
+              <img loading="lazy" src={article.image} alt={article.alt} width="600" height="400" />
+              <div>
+                <span class="article-tag">{article.tag}</span>
+                <h3>{article.title}</h3>
+                <p>{article.meta}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-head { display: flex; align-items: end; justify-content: space-between; }
+  .articles { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 24px; margin-top: 40px; }
+  .lead-article { position: relative; min-height: 510px; overflow: hidden; border-radius: 22px; color: #fff; }
+  .lead-article img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .lead-article::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 25%, rgba(12, 13, 16, 0.88)); }
+  .article-copy { position: absolute; z-index: 2; left: 30px; right: 30px; bottom: 30px; }
+  .article-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: #fff; }
+  .article-copy h2 { max-width: 650px; margin: 12px 0 10px; font: 600 clamp(1.7rem, 3vw, 2.5rem) / 1.15 var(--font-display); letter-spacing: -0.04em; }
+  .article-copy p { margin: 0; color: rgba(255, 255, 255, 0.7); }
+  .side-articles { display: grid; gap: 24px; }
+  .small-article { display: grid; grid-template-columns: 155px 1fr; gap: 20px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+  .small-article img { width: 100%; height: 150px; object-fit: cover; border-radius: 12px; }
+  .small-article .article-tag { color: var(--red); }
+  .small-article h3 { margin: 10px 0; font: 600 17px/1.35 var(--font-display); }
+  .small-article p { margin: 0; color: #8a898d; font-size: 12px; }
+
+  @media (max-width: 980px) {
+    .articles { grid-template-columns: 1fr; }
+    .side-articles { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 680px) {
+    .lead-article { min-height: 430px; }
+    .side-articles { grid-template-columns: 1fr; }
+    .small-article { grid-template-columns: 120px 1fr; }
+    .small-article img { height: 130px; }
+  }
+</style>

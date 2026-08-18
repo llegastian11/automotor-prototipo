@@ -1,0 +1,37 @@
+/*
+  Paleta oficial según design/LEEME.txt (rojo PLAQUÉALO #C41E1E, negro
+  #171719, blanco cálido #F7F5F2). El prototipo anterior tenía un segundo
+  rojo (#c81e3a) definido solo en el <style> inline del index.html, en
+  conflicto con este — se consolida aquí en una sola fuente de verdad.
+*/
+:root {
+  --red: #c41e1e;
+  --red-dark: #a11717;
+  --red-light: #fff0ee;
+  --ink: #171719;
+  --paper: #f7f5f2;
+  --surface: #fffdfa;
+  --surface-secondary: #f0ece7;
+  --muted: #66656a;
+  --muted-2: #8b898e;
+  --line: #ddd8d2;
+  --blue: #3468a8;
+  --green: #1f8a4c;
+  --amber: #b56f09;
+  --danger: #b42318;
+
+  --shadow-soft: 0 12px 35px rgba(32, 25, 22, 0.08);
+  --shadow-lg: 0 18px 50px rgba(20, 21, 26, 0.09);
+  --focus-ring: 0 0 0 4px rgba(196, 30, 30, 0.16);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  --container-max: 1180px;
+
+  --font-display: Sora, Inter, system-ui, sans-serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}

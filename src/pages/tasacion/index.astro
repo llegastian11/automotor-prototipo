@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlateForm from '../../components/PlateForm.astro';
+import ExampleBadge from '../../components/ExampleBadge.astro';
+---
+
+<BaseLayout
+  title="Tasación de autos en Perú | Automotor.pe"
+  description="Obtén una estimación referencial del valor de tu vehículo en Perú a partir de su placa, año, versión y kilometraje."
+>
+  <section class="section valuation">
+    <div class="container valuation-grid reveal">
+      <div>
+        <p class="eyebrow">Tasación referencial</p>
+        <h1 class="section-title">Conoce el valor de tu vehículo antes de publicarlo.</h1>
+        <p class="section-copy">Ingresa la placa para obtener una estimación visual basada en año, versión, kilometraje y referencias del mercado.</p>
+        <PlateForm id="valuation" initialValue="B5K110" redirectTo="/tasacion/" helpText="Estimación gratuita · Resultado referencial" submitLabel="Calcular" />
+      </div>
+      <article class="valuation-card" aria-label="Ejemplo de tasación vehicular">
+        <div class="valuation-card-top"><span>Estimación de mercado</span><strong>B5K110</strong></div>
+        <div class="valuation-price"><small>Valor medio estimado</small><b>US$ 18,500</b></div>
+        <div class="valuation-range"><span>Rango de publicación</span><strong>US$ 17,800 — 19,400</strong></div>
+        <div class="valuation-factors">
+          <div><strong>2020</strong><small>Año</small></div>
+          <div><strong>38,100 km</strong><small>Kilometraje</small></div>
+          <div><strong>Automática</strong><small>Transmisión</small></div>
+        </div>
+        <ExampleBadge label="Ejemplo · resultado de muestra" />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .valuation { min-height: calc(100vh - 94px); background: linear-gradient(140deg, #faf9f7 0%, #f4efe9 100%); }
+  .valuation-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 80px; align-items: center; }
+  .valuation-card { padding: 32px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow-soft); }
+  .valuation-card-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .valuation-card-top span { color: #89878a; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .valuation-card-top strong { font: 700 20px var(--font-mono); }
+  .valuation-price { padding: 30px 0; }
+  .valuation-price small { display: block; color: #858388; font-size: 12px; }
+  .valuation-price b { display: block; margin-top: 7px; font: 700 42px var(--font-display); letter-spacing: -0.06em; }
+  .valuation-range { display: flex; justify-content: space-between; padding: 16px 0; border-block: 1px solid var(--line); font-size: 13px; }
+  .valuation-factors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+  .valuation-factors div { padding: 13px 8px; border-radius: 10px; background: var(--surface-secondary); text-align: center; }
+  .valuation-factors strong { display: block; font-size: 12px; }
+  .valuation-factors small { display: block; margin-top: 4px; color: #8c8a8e; font-size: 10px; }
+
+  @media (max-width: 980px) {
+    .valuation-grid { grid-template-columns: 1fr; gap: 40px; }
+    .valuation { min-height: 0; }
+  }
+  @media (max-width: 680px) {
+    .valuation-card { padding: 22px; }
+    .valuation-price b { font-size: 34px; }
+  }
+</style>
