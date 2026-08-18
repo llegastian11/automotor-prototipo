@@ -1,0 +1,292 @@
+---
+// Navegación de primer nivel reducida de 8 a 5 puntos (auditoría, recomendación
+// #7): Plaquealo, Consulta vehicular, Vehículos, Otros servicios (submenú) y
+// Blog. Planes, Tasación, MiGarage y TIVE viven ahora dentro del submenú.
+import ProductBrand from './ProductBrand.astro';
+import { withBase } from '../utils/url';
+
+const primaryLinks = [
+  { href: '/plaquealo/', label: 'Plaquealo', route: 'plaquealo', emphasis: true },
+  { href: '/consulta-vehicular/', label: 'Consulta vehicular', route: 'consulta-vehicular' },
+  { href: '/vehiculos/', label: 'Vehículos', route: 'vehiculos' },
+];
+
+const otherServices = {
+  herramientas: [
+    { href: '/tasacion/', label: 'Tasación', hint: 'Estimación referencial de valor' },
+    { href: '/migarage/', label: 'MiGarage', hint: 'Alertas de tus vehículos' },
+    { href: '/planes/', label: 'Planes', hint: 'Cuánto control necesitas' },
+    { href: '/tive/', label: 'Descargar TIVE', hint: 'Tarjeta de propiedad · S/ 20' },
+  ],
+  proteccion: [
+    { href: '/servicios/soat/', label: 'SOAT', hint: 'Cotiza tu SOAT' },
+    { href: '/servicios/seguro-vehicular/', label: 'Seguro Vehicular', hint: 'Protege tu vehículo' },
+    { href: '/servicios/gps/', label: 'GPS Vehicular', hint: 'Seguridad y monitoreo' },
+  ],
+};
+---
+
+<header class="topbar">
+  <nav class="nav container" aria-label="Navegación principal">
+    <ProductBrand href={withBase('/')} />
+
+    <div class="nav-links">
+      {primaryLinks.map((link) => (
+        <a href={withBase(link.href)} data-route={link.route} class:list={[{ 'nav-emphasis': link.emphasis }]}>{link.label}</a>
+      ))}
+      <div class="services-menu">
+        <button class="services-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+          Otros servicios
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+        </button>
+        <div class="services-dropdown">
+          <div class="services-dropdown-head">
+            <span>Servicios Automotor</span>
+            <small>Herramientas para comprar, proteger y administrar vehículos.</small>
+          </div>
+          <div class="services-dropdown-grid">
+            <div class="services-column">
+              <b>Consulta y documentos</b>
+              {otherServices.herramientas.map((item) => (
+                <a class="service-nav-item" href={withBase(item.href)}><strong>{item.label}</strong><small>{item.hint}</small></a>
+              ))}
+            </div>
+            <div class="services-column">
+              <b>Protección y control</b>
+              {otherServices.proteccion.map((item) => (
+                <a class="service-nav-item" href={withBase(item.href)}><strong>{item.label}</strong><small>{item.hint}</small></a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href={withBase('/blog/')} data-route="blog">Blog</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="header-publish publish-open" type="button">
+        <span>Publicar vehículo</span><b>+</b>
+      </button>
+      <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="drawer-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="Menú principal">
+  <div class="drawer-head">
+    <ProductBrand href={withBase('/')} compact />
+    <button class="drawer-close" type="button" aria-label="Cerrar menú">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <nav class="drawer-nav">
+    {primaryLinks.map((link) => (
+      <a class:list={['drawer-link', { 'drawer-emphasis': link.emphasis }]} href={withBase(link.href)} data-route={link.route}>{link.label}</a>
+    ))}
+    <span class="drawer-section-label">Otros servicios</span>
+    {[...otherServices.herramientas, ...otherServices.proteccion].map((item) => (
+      <a class="drawer-service-link" href={withBase(item.href)}>{item.label}</a>
+    ))}
+    <a class="drawer-link" href={withBase('/blog/')} data-route="blog">Blog</a>
+  </nav>
+  <div class="drawer-foot">
+    <button class="btn btn-red publish-open" type="button">Publicar vehículo</button>
+    <div class="drawer-legal">
+      <a href={withBase('/legal/terminos/')}>Legal</a>
+      <a href={withBase('/legal/privacidad/')}>Privacidad</a>
+      <a href={withBase('/legal/cookies/')}>Cookies</a>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .topbar { position: fixed; top: 12px; left: 0; right: 0; z-index: 80; }
+  .nav {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 20px;
+    border: 1px solid rgba(23, 23, 25, 0.1);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.93);
+    box-shadow: 0 14px 38px rgba(23, 23, 25, 0.09);
+    backdrop-filter: blur(16px);
+  }
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-links > a {
+    position: relative;
+    font-size: 13px;
+    font-weight: 700;
+    color: #55545a;
+    transition: color 0.2s ease;
+  }
+  .nav-links > a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -8px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-links > a:hover, .nav-links > a.active { color: var(--red); }
+  .nav-links > a:hover::after, .nav-links > a.active::after { transform: scaleX(1); transform-origin: left; }
+  .nav-links > a.nav-emphasis {
+    padding: 10px 14px;
+    border-radius: 11px;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 7px 16px rgba(196, 30, 30, 0.18);
+  }
+  .nav-links > a.nav-emphasis::after { display: none; }
+  .nav-links > a.nav-emphasis:hover { background: var(--red-dark); color: #fff; }
+
+  .services-menu { position: relative; }
+  .services-trigger {
+    display: flex; align-items: center; gap: 5px;
+    min-height: 42px; padding: 0 8px;
+    border: 0; border-radius: 9px; background: transparent;
+    color: #55545a; font-size: 13px; font-weight: 700; cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+  .services-trigger svg { width: 15px; transition: transform 0.2s; }
+  .services-trigger:hover, .services-menu.open .services-trigger { background: var(--surface-secondary); color: var(--red); }
+  .services-menu.open .services-trigger svg { transform: rotate(180deg); }
+
+  .services-dropdown {
+    position: absolute; top: 52px; right: -170px; z-index: 70;
+    width: 640px; padding: 0;
+    border: 1px solid var(--line); border-radius: 20px; background: #fff;
+    box-shadow: 0 28px 70px rgba(23, 23, 25, 0.16);
+    opacity: 0; visibility: hidden; overflow: hidden;
+    transform: translateY(10px) scale(0.985); transform-origin: top right;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .services-menu.open .services-dropdown { opacity: 1; visibility: visible; transform: none; }
+  .services-dropdown-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 18px 20px; border-bottom: 1px solid var(--line); background: #faf8f5;
+  }
+  .services-dropdown-head span { font: 700 14px var(--font-display); }
+  .services-dropdown-head small { max-width: 300px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+  .services-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .services-column { padding: 17px; }
+  .services-column + .services-column { border-left: 1px solid var(--line); }
+  .services-column > b { display: block; margin: 0 10px 8px; color: #8b8784; font-size: 9px; letter-spacing: 0.13em; text-transform: uppercase; }
+  .service-nav-item { display: block; padding: 10px; border-radius: 11px; border: 1px solid transparent; }
+  .service-nav-item:hover { border-color: #eadfda; background: #fff5f3; }
+  .service-nav-item strong { display: block; color: var(--ink); font-size: 13px; }
+  .service-nav-item small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+
+  .nav-actions { display: flex; align-items: center; gap: 8px; }
+  .header-publish {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 46px; padding: 0 12px 0 15px;
+    border: 1px solid var(--ink); border-radius: 12px;
+    background: var(--ink); color: #fff; font-weight: 750; cursor: pointer;
+    box-shadow: 0 9px 20px rgba(23, 23, 25, 0.14);
+    transition: transform 0.18s ease, background-color 0.18s ease;
+  }
+  .header-publish:hover { transform: translateY(-1px); background: #2b2b2e; }
+  .header-publish b { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 7px; background: var(--red); font-size: 16px; line-height: 1; }
+  .menu-btn { display: none; border: 0; background: transparent; padding: 10px; cursor: pointer; }
+
+  @media (max-width: 980px) {
+    .nav-links, .nav-actions .header-publish { display: none; }
+    .menu-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 11px; }
+  }
+
+  /* Drawer móvil */
+  .drawer-backdrop {
+    position: fixed; inset: 0; z-index: 89;
+    background: rgba(20, 17, 16, 0.45);
+    opacity: 0; visibility: hidden; transition: 0.22s;
+  }
+  .mobile-drawer {
+    position: fixed; inset: 0 auto 0 0; z-index: 90;
+    display: flex; width: min(86vw, 390px); flex-direction: column;
+    padding: 18px; background: var(--surface);
+    box-shadow: 24px 0 60px rgba(20, 17, 16, 0.2);
+    transform: translateX(-104%);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  :global(body.drawer-open) .drawer-backdrop { opacity: 1; visibility: visible; }
+  :global(body.drawer-open) .mobile-drawer { transform: none; }
+  :global(body.drawer-open) { overflow: hidden; }
+  .drawer-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .drawer-close { display: grid; width: 44px; height: 44px; place-items: center; border: 0; border-radius: 12px; background: var(--surface-secondary); cursor: pointer; }
+  .drawer-nav { display: grid; gap: 4px; padding: 16px 0; overflow: auto; }
+  .drawer-link, .drawer-service-link {
+    display: flex; align-items: center; min-height: 49px; padding: 0 12px;
+    border-radius: 11px; color: var(--ink); font-weight: 650;
+  }
+  .drawer-link:hover, .drawer-service-link:hover { background: var(--red-light); color: var(--red); }
+  .drawer-link.drawer-emphasis { border-radius: 10px; background: var(--red); color: #fff; }
+  .drawer-section-label { margin: 15px 12px 5px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+  .drawer-foot { display: grid; gap: 10px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+  .drawer-legal { display: flex; justify-content: center; gap: 15px; font-size: 11px; color: var(--muted); }
+</style>
+
+<script>
+  function qs<T extends Element = Element>(selector: string, root: ParentNode = document): T | null {
+    return root.querySelector<T>(selector);
+  }
+  function qsa<T extends Element = Element>(selector: string, root: ParentNode = document): T[] {
+    return [...root.querySelectorAll<T>(selector)];
+  }
+
+  const servicesMenu = qs<HTMLElement>('.services-menu');
+  const servicesTrigger = qs<HTMLButtonElement>('.services-trigger');
+  if (servicesMenu && servicesTrigger) {
+    servicesTrigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const open = servicesMenu.classList.toggle('open');
+      servicesTrigger.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', (event) => {
+      if (servicesMenu.contains(event.target as Node)) return;
+      servicesMenu.classList.remove('open');
+      servicesTrigger.setAttribute('aria-expanded', 'false');
+    });
+    servicesMenu.addEventListener('focusout', (event) => {
+      if (!servicesMenu.contains((event as FocusEvent).relatedTarget as Node)) {
+        servicesMenu.classList.remove('open');
+        servicesTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  const drawer = qs<HTMLElement>('#mobileDrawer');
+  const menuBtn = qs<HTMLButtonElement>('.menu-btn');
+  const drawerClose = qs<HTMLButtonElement>('.drawer-close');
+  const drawerBackdrop = qs<HTMLElement>('.drawer-backdrop');
+  function openDrawer() {
+    document.body.classList.add('drawer-open');
+    drawer?.setAttribute('aria-hidden', 'false');
+    menuBtn?.setAttribute('aria-expanded', 'true');
+    drawerClose?.focus();
+  }
+  function closeDrawer() {
+    document.body.classList.remove('drawer-open');
+    drawer?.setAttribute('aria-hidden', 'true');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn?.addEventListener('click', openDrawer);
+  drawerClose?.addEventListener('click', closeDrawer);
+  drawerBackdrop?.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeDrawer();
+  });
+
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  qsa('[data-route]').forEach((link) => {
+    const linkPath = new URL((link as HTMLAnchorElement).href).pathname.replace(/\/$/, '') || '/';
+    if (linkPath === currentPath) link.classList.add('active');
+  });
+</script>

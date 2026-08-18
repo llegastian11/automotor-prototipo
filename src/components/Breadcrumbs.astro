@@ -1,0 +1,52 @@
+---
+import { company } from '../data/company';
+
+interface Crumb {
+  label: string;
+  href: string;
+}
+interface Props {
+  items: Crumb[];
+}
+const { items } = Astro.props;
+const trail: Crumb[] = [{ label: 'Inicio', href: '/' }, ...items];
+
+const siteUrl = String(Astro.site).replace(/\/$/, '');
+const base = import.meta.env.BASE_URL;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map((crumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: crumb.label,
+    item: siteUrl + base + crumb.href.replace(/^\//, ''),
+  })),
+};
+void company;
+---
+
+<nav class="breadcrumbs" aria-label="Ruta de navegación">
+  <ol>
+    {trail.map((crumb, index) => (
+      <li>
+        {index === trail.length - 1 ? (
+          <span aria-current="page">{crumb.label}</span>
+        ) : (
+          <a href={base + crumb.href.replace(/^\//, '')}>{crumb.label}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+<style>
+  .breadcrumbs { margin-bottom: 24px; }
+  .breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .breadcrumbs li { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .breadcrumbs li:not(:last-child)::after { content: '/'; margin-left: 6px; color: var(--line); }
+  .breadcrumbs a { color: var(--muted); font-weight: 600; }
+  .breadcrumbs a:hover { color: var(--red); }
+  .breadcrumbs [aria-current='page'] { color: var(--ink); font-weight: 700; }
+</style>

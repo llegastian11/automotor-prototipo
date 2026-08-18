@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PlateForm from '../components/PlateForm.astro';
+import ReportPreview from '../components/ReportPreview.astro';
+import VehicleCard from '../components/VehicleCard.astro';
+import ExampleBadge from '../components/ExampleBadge.astro';
+import { vehicles, testimonials } from '../data/vehicles';
+import { withBase } from '../utils/url';
+
+const homeVehicles = vehicles.slice(0, 3);
+const officialSources = ['SUNARP', 'SAT', 'MTC', 'SBS', 'APESEG', 'SUTRAN'];
+---
+
+<BaseLayout
+  title="Automotor.pe — Consulta vehicular por placa en Perú"
+  description="Automotor.pe: consulta información vehicular por placa, revisa fuentes oficiales y explora servicios vehiculares en Perú."
+>
+  <section class="hero">
+    <div class="container hero-split">
+      <div class="hero-copy-panel">
+        <p class="official-badge"><span aria-hidden="true">✓</span> Información de SUNARP, SAT, SOAT y MTC</p>
+        <h1 class="display hero-title">Conoce la historia real <span>de esa placa</span></h1>
+        <p class="hero-sub">Consulta antecedentes, deudas y documentos del vehículo antes de comprar o vender. Decide con información clara.</p>
+        <PlateForm id="hero" initialValue="B5K110" redirectTo="/plaquealo/" />
+        <div class="hero-stats" aria-label="Características de la consulta">
+          <div><span>Fuentes consultadas</span><strong>25</strong></div>
+          <div><span>Consulta digital</span><strong>100%</strong></div>
+        </div>
+      </div>
+      <div class="hero-visual-column">
+        <ReportPreview />
+        <div class="hero-visual-panel">
+          <img src={withBase('/assets/automotor/paisaje-automotor-hd.webp')} alt="Automóvil rojo en una carretera rodeada de montañas peruanas" width="1200" height="800" />
+        </div>
+      </div>
+    </div>
+    <div class="source-rail">
+      <div class="source-row container">
+        <span>Fuentes oficiales</span>
+        {officialSources.map((source) => <strong>{source}</strong>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section promise">
+    <div class="container promise-grid reveal">
+      <div>
+        <p class="eyebrow">Decide mejor</p>
+        <h2 class="section-title">Compra con información, no con suposiciones.</h2>
+        <p class="section-copy">Transformamos datos dispersos en una lectura clara para ayudarte a detectar riesgos antes de cerrar el trato.</p>
+      </div>
+      <div class="benefit-list">
+        <article class="benefit"><span class="benefit-num">01</span><div><h3>Una consulta, múltiples fuentes</h3><p>Reunimos la información clave del vehículo en un solo lugar.</p></div></article>
+        <article class="benefit"><span class="benefit-num">02</span><div><h3>Resultados fáciles de entender</h3><p>Estados claros: conforme, atención o riesgo. Sin lenguaje complicado.</p></div></article>
+        <article class="benefit"><span class="benefit-num">03</span><div><h3>La placa conecta todo</h3><p>Consulta, publica o compara usando el dato más simple del vehículo.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-marketplace">
+    <div class="container">
+      <div class="listings-head reveal">
+        <div>
+          <p class="eyebrow">Marketplace</p>
+          <h2 class="section-title">Vehículos que puedes explorar.</h2>
+          <p class="section-copy">Así se ve un listado en Plaquéalo.</p>
+          <ExampleBadge label="Ejemplo · vehículos de muestra" />
+        </div>
+        <a class="btn btn-outline" href={withBase('/vehiculos/')}>Ver marketplace completo</a>
+      </div>
+      <div class="vehicles">
+        {homeVehicles.map((vehicle) => <VehicleCard vehicle={vehicle} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section report">
+    <div class="container report-grid reveal">
+      <div>
+        <p class="eyebrow">Reporte vehicular</p>
+        <h2 class="section-title">Todo lo importante, antes de tomar una decisión.</h2>
+        <p class="section-copy">El reporte organiza la información del vehículo y señala dónde debes prestar atención.</p>
+        <div class="report-features">
+          <div class="report-feature">↗ Historial de propietarios</div>
+          <div class="report-feature">↗ Multas y papeletas</div>
+          <div class="report-feature">↗ SOAT vigente</div>
+          <div class="report-feature">↗ Revisión técnica</div>
+          <div class="report-feature">↗ Gravámenes y embargos</div>
+          <div class="report-feature">↗ Accidentes registrados</div>
+        </div>
+        <a class="btn btn-red" href={withBase('/plaquealo/')}>Generar reporte por placa</a>
+      </div>
+      <div class="report-sheet" aria-label="Ejemplo visual de reporte">
+        <div class="report-title"><div><small>Reporte vehicular</small><strong>B5K110</strong></div><div class="report-logo">AUTOMOTOR<span>.pe</span></div></div>
+        <div class="report-row"><i>✓</i><span>Multas y papeletas</span><b>Sin registro</b></div>
+        <div class="report-row"><i>✓</i><span>SOAT</span><b>Vigente</b></div>
+        <div class="report-row"><i>✓</i><span>Revisión técnica</span><b>Vigente</b></div>
+        <div class="report-row attention"><i>!</i><span>Gravámenes</span><b>1 registro</b></div>
+        <div class="report-row"><i>✓</i><span>Accidentes registrados</span><b>Sin registro</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="container">
+      <p class="eyebrow">Comentarios</p>
+      <h2 class="section-title">Una experiencia pensada para decidir con claridad.</h2>
+      <ExampleBadge label="Ejemplo · opiniones ilustrativas" />
+      <div class="testimonial-track">
+        {testimonials.map((item) => (
+          <article class="testimonial-card">
+            <div class="testimonial-person">
+              <span class="testimonial-avatar">{item.initial}</span>
+              <div><h3>{item.name}</h3><small>{item.location}</small></div>
+            </div>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container final-grid">
+      <h2>Una placa. Una consulta. Una decisión mejor informada.</h2>
+      <PlateForm id="finalCta" initialValue="B5K110" redirectTo="/plaquealo/" label="Placa para consulta rápida" helpText="" submitLabel="Ir a consultar" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding: 70px 0 38px; text-align: left; overflow: hidden; }
+  .hero-split { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr); gap: 64px; align-items: center; min-height: 620px; }
+  .hero-copy-panel { padding: 18px 0; }
+  .official-badge {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 19px; padding: 8px 11px;
+    border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 253, 250, 0.82);
+    color: var(--muted); font-size: 10px; font-weight: 700;
+  }
+  .official-badge span { display: grid; width: 16px; height: 16px; place-items: center; border-radius: 50%; background: #e8f6ed; color: var(--green); font-size: 10px; }
+  .hero-title { max-width: 600px; font-size: clamp(3rem, 4vw, 4rem); line-height: 1.02; letter-spacing: -0.055em; }
+  .hero-title span { color: var(--red); }
+  .hero-sub { max-width: 550px; margin: 22px 0 27px; color: var(--muted); font-size: 16px; line-height: 1.62; }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); max-width: 590px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .hero-stats div { padding: 0 18px; }
+  .hero-stats div:first-child { padding-left: 0; }
+  .hero-stats div + div { border-left: 1px solid var(--line); }
+  .hero-stats span { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; }
+  .hero-stats strong { display: block; font: 700 17px var(--font-display); }
+
+  .hero-visual-column { display: grid; gap: 16px; min-width: 0; }
+  .hero-visual-panel { position: relative; min-height: 480px; overflow: hidden; border: 1px solid rgba(23, 23, 25, 0.12); border-radius: 26px; background: #f4dfca; box-shadow: 0 22px 48px rgba(23, 23, 25, 0.1); }
+  .hero-visual-panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .source-rail { margin-top: 44px; border-block: 1px solid var(--line); background: rgba(255, 255, 255, 0.46); }
+  .source-row { min-height: 100px; display: grid; grid-template-columns: 1.25fr repeat(6, 1fr); align-items: center; gap: 20px; }
+  .source-row span { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: #8b898a; text-transform: uppercase; }
+  .source-row strong { text-align: center; color: #77767a; font-size: 14px; }
+
+  .promise { background: var(--ink); color: #fff; }
+  .promise .eyebrow { color: #e95d73; }
+  .promise .section-title, .promise h3 { color: #fff; }
+  .promise .section-copy { color: rgba(255, 255, 255, 0.58); }
+  .promise-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 90px; align-items: end; }
+  .benefit-list { border-top: 1px solid rgba(255, 255, 255, 0.14); }
+  .benefit { display: grid; grid-template-columns: 46px 1fr; gap: 22px; padding: 25px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
+  .benefit-num { font: 600 13px var(--font-mono); color: #e95d73; }
+  .benefit h3 { margin: 0 0 8px; font: 600 19px var(--font-display); }
+  .benefit p { margin: 0; color: rgba(255, 255, 255, 0.55); line-height: 1.6; }
+
+  .listings-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+  .vehicles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+
+  .report { background: #f1efec; }
+  .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+  .report-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 30px 0 35px; border-top: 1px solid #d7d3ce; }
+  .report-feature { display: flex; align-items: center; gap: 12px; padding: 17px 0; border-bottom: 1px solid #d7d3ce; font-size: 14px; font-weight: 600; }
+  .report-feature:nth-child(odd) { padding-right: 15px; }
+  .report-feature:nth-child(even) { padding-left: 15px; border-left: 1px solid #d7d3ce; }
+  .report-sheet { position: relative; padding: 34px; border: 1px solid #d4d0cb; border-radius: 24px; background: #fff; box-shadow: var(--shadow-lg); transform: rotate(1.5deg); }
+  .report-title { display: flex; align-items: center; justify-content: space-between; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .report-title small { display: block; margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.15em; color: #8b898e; font-weight: 700; }
+  .report-title strong { font: 700 25px var(--font-mono); letter-spacing: 0.1em; }
+  .report-logo { font: 700 14px var(--font-display); }
+  .report-logo span { color: var(--red); }
+  .report-row { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; padding: 18px 0; border-bottom: 1px solid #ece9e5; }
+  .report-row i { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: #eaf7ef; color: var(--green); font-style: normal; font-weight: 700; }
+  .report-row.attention i { background: #fff3dd; color: var(--amber); }
+  .report-row span { font-size: 13px; font-weight: 600; }
+  .report-row b { font-size: 12px; color: var(--green); }
+  .report-row.attention b { color: var(--amber); }
+
+  .testimonials { background: linear-gradient(180deg, var(--surface) 0%, var(--paper) 100%); }
+  .testimonial-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+  .testimonial-card { padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+  .testimonial-person { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: var(--red-light); color: var(--red); font-weight: 800; }
+  .testimonial-card h3 { margin: 0; font-size: 14px; }
+  .testimonial-card small { color: var(--muted); }
+  .testimonial-card p { margin: 20px 0 0; color: var(--muted); line-height: 1.7; }
+
+  .final-cta { padding: 78px 0; background: var(--red); color: #fff; }
+  .final-grid { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; }
+  .final-cta h2 { max-width: 680px; margin: 0; font: 700 clamp(2.3rem, 4vw, 4rem) / 1.05 var(--font-display); letter-spacing: -0.06em; }
+  .final-grid :global(.plate-label) { color: #fff; }
+  .final-grid :global(.plate) { max-width: 420px; height: 64px; }
+
+  @media (max-width: 980px) {
+    .hero-split { grid-template-columns: 1fr; gap: 38px; min-height: 0; }
+    .hero-visual-panel { min-height: 420px; }
+    .promise-grid, .report-grid { grid-template-columns: 1fr; gap: 50px; }
+    .vehicles { grid-template-columns: repeat(2, 1fr); }
+    .source-row { grid-template-columns: repeat(3, 1fr); padding: 25px 0; }
+    .source-row span { grid-column: 1 / -1; text-align: center; }
+    .testimonial-track { display: flex; overflow: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+    .testimonial-card { min-width: min(82vw, 350px); scroll-snap-align: start; }
+    .final-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .hero { padding-top: 42px; }
+    .hero-title { font-size: clamp(2.45rem, 11vw, 3.35rem); }
+    .vehicles { grid-template-columns: 1fr; }
+    .report-features { grid-template-columns: 1fr; }
+    .report-feature:nth-child(even) { padding-left: 0; border-left: 0; }
+    .source-row { grid-template-columns: repeat(2, 1fr); }
+    .final-grid :global(.plate) { max-width: 100%; }
+  }
+</style>
