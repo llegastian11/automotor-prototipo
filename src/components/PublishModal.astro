@@ -1,0 +1,168 @@
+---
+import { vehicleCatalog } from '../data/services';
+---
+
+<div class="modal publish-modal" id="publishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-top">
+      <div><p class="eyebrow">Publicar vehículo</p><h2 id="modalTitle">Crea una publicación clara</h2></div>
+      <button class="modal-close" type="button" aria-label="Cerrar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="wizard-progress" aria-label="Progreso">
+      <span class="wizard-step-indicator active"></span><span class="wizard-step-indicator"></span><span class="wizard-step-indicator"></span><span class="wizard-step-indicator"></span>
+    </div>
+    <form id="publishForm" novalidate>
+      <section class="wizard-panel active" data-step="0">
+        <h3>1. Identificación</h3>
+        <div class="form-grid">
+          <div class="field"><label for="pubPlate">Placa</label><input id="pubPlate" maxlength="8" placeholder="ABC-123" required /></div>
+          <div class="field"><label for="pubYear">Año</label><input id="pubYear" inputmode="numeric" maxlength="4" placeholder="2021" required /></div>
+          <div class="field">
+            <label for="pubBrand">Marca</label>
+            <select id="pubBrand" required>
+              <option value="">Selecciona una marca</option>
+              {Object.keys(vehicleCatalog).map((brand) => <option>{brand}</option>)}
+            </select>
+          </div>
+          <div class="field"><label for="pubModel">Modelo</label><select id="pubModel" disabled required><option value="">Selecciona una marca</option></select></div>
+        </div>
+      </section>
+      <section class="wizard-panel" data-step="1">
+        <h3>2. Características</h3>
+        <div class="form-grid">
+          <div class="field"><label for="pubKm">Kilometraje</label><input id="pubKm" inputmode="numeric" placeholder="42,000" /></div>
+          <div class="field"><label for="pubTransmission">Transmisión</label><select id="pubTransmission"><option>Automática</option><option>Mecánica</option></select></div>
+          <div class="field"><label for="pubFuel">Combustible</label><select id="pubFuel"><option>Gasolina</option><option>Diésel</option><option>Híbrido</option><option>Eléctrico</option></select></div>
+          <div class="field"><label for="pubVersion">Versión</label><input id="pubVersion" placeholder="Ej. Full equipo" /></div>
+        </div>
+      </section>
+      <section class="wizard-panel" data-step="2">
+        <h3>3. Publicación</h3>
+        <div class="form-grid">
+          <div class="field"><label for="pubPrice">Precio</label><input id="pubPrice" inputmode="decimal" placeholder="US$ 18,500" /></div>
+          <div class="field"><label for="pubLocation">Ubicación</label><input id="pubLocation" placeholder="Lima, Perú" /></div>
+          <div class="field full"><label for="pubDescription">Descripción</label><input id="pubDescription" placeholder="Describe el estado y los puntos importantes" /></div>
+          <div class="field full"><label for="pubPhotos">Fotos</label><input id="pubPhotos" type="file" accept="image/*" multiple /></div>
+        </div>
+      </section>
+      <section class="wizard-panel" data-step="3">
+        <h3>4. Verificación</h3>
+        <div class="report-features">
+          <div class="report-feature">Publicación estándar</div>
+          <div class="report-feature">Verificada por PLAQUÉALO</div>
+        </div>
+        <p class="modal-note">La verificación ayuda a presentar la información disponible con mayor claridad. No reemplaza una inspección física ni constituye garantía legal.</p>
+        <div class="auth-gate" id="authGate">
+          <h3>Guarda y publica tu vehículo</h3>
+          <p>Continúa con Google para finalizar sin perder la información ingresada.</p>
+          <button class="google-button" id="googleLoginBtn" type="button"><b>G</b> Continuar con Google</button>
+          <p class="auth-gate-note" id="authGateNote" role="status" hidden>Inicio de sesión con Google preparado; falta configurar un proveedor OAuth seguro. No se guardó ningún dato.</p>
+        </div>
+      </section>
+      <div class="wizard-actions">
+        <button class="btn btn-outline" id="wizardBack" type="button">Atrás</button>
+        <button class="btn btn-red" id="wizardNext" type="button">Continuar</button>
+      </div>
+      <p class="modal-note" id="publishStatus" role="status">Los datos se conservan solo en esta sesión del navegador.</p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .modal { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 20px; background: rgba(23, 23, 25, 0.72); }
+  .modal.open { display: grid; }
+  .modal-card { width: min(760px, 100%); max-height: min(90vh, 780px); overflow: auto; border-radius: 22px; background: var(--surface); padding: 28px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3); }
+  .modal-top { display: flex; align-items: center; justify-content: space-between; }
+  .modal-top h2 { margin: 0; font: 700 24px var(--font-display); }
+  .modal-close { border: 0; background: transparent; cursor: pointer; padding: 6px; }
+  .wizard-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 22px 0; }
+  .wizard-step-indicator { height: 4px; border-radius: 4px; background: var(--line); }
+  .wizard-step-indicator.active { background: var(--red); }
+  .wizard-panel { display: none; }
+  .wizard-panel.active { display: block; }
+  .wizard-panel h3 { margin: 0 0 18px; font: 650 17px var(--font-display); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { display: grid; gap: 7px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 12px; font-weight: 700; }
+  .field input, .field select { height: 48px; border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 0 13px; outline: 0; }
+  .field input:focus, .field select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(196, 30, 30, 0.1); }
+  .report-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 10px 0 20px; border-top: 1px solid var(--line); }
+  .report-feature { padding: 17px 0; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+  .auth-gate { display: none; padding: 20px; border-radius: 15px; background: var(--red-light); text-align: center; }
+  .auth-gate.visible { display: block; }
+  .auth-gate h3 { margin: 0 0 6px; }
+  .auth-gate p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+  .google-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 18px; border: 1px solid var(--line); border-radius: 12px; background: #fff; font-weight: 700; cursor: pointer; }
+  .auth-gate-note { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+  .wizard-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+  .wizard-actions .btn { flex: 1; }
+  .wizard-actions .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .modal-note { margin: 15px 0 0; color: #7b7a7f; font-size: 12px; line-height: 1.5; }
+
+  @media (max-width: 680px) {
+    .modal { padding: 8px; }
+    .modal-card { max-height: 96vh; padding: 20px; border-radius: 18px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .field.full { grid-column: auto; }
+    .report-features { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script define:vars={{ vehicleCatalog }}>
+  const qs = (selector, root = document) => root.querySelector(selector);
+  const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+  const modal = qs('#publishModal');
+  let wizardStep = 0;
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    qs('#pubPlate')?.focus();
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function paintWizard() {
+    qsa('.wizard-panel').forEach((panel, index) => panel.classList.toggle('active', index === wizardStep));
+    qsa('.wizard-step-indicator').forEach((item, index) => item.classList.toggle('active', index <= wizardStep));
+    qs('#wizardBack').disabled = wizardStep === 0;
+    qs('#wizardNext').textContent = wizardStep === 3 ? 'Finalizar publicación' : 'Continuar';
+  }
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('.publish-open')) openModal();
+    if (event.target.closest('.modal-close')) closeModal();
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeModal(); });
+
+  qs('#wizardBack').addEventListener('click', () => { wizardStep = Math.max(0, wizardStep - 1); paintWizard(); });
+  qs('#wizardNext').addEventListener('click', () => {
+    if (wizardStep === 0 && (!qs('#pubPlate').value || !qs('#pubYear').value || !qs('#pubBrand').value || !qs('#pubModel').value)) {
+      qs('#publishStatus').textContent = 'Completa placa, año, marca y modelo para continuar.';
+      return;
+    }
+    if (wizardStep < 3) { wizardStep += 1; paintWizard(); return; }
+    qs('#authGate').classList.add('visible');
+  });
+
+  const brandSelect = qs('#pubBrand');
+  brandSelect.addEventListener('change', () => {
+    const modelSelect = qs('#pubModel');
+    const models = vehicleCatalog[brandSelect.value] || [];
+    modelSelect.innerHTML = models.length
+      ? `<option value="">Selecciona un modelo</option>${models.map((model) => `<option>${model}</option>`).join('')}`
+      : '<option value="">No hay modelos disponibles</option>';
+    modelSelect.disabled = !models.length;
+  });
+
+  qs('#googleLoginBtn').addEventListener('click', () => {
+    const note = qs('#authGateNote');
+    note.hidden = false;
+  });
+</script>

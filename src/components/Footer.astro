@@ -1,0 +1,163 @@
+---
+// Footer reorganizado: la identidad legal (razón social + RUC) vive en el
+// área corporativa, con menor jerarquía que el logo pero perfectamente
+// legible — antes no existía en ningún archivo del sitio.
+import { company } from '../data/company';
+import ProductBrand from './ProductBrand.astro';
+import { withBase } from '../utils/url';
+
+const socials = Object.entries(company.socialLinks).filter(([, url]) => url);
+---
+
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <ProductBrand href={withBase('/')} />
+        <p class="footer-about">{company.tagline}</p>
+        {socials.length > 0 && (
+          <div class="footer-socials">
+            {socials.map(([name, url]) => (
+              <a href={url} target="_blank" rel="noopener noreferrer" aria-label={name}>{name.slice(0, 1).toUpperCase()}</a>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="footer-group">
+        <button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-services">
+          <span>Servicios</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+        </button>
+        <div class="footer-panel" id="footer-services">
+          <a href={withBase('/consulta-vehicular/')}>Consulta vehicular gratuita</a>
+          <a href={withBase('/plaquealo/')}>PLAQUÉALO</a>
+          <a href={withBase('/tasacion/')}>Tasación</a>
+          <a href={withBase('/vehiculos/')}>Marketplace</a>
+          <a href={withBase('/servicios/soat/')}>SOAT</a>
+          <a href={withBase('/servicios/seguro-vehicular/')}>Seguro Vehicular</a>
+          <a href={withBase('/servicios/gps/')}>GPS Vehicular</a>
+        </div>
+      </div>
+
+      <div class="footer-group">
+        <button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-resources">
+          <span>Recursos</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+        </button>
+        <div class="footer-panel" id="footer-resources">
+          <a href={withBase('/consulta-vehicular/')}>Fuentes oficiales</a>
+          <a href={withBase('/blog/')}>Blog</a>
+          <a href={withBase('/planes/')}>Planes</a>
+        </div>
+      </div>
+
+      <div class="footer-group">
+        <button class="footer-toggle" type="button" aria-expanded="false" aria-controls="footer-legal">
+          <span>Legal</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+        </button>
+        <div class="footer-panel" id="footer-legal">
+          <a href={withBase('/legal/terminos/')}>Términos de uso</a>
+          <a href={withBase('/legal/privacidad/')}>Política de privacidad</a>
+          <a href={withBase('/legal/cookies/')}>Cookies</a>
+          <a href={`mailto:${company.contact.email}`}>Contacto</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-corporate">
+      <p><strong>{company.legalName}</strong> · RUC {company.ruc}</p>
+      <p>Marca comercial {company.brand}.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 {company.brand}</span>
+      <span>Información para decidir con confianza.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: 62px 0 30px; background: #191717; color: #fff; }
+  .footer :global(.product-brand-name) { color: #fff; }
+  .footer :global(.product-brand-parent) { color: rgba(255, 255, 255, 0.55); }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 60px; }
+  .footer-about { max-width: 340px; margin: 18px 0 0; color: rgba(255, 255, 255, 0.5); font-size: 14px; line-height: 1.7; }
+  .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
+  .footer-socials a { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px; color: #fff; font-weight: 700; }
+
+  .footer-toggle {
+    display: flex; width: 100%; align-items: center; justify-content: space-between;
+    border: 0; background: transparent; padding: 0; margin-bottom: 17px;
+    color: #fff; font: 700 14px var(--font-display); text-align: left; pointer-events: none;
+  }
+  .footer-toggle svg { display: none; width: 19px; transition: transform 0.2s; }
+  .footer-panel a { display: block; margin: 11px 0; color: rgba(255, 255, 255, 0.55); font-size: 13px; }
+  .footer-panel a:hover { color: #fff; }
+
+  .footer-corporate {
+    margin-top: 46px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.45); font-size: 12.5px; line-height: 1.7;
+  }
+  .footer-corporate strong { color: rgba(255, 255, 255, 0.7); font-weight: 700; }
+  .footer-corporate p { margin: 0; }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; gap: 20px;
+    margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.4); font-size: 12px;
+  }
+
+  @media (max-width: 980px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 680px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 0; }
+    .footer-brand { padding-bottom: 24px; }
+    .footer-group { border-top: 1px solid rgba(255, 255, 255, 0.13); }
+    .footer-group:last-of-type { border-bottom: 1px solid rgba(255, 255, 255, 0.13); }
+    .footer-toggle { min-height: 58px; padding: 0 2px; margin-bottom: 0; pointer-events: auto; cursor: pointer; }
+    .footer-toggle svg { display: block; }
+    .footer-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
+    .footer-panel { padding: 0 2px 16px; }
+    .footer-panel[hidden] { display: none !important; }
+    .footer-bottom { display: block; }
+    .footer-bottom span { display: block; margin-top: 6px; }
+  }
+</style>
+
+<script>
+  function qs<T extends Element = Element>(selector: string, root: ParentNode = document): T | null {
+    return root.querySelector<T>(selector);
+  }
+  function qsa<T extends Element = Element>(selector: string, root: ParentNode = document): T[] {
+    return [...root.querySelectorAll<T>(selector)];
+  }
+
+  const media = window.matchMedia('(max-width: 680px)');
+  function sync() {
+    qsa<HTMLButtonElement>('.footer-toggle').forEach((toggle) => {
+      const panel = qs<HTMLElement>(`#${toggle.getAttribute('aria-controls')}`);
+      if (!panel) return;
+      if (media.matches) {
+        panel.hidden = toggle.getAttribute('aria-expanded') !== 'true';
+      } else {
+        toggle.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+      }
+    });
+  }
+  qsa<HTMLButtonElement>('.footer-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      if (!media.matches) return;
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      const panel = qs<HTMLElement>(`#${toggle.getAttribute('aria-controls')}`);
+      if (panel) panel.hidden = expanded;
+    });
+  });
+  media.addEventListener?.('change', sync);
+  sync();
+</script>

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VehicleCard from '../../components/VehicleCard.astro';
+import ExampleBadge from '../../components/ExampleBadge.astro';
+import { vehicles } from '../../data/vehicles';
+
+const filters = [
+  { key: 'all', label: 'Todos' },
+  { key: 'sedan', label: 'Sedanes' },
+  { key: 'suv', label: 'SUV' },
+  { key: 'pickup', label: 'Pick-up' },
+  { key: 'hatchback', label: 'Hatchback' },
+];
+---
+
+<BaseLayout
+  title="Vehículos publicados en Perú | Marketplace Automotor.pe"
+  description="Explora vehículos publicados con reporte disponible: año, kilometraje, transmisión y ubicación en un mismo listado."
+>
+  <section class="section">
+    <div class="container">
+      <div class="listings-head reveal">
+        <div>
+          <p class="eyebrow">Marketplace</p>
+          <h1 class="section-title">Vehículos publicados</h1>
+          <p class="section-copy">Opciones claras, datos esenciales y una señal visible de verificación.</p>
+          <ExampleBadge label="Ejemplo · listado de muestra" />
+        </div>
+        <button class="btn btn-red publish-open" type="button">Publicar mi vehículo</button>
+      </div>
+      <div class="filter-row" aria-label="Filtros de vehículos">
+        {filters.map((filter) => (
+          <button class:list={['filter', { active: filter.key === 'all' }]} data-filter={filter.key}>{filter.label}</button>
+        ))}
+      </div>
+      <div class="vehicles">
+        {vehicles.map((vehicle) => <VehicleCard vehicle={vehicle} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .listings-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+  .filter-row { display: flex; gap: 8px; margin: 38px 0 30px; overflow: auto; }
+  .filter { white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; background: transparent; padding: 10px 16px; color: #646369; font-weight: 600; cursor: pointer; }
+  .filter.active, .filter:hover { border-color: var(--ink); background: var(--ink); color: #fff; }
+  .vehicles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+  @media (max-width: 980px) {
+    .listings-head { display: block; }
+    .listings-head .btn { margin-top: 22px; }
+    .vehicles { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 680px) {
+    .vehicles { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const cards = document.querySelectorAll<HTMLElement>('.vehicles .vehicle');
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      buttons.forEach((item) => item.classList.remove('active'));
+      button.classList.add('active');
+      cards.forEach((card) => {
+        card.hidden = button.dataset.filter !== 'all' && card.dataset.type !== button.dataset.filter;
+      });
+    });
+  });
+</script>

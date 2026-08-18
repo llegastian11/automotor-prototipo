@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../utils/url';
+
+const plans = [
+  {
+    tag: 'PERSONAL',
+    price: 'Gratis',
+    description: 'Acceso a fuentes oficiales y una vista básica.',
+    features: ['Consulta vehicular gratuita', 'Enlaces oficiales'],
+    cta: { label: 'Comenzar', href: '/consulta-vehicular/', variant: 'outline' },
+    featured: false,
+  },
+  {
+    tag: 'PLAQUEALO',
+    price: 'S/ 19.90',
+    description: 'Un reporte organizado para revisar antes de comprar.',
+    features: ['25 fuentes disponibles', 'Alertas y documentos', 'Descarga del reporte'],
+    cta: { label: 'Consultar placa', href: '/plaquealo/', variant: 'red' },
+    featured: true,
+  },
+  {
+    tag: 'MIGARAGE',
+    price: 'S/ 14.90 / mes',
+    description: 'Seguimiento continuo de los vehículos que ya tienes.',
+    features: ['Alertas de multas', 'Recordatorios de SOAT', 'Hasta 3 vehículos'],
+    cta: { label: 'Conocer MiGarage', href: '/migarage/', variant: 'outline' },
+    featured: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Planes de Plaquéalo | Automotor.pe"
+  description="Compara los planes de Automotor.pe: consulta vehicular gratuita, reportes Plaquéalo y seguimiento continuo con MiGarage."
+>
+  <section class="section plans-page">
+    <div class="container">
+      <p class="eyebrow">Planes referenciales</p>
+      <h1 class="section-title">Elige cuánto control necesitas.</h1>
+      <p class="section-copy">Precios de demostración sujetos a validación comercial.</p>
+      <div class="plans-grid">
+        {plans.map((plan) => (
+          <article class:list={{ featured: plan.featured }}>
+            <span>{plan.tag}</span>
+            <h2>{plan.price}</h2>
+            <p>{plan.description}</p>
+            <ul>{plan.features.map((feature) => <li>{feature}</li>)}</ul>
+            <a class:list={['btn', plan.cta.variant === 'red' ? 'btn-red' : 'btn-outline']} href={withBase(plan.cta.href)}>{plan.cta.label}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .plans-page { min-height: calc(100vh - 94px); background: linear-gradient(145deg, #fff, var(--paper)); }
+  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; }
+  .plans-grid article { display: flex; min-height: 430px; flex-direction: column; padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow-soft); }
+  .plans-grid article.featured { border-color: rgba(196, 30, 30, 0.38); box-shadow: 0 18px 45px rgba(196, 30, 30, 0.1); }
+  .plans-grid article > span { color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: 0.14em; }
+  .plans-grid h2 { margin: 15px 0 8px; font: 700 30px var(--font-display); }
+  .plans-grid p { min-height: 48px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+  .plans-grid ul { display: grid; gap: 12px; margin: 22px 0 28px; padding: 20px 0 0; border-top: 1px solid var(--line); list-style: none; }
+  .plans-grid li { font-size: 13px; }
+  .plans-grid li::before { content: '✓'; margin-right: 9px; color: var(--green); font-weight: 800; }
+  .plans-grid .btn { margin-top: auto; }
+
+  @media (max-width: 980px) {
+    .plans-grid { grid-template-columns: 1fr; }
+    .plans-grid article { min-height: 0; }
+  }
+</style>

@@ -1,4 +1,4 @@
-name: Publicar prototipo en GitHub Pages
+name: Publicar sitio en GitHub Pages
 
 on:
   push:
@@ -15,21 +15,34 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Compilar sitio (Astro)
+        run: npm run build
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+      - name: Preparar artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar sitio
-        uses: actions/checkout@v4
-      - name: Configurar Pages
-        uses: actions/configure-pages@v5
-      - name: Preparar archivos
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
       - name: Publicar
         id: deployment
         uses: actions/deploy-pages@v4
-

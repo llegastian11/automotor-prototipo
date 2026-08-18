@@ -1,0 +1,42 @@
+---
+import type { Vehicle } from '../data/vehicles';
+
+interface Props {
+  vehicle: Vehicle;
+}
+const { vehicle } = Astro.props;
+---
+
+<article class="vehicle reveal" data-type={vehicle.type}>
+  <div class="vehicle-media">
+    <img loading="lazy" src={vehicle.image} alt={vehicle.imageAlt} width="900" height="600" />
+    <span class="verified">✓ {vehicle.verifiedLabel}</span>
+  </div>
+  <div class="vehicle-body">
+    <div class="vehicle-top">
+      <h3>{vehicle.name}</h3>
+      <span class="vehicle-price">{vehicle.price}</span>
+    </div>
+    <div class="vehicle-meta">
+      <span>{vehicle.year}</span>
+      <span>{vehicle.km}</span>
+      <span>{vehicle.transmission}</span>
+    </div>
+    <p class="vehicle-location">{vehicle.location}</p>
+  </div>
+</article>
+
+<style>
+  .vehicle { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: #fff; transition: 0.25s ease; }
+  .vehicle:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+  .vehicle-media { position: relative; height: 220px; overflow: hidden; background: #ece9e5; }
+  .vehicle-media img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+  .vehicle:hover .vehicle-media img { transform: scale(1.025); }
+  .verified { position: absolute; left: 14px; top: 14px; padding: 8px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.94); font-size: 11px; font-weight: 700; color: var(--green); }
+  .vehicle-body { padding: 20px; }
+  .vehicle-top { display: flex; justify-content: space-between; gap: 15px; }
+  .vehicle-top h3 { margin: 0; font: 600 17px var(--font-display); }
+  .vehicle-price { font-weight: 700; white-space: nowrap; }
+  .vehicle-meta { display: flex; flex-wrap: wrap; gap: 9px 16px; margin-top: 14px; color: #747378; font-size: 12px; }
+  .vehicle-location { margin: 16px 0 0; padding-top: 15px; border-top: 1px solid #ece9e5; color: #77767a; font-size: 12px; }
+</style>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /legal/
+
+Sitemap: https://llegastian11.github.io/automotor-prototipo/sitemap-index.xml

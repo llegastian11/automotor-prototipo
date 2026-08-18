@@ -1,0 +1,51 @@
+---
+// Alternativa C del prompt maestro: una sola línea discreta e integrada,
+// visible en toda ruta y en cualquier tamaño de pantalla — a diferencia del
+// prototipo anterior, donde el vínculo con Automotor.pe solo vivía en el
+// hero de /inicio/ y se ocultaba en móvil.
+import { company } from '../data/company';
+
+interface Props {
+  href?: string;
+  compact?: boolean;
+}
+const { href = '/', compact = false } = Astro.props;
+---
+
+<a class:list={['product-brand', { compact }]} href={href} aria-label={`${company.product}, un producto de ${company.brand}, ir a inicio`}>
+  <span class="product-brand-name">{company.product}</span>
+  <span class="product-brand-sep" aria-hidden="true">·</span>
+  <span class="product-brand-parent">un producto de <strong>{company.brand}</strong></span>
+</a>
+
+<style>
+  .product-brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 7px;
+    flex-wrap: wrap;
+    line-height: 1;
+  }
+  .product-brand-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .product-brand-sep { color: var(--line); font-size: 13px; }
+  .product-brand-parent {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .product-brand-parent strong { color: var(--red); font-weight: 700; }
+
+  .product-brand.compact .product-brand-name { font-size: 16px; }
+  .product-brand.compact .product-brand-parent { font-size: 9.5px; }
+
+  @media (max-width: 560px) {
+    .product-brand-parent { font-size: 9px; }
+  }
+</style>
