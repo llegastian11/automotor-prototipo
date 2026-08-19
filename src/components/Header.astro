@@ -251,21 +251,27 @@ const otherServices = {
   const servicesMenu = qs<HTMLElement>('.services-menu');
   const servicesTrigger = qs<HTMLButtonElement>('.services-trigger');
   if (servicesMenu && servicesTrigger) {
-    servicesTrigger.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const open = servicesMenu.classList.toggle('open');
-      servicesTrigger.setAttribute('aria-expanded', String(open));
-    });
-    document.addEventListener('click', (event) => {
-      if (servicesMenu.contains(event.target as Node)) return;
-      servicesMenu.classList.remove('open');
-      servicesTrigger.setAttribute('aria-expanded', 'false');
-    });
-    servicesMenu.addEventListener('focusout', (event) => {
-      if (!servicesMenu.contains((event as FocusEvent).relatedTarget as Node)) {
+    let closeTimer: number;
+    const openMenu = () => {
+      window.clearTimeout(closeTimer);
+      servicesMenu.classList.add('open');
+      servicesTrigger.setAttribute('aria-expanded', 'true');
+    };
+    const closeMenu = () => {
+      closeTimer = window.setTimeout(() => {
         servicesMenu.classList.remove('open');
         servicesTrigger.setAttribute('aria-expanded', 'false');
-      }
+      }, 150);
+    };
+    servicesMenu.addEventListener('pointerenter', openMenu);
+    servicesMenu.addEventListener('pointerleave', closeMenu);
+    servicesMenu.addEventListener('focusin', openMenu);
+    servicesMenu.addEventListener('focusout', (event) => {
+      if (!servicesMenu.contains((event as FocusEvent).relatedTarget as Node)) closeMenu();
+    });
+    servicesTrigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      openMenu();
     });
   }
 
