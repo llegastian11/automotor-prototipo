@@ -19,9 +19,9 @@ const officialSources = ['SUNARP', 'SAT', 'MTC', 'SBS', 'APESEG', 'SUTRAN'];
     <div class="container hero-split">
       <div class="hero-copy-panel">
         <p class="official-badge"><span aria-hidden="true">✓</span> Información de SUNARP, SAT, SOAT y MTC</p>
+        <PlateForm id="hero" initialValue="B5K110" redirectTo="/plaquealo/" />
         <h1 class="display hero-title">Conoce la historia real <span>de esa placa</span></h1>
         <p class="hero-sub">Consulta antecedentes, deudas y documentos del vehículo antes de comprar o vender. Decide con información clara.</p>
-        <PlateForm id="hero" initialValue="B5K110" redirectTo="/plaquealo/" />
         <div class="hero-stats" aria-label="Características de la consulta">
           <div><span>Fuentes consultadas</span><strong>25</strong></div>
           <div><span>Consulta digital</span><strong>100%</strong></div>
@@ -138,7 +138,7 @@ const officialSources = ['SUNARP', 'SAT', 'MTC', 'SBS', 'APESEG', 'SUTRAN'];
     color: var(--muted); font-size: 10px; font-weight: 700;
   }
   .official-badge span { display: grid; width: 16px; height: 16px; place-items: center; border-radius: 50%; background: #e8f6ed; color: var(--green); font-size: 10px; }
-  .hero-title { max-width: 600px; font-size: clamp(3rem, 4vw, 4rem); line-height: 1.02; letter-spacing: -0.055em; }
+  .hero-title { max-width: 600px; margin-top: 30px; font-size: clamp(3rem, 4vw, 4rem); line-height: 1.02; letter-spacing: -0.055em; }
   .hero-title span { color: var(--red); }
   .hero-sub { max-width: 550px; margin: 22px 0 27px; color: var(--muted); font-size: 16px; line-height: 1.62; }
   .hero-copy-panel :global(.plate-form) { max-width: 620px; }
