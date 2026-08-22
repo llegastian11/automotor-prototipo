@@ -1,7 +1,8 @@
 ---
-// Navegación de primer nivel reducida de 8 a 5 puntos (auditoría, recomendación
-// #7): Plaquealo, Consulta vehicular, Vehículos, Otros servicios (submenú) y
-// Blog. Planes, Tasación, MiGarage y TIVE viven ahora dentro del submenú.
+// Navegación de primer nivel (auditoría, recomendación #7): Plaquealo,
+// Tasación y MiGarage salieron del submenú "Otros servicios" (2026-08-22) y
+// se muestran junto al botón rojo de Plaquealo para no dejar el header vacío.
+// Planes y TIVE se quedan dentro del submenú.
 import ProductBrand from './ProductBrand.astro';
 import { withBase } from '../utils/url';
 
@@ -11,6 +12,8 @@ import { withBase } from '../utils/url';
 // back into the header.
 const primaryLinks = [
   { href: '/plaquealo/', label: 'Plaquealo', route: 'plaquealo', emphasis: true },
+  { href: '/tasacion/', label: 'Tasación', route: 'tasacion' },
+  { href: '/migarage/', label: 'MiGarage', route: 'migarage' },
   { href: '/consulta-vehicular/', label: 'Consulta vehicular', route: 'consulta-vehicular', hidden: true },
   { href: '/vehiculos/', label: 'Vehículos', route: 'vehiculos', hidden: true },
 ];
@@ -21,8 +24,6 @@ const showPublishButton = false;
 
 const otherServices = {
   herramientas: [
-    { href: '/tasacion/', label: 'Tasación', hint: 'Estimación referencial de valor' },
-    { href: '/migarage/', label: 'MiGarage', hint: 'Alertas de tus vehículos' },
     { href: '/planes/', label: 'Planes', hint: 'Cuánto control necesitas' },
     { href: '/tive/', label: 'Descargar TIVE', hint: 'Tarjeta de propiedad · S/ 20' },
   ],

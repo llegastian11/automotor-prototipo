@@ -141,6 +141,13 @@ const officialSources = ['SUNARP', 'SAT', 'MTC', 'SBS', 'APESEG', 'SUTRAN'];
   .hero-title { max-width: 600px; font-size: clamp(3rem, 4vw, 4rem); line-height: 1.02; letter-spacing: -0.055em; }
   .hero-title span { color: var(--red); }
   .hero-sub { max-width: 550px; margin: 22px 0 27px; color: var(--muted); font-size: 16px; line-height: 1.62; }
+  .hero-copy-panel :global(.plate-form) { max-width: 620px; }
+  .hero-copy-panel :global(.plate-label) { font-size: 15px; }
+  .hero-copy-panel :global(.plate) { height: 84px; grid-template-columns: 70px minmax(0, 1fr) 168px; border-width: 2px; box-shadow: 0 20px 46px rgba(23, 23, 25, 0.14); }
+  .hero-copy-panel :global(.plate-input) { font-size: clamp(1.65rem, 2.7vw, 2.35rem); }
+  .hero-copy-panel :global(.plate-submit) { font-size: 14px; }
+  .hero-copy-panel :global(.plate-submit svg) { width: 20px; }
+  .hero-copy-panel :global(.plate-note) { font-size: 13px; }
   .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); max-width: 590px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
   .hero-stats div { padding: 0 18px; }
   .hero-stats div:first-child { padding-left: 0; }
@@ -219,6 +226,7 @@ const officialSources = ['SUNARP', 'SAT', 'MTC', 'SBS', 'APESEG', 'SUTRAN'];
   @media (max-width: 680px) {
     .hero { padding-top: 42px; }
     .hero-title { font-size: clamp(2.45rem, 11vw, 3.35rem); }
+    .hero-copy-panel :global(.plate) { height: 72px; grid-template-columns: 58px minmax(0, 1fr) 64px; }
     .listings-head { display: block; }
     .listings-head .btn { margin-top: 18px; }
     .vehicles { grid-template-columns: 1fr; }
