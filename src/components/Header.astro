@@ -5,11 +5,19 @@
 import ProductBrand from './ProductBrand.astro';
 import { withBase } from '../utils/url';
 
+// Temporarily hidden per request (2026-08-21): "Consulta vehicular" and
+// "Vehículos" are going to be integrated differently later, so they stay in
+// this list (not deleted) with `hidden: true` — flip it back to bring them
+// back into the header.
 const primaryLinks = [
   { href: '/plaquealo/', label: 'Plaquealo', route: 'plaquealo', emphasis: true },
-  { href: '/consulta-vehicular/', label: 'Consulta vehicular', route: 'consulta-vehicular' },
-  { href: '/vehiculos/', label: 'Vehículos', route: 'vehiculos' },
+  { href: '/consulta-vehicular/', label: 'Consulta vehicular', route: 'consulta-vehicular', hidden: true },
+  { href: '/vehiculos/', label: 'Vehículos', route: 'vehiculos', hidden: true },
 ];
+const visiblePrimaryLinks = primaryLinks.filter((link) => !link.hidden);
+
+// Same: hidden for now rather than removed, per the same request.
+const showPublishButton = false;
 
 const otherServices = {
   herramientas: [
@@ -31,7 +39,7 @@ const otherServices = {
     <ProductBrand href={withBase('/')} />
 
     <div class="nav-links">
-      {primaryLinks.map((link) => (
+      {visiblePrimaryLinks.map((link) => (
         <a href={withBase(link.href)} data-route={link.route} class:list={[{ 'nav-emphasis': link.emphasis }]}>{link.label}</a>
       ))}
       <div class="services-menu">
@@ -64,9 +72,11 @@ const otherServices = {
     </div>
 
     <div class="nav-actions">
-      <button class="header-publish publish-open" type="button">
-        <span>Publicar vehículo</span><b>+</b>
-      </button>
+      {showPublishButton && (
+        <button class="header-publish publish-open" type="button">
+          <span>Publicar vehículo</span><b>+</b>
+        </button>
+      )}
       <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer" type="button">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -83,7 +93,7 @@ const otherServices = {
     </button>
   </div>
   <nav class="drawer-nav">
-    {primaryLinks.map((link) => (
+    {visiblePrimaryLinks.map((link) => (
       <a class:list={['drawer-link', { 'drawer-emphasis': link.emphasis }]} href={withBase(link.href)} data-route={link.route}>{link.label}</a>
     ))}
     <span class="drawer-section-label">Otros servicios</span>
@@ -93,7 +103,9 @@ const otherServices = {
     <a class="drawer-link" href={withBase('/blog/')} data-route="blog">Blog</a>
   </nav>
   <div class="drawer-foot">
-    <button class="btn btn-red publish-open" type="button">Publicar vehículo</button>
+    {showPublishButton && (
+      <button class="btn btn-red publish-open" type="button">Publicar vehículo</button>
+    )}
     <div class="drawer-legal">
       <a href={withBase('/legal/terminos/')}>Legal</a>
       <a href={withBase('/legal/privacidad/')}>Privacidad</a>
